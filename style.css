@@ -76,11 +76,11 @@ body {
     display: inline-block;
 }
 #name{
-    margin-top: 25px;
+    margin-top: 20px;
     color: white;
-    font-size: 25px;
+    font-size: 30px;
     font-family: Hind Siliguri;
-    font-weight: 700;
+    font-weight: 1000;
 }
 /* uodate */
 #menu{
