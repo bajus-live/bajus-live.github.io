@@ -207,8 +207,6 @@ body {
     height: 60px;
     width: 60px;
     border-radius: 0px;
-    border-top: 1px;
-    border-left: 1px;
 }
     /*
     animation-name: logo;
@@ -815,7 +813,7 @@ b{
         }
     
     nav{
-    background: var(--table-head);
+    background: black;
     height: 100px;
     position: relative;
     display: flex;
