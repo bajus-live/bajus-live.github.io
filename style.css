@@ -204,9 +204,11 @@ body {
     border-radius: 10px;
 }
 #logo1{
-    height: 40px;
-    width: 40px;
-    border-radius: 50px;
+    height: 60px;
+    width: 60px;
+    border-radius: 0px;
+}
+    /*
     animation-name: logo;
     animation-duration: 1s;
     animation-delay: 0s;
@@ -219,7 +221,7 @@ body {
       border: 1.5px dotted #b78829;
 }
 }
-
+*/
 
 
 
