@@ -229,7 +229,7 @@ body {
     #header{
       margin-top: 110px;
       width: 100%;
-      background: linear-gradient(90deg, #0b1b22);
+      background: black;
       color: var(--cream);
       padding: 16px;
       display: flex;
@@ -813,7 +813,7 @@ b{
         }
     
     nav{
-    background: black;
+    background: var(--table-head);
     height: 100px;
     position: relative;
     display: flex;
