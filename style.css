@@ -76,7 +76,6 @@ body {
     display: inline-block;
 }
 #name{
-    white-space: nowrap;
     margin-top: 25px;
     color: white;
     font-size: 25px;
