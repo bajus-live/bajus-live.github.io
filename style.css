@@ -94,7 +94,8 @@ body {
 }
 
 .logo{
-     margin-left: 25px;
+     margin-top: 15px
+     margin-left: 15px;
      font-size: 2rem;
      color: white;
      text-decoration: none;
@@ -204,8 +205,8 @@ body {
     border-radius: 10px;
 }
 #logo1{
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
 }
     /*
     animation-name: logo;
