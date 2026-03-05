@@ -205,8 +205,8 @@ body {
     border-radius: 10px;
 }
 #logo1{
-    height: 60px;
-    width: 60px;
+    height: auto;
+    width: 100%;
 }
     /*
     animation-name: logo;
