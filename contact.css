@@ -1,348 +1,173 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
-
-
-
-:root {
-    --gold: #caa43a;
-    --silver: #D3D3D3;
-    --deep: #0e2830;
-    --cream: #f8f2ea;
-    --table-head: #0d2930;
-    --accent: #b78829;
-    --silver: #bfbfbf;
-}
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Hind Siliguri;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hind+Siliguri:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 html{
-    scroll-behavior: smooth;
+      scroll-behavior: smooth;
+      min-height: 100%;
+}
+body{
+      background: #E8E8E8;
+      margin-top: 50px;
+      font-family: hind siliguri;
 }
 
-body {
-    min-height: 100vh;
-    background-image: url('https://rka-999.github.io/storage/photos/bg.jpg');
-    background-attachment: fixed;
-    background-size: 300px;
-    background-repeat: repeat;
-    background-blend-mode: soft-light;
-}
-
-.header{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 140px; /*999*/
-    padding: 1.3rem 10%;
-   /* background-color: rgba(0, 0, 0, .1);
-    backdrop-filter: blur(50px); */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-}
-.header::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: red;
-    background-color: #0b1b22;
-    backdrop-filter: blur(50px);
-    z-index: -1;
-}
-.header::after {
-    content: '';
-    position: absolute;
-    top: 0;
-   /* Remove symbol to see magic left: 0; */
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
-    transition: .5s;
-}
-.header:hover::after{
-    left: 100%;
-}
-#homelogo{
-    display: inline-block;
-}
-#name{
-    margin-top: 25px;
-    color: white;
-    font-size: 25px;
-    font-family: Hind Siliguri;
-    font-weight: 700;
-}
-
-/* update */
-#menu{
-    color: white;
-    margin-right: 2.9%;
-    margin-top: -2%;
-    font-family: Hind Siliguri;
-    font-size: 25px;
-    font-weight: 900;
-}
-
-.logo{
-     margin-left: 25px;
-     font-size: 2rem;
-     color: white;
-     text-decoration: none;
-     font-weight: 800;
-}
-.navbar a{
-    font-size: 1.15rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    margin-left: 2.5rem;
-}
-#check{
-    display: none;
-}
-.icons{
-    top: 60%; /* update */
-    position: absolute;
-    right: 4.5%;
-    font-size: 30px;
-    cursor: pointer;
-    display: none;
-    border: 1px solid #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 7px; /* update */
-    border-radius: 10px;
-    color: white;
-    transition: 1.2s all ease;
-}
-.icons:hover {
-    color: red;
-    border: 2px solid #0e2830;
-    box-shadow: .5px .5px var(--cream);
-    border-radius: 10px;
-    font-size: 30px;
-    transform: rotate(90deg); /* update */
-}
-/*U-turn*/
-@media (max-width: 980px) {
-    .header{
-        padding: 1.3rem 3%;
-    }
-    .icons #close-icon{
-        display: none;
-    }
-}
-@media (max-width: 792px) {
-    .icons{
-        display: inline-flex;
-    }
-    #check:checked~.icons #menu-icon {
-    display: none;
-    }
-    #check:checked~.icons #close-icon{
-    display: block;
-    }
-    .navbar{
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        height: 0;
-        background: rgba(0, 0, 0, .1);
-        backdrop-filter: blur(50px);
-        box-shadow: 0.5rem 1rem rgba(0, 0, 0, .1);
-        overflow: hidden;
-        transition: .8s ease;
-    }
-      #check:checked~.navbar {
-    height: 37.7rem;
-    }
-    .navbar a{
-        display: block;
-        font-size: 1.2rem;
-        margin: 2.5rem 0;
-        text-align: center;
-        transform: translateY(-50px);
-        opacity: 0;
-        transition: 0.8s ease;
- }
- 
- .navbar a:hover {
-    background: white;
-    border: .1px dashed white#42445A;
-    border-radius: 20px;
-    color: var(--gold);
-}
- 
-    #check:checked~.navbar a {
-    transform: translateY(0);
-    opacity: 1;
-    transition-delay: calc(.15s * var(--i));
-    }
-}
-#menu-icon{
-    font-size: 30px;
-}
-#menu-icon:hover{
-    border: 2px solid rgba(255, 255, 255, .2);
-    border-radius: 10px;
-}
-#close-icon{
-    font-size: 30px;
-}
-#close-icon:hover {
-    border: 2px solid rgba(255, 255, 255, .2);
-    border-radius: 10px;
-}
-#logo1{
-    height: 40px;
-    width: 40px;
-    border-radius: 50px;
-    animation-name: logo;
-    animation-duration: 1s;
-    animation-delay: 0s;
-    animation-iteration-count: infinite;
-}
-@keyframes logo{
-  form{border: 0px solid white;
-  }
-  to{
-      border: 1.5px dotted #b78829;
-}
-}
-
-
-
-
-    /* Header */
-    #header{
-      margin-top: 110px;
+.top-logo{
       width: 100%;
-      background: linear-gradient(90deg, #0b1b22);
-      color: var(--cream);
-      padding: 16px;
+      align-items: center;
+      height: 52px;
+      align-items: center;
+      top: 0;
+      left: 0;
+      right: 0;
+      position: fixed;
+      z-index: 999;
+}
+/* Main logo */
+#top-logo{
+      height: 45px;
+      width: auto;
+      border: 3px solid white;
+      border-radius: 50px;
+      box-shadow: 1px 2px 3px rgba(0, 0, 0, 5);
+}
+
+/*Bottom Navbar */
+.navbar{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background-color: #ffffff;
+      border: .1px solid #F1E5E9;
       display: flex;
-      justify-content: end;
-      border-bottom: 2px solid var(--accent);
+      justify-content: space-around;
+      align-items: center;
+      padding-bottom: 5px;
+      box-shadow: 1px 2px 5px 5px rgba(0, 0, 0, .2);
+      z-index: 1000;
     }
-   .logo{
-      height: auto;
-      width: 100%;
-      border-radius: 4px
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #757575;
+      font-size: 12px;
+      cursor: pointer;
     }
-    #hotline{
-        width: auto;
-        height: 20px;
-        display: flex;
-        justify-content: right;
-        margin-right: -45px;
-        margin-bottom: 0px;
+    .nav-item:hover{
+      background: red;
     }
-    #number{
-    font-family: Hind Siliguri;
-    margin-top: 25px;
-    text-align: right;
-    display: flex;
-    margin-left: auto;
-    font-size: 15px;  /* update */
-    font-weight: 700; /* update */
-    text-decoration: none;
-    color: white;
-    text-align: right;
-    transition: .5s .5s all ease-in;
+    .nav-item.active {
+      color: #2e7d32;
     }
-    #number:hover{
-      font-size: 14.8px;
-      transition: 2s all ease-in;
-      color: var(--gold);
+    .nav-item a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s ease-in-out;
+      background: #F8F8FF;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+      border-radius: 2px;
+      }
+    .nav-item i {
+      font-size: 18px;
+      margin-bottom: 4px;
+      display: inline-block;
+      padding: 15px 25px;
+      border-radius: 20px;
+      background-color: transparent;
+      color: #757575;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background: #F8F8FF;
+    }
+    .nav-item.active a i {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+    .nav-item.active span {
+      color: #2e7d32;
+      font-weight: bold;
     }
     
-    
-    /* scroll up button */
-    
-    #scrollUpButton {
-    display: none;
-    position: fixed;
-    bottom: 100px;
-    right: 10px;
-    z-index: 99;
-    outline: none;
-    background: rgba(255, 0, 0, 5);
-    cursor: pointer;
-    padding: 3px;
-    border-radius: 40px;
-    font-size: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
-}
 
-#arrowimg {
-    width: 40px;
-    height: auto;
-}
 
 
 /* (Main Container) */
 .contact-container {
     padding: 20px;
     display: flex;
-    flex-direction: column; /* উলম্ব বিন্যাস */
-    gap: 15px; /* কার্ডগুলোর মধ্যে দূরত্ব */
+    flex-direction: column;
+    gap: 15px;
 }
 
-/* প্রতিটি কার্ডের স্টাইল */
+/* Each Card Style */
 .contact-card {
     background-color: #ffffff;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* হালকা ছায়া */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.7s ease;
 }
 
 .contact-card:hover {
-    transform: scale(0.96);
+    transform: scale(1.03);
 }
 
-/* শিরোনামের স্টাইল */
+/* Card Title */
 .card-title {
-    font-size: 1.1em;
+    font-size: 20px;
     color: #333;
     margin-bottom: 15px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
-/* আইকন ধারক */
+/* Icon */
 .icon-wrapper {
     margin: 15px 0;
 }
 
-/* আইকনের স্টাইল (পরিবর্তন করুন) */
-.card-icon {
-    width: 50px; /* আইকনের আকার */
-    height: 50px;
+/* Card style change */
+.card-icon-Wh{
+    width: 50px;
+    height: auto;
+    display: inline-block;
+}
+.card-icon-G{
+    width: 40px;
+    height: auto;
+    display: inline-block;
+}
+.card-icon-Web{
+    width: 40px;
+    height: auto;
+    display: inline-block;
+    border: .1px solid black;
+    padding: 5px 5px;
+    border-radius: 8px;
+}
+.card-icon-L{
+    width: 40px;
+    height: auto;
+    border: .1px solid black;
+    padding: 5px 5px;
+    border-radius: 8px;
     display: inline-block;
 }
 
-/* ব্যাখ্যার স্টাইল */
+/* description */
 .card-description {
     font-size: 0.9em;
     color: #666;
     margin-bottom: 20px;
 }
 
-/* অ্যাকশন বাটনের স্টাইল */
+/* Action Button Style */
 .action-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff; /* মূল রং */
+    background-color: #007bff;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -364,6 +189,12 @@ body {
 .website .action-button {
     background-color: #FFA500;
 }
+.hotline .action-button{
+    background-color: #1EDEDE;
+}
 .location .action-button {
     background-color: #4285F4;
+}
+.card_position{
+    margin-bottom: 70px;
 }
