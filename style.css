@@ -20,6 +20,43 @@ body{
       position: fixed;
       z-index: 999;
 }
+.top-logo-test{
+  width: 100%;
+  margin: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  z-index: 99;
+  background: white;
+  border-radius: 5px;
+  
+}
+#top-logo-test{
+  height: 80px;
+  width: auto;
+  border-radius: 10px;
+}
+.top-logo-area{
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  width: 100%;
+  height: auto;
+  padding: 5px 0;
+  margin: auto;
+  margin-top: -35px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.top-logo-text{
+  font-size: 20px;
+  font-family: hind siliguri;
+  font-weight: 800;
+  color: #B28A00;
+}
 /*#top-logo{
       height: 60px;
       width: 100%;
