@@ -574,3 +574,13 @@ body{
 .text{
   color: #FFCC33;
 }
+.visitor_c{
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+.copyright{
+  text-align: center;
+  display: flex;
+  flex-flow: column-reverse;
+  margin-top: -50px;
+}
