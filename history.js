@@ -79,9 +79,9 @@ function toggleLanguage() {
       let text = node.nodeValue;
       if (text.trim() !== "") {
         if (currentLang === 'en') {
-          text = text.replace(/টাকা/g, 'TK');
+          text = text.replace(/টাকা/g, 'BDT');
         } else {
-          text = text.replace(/TK/g, 'টাকা');
+          text = text.replace(/BDT/g, 'টাকা');
         }
         node.nodeValue = convertNum(text);
       }
