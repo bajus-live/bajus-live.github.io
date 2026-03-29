@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Hind+Siliguri:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 html{
       scroll-behavior: smooth;
+      overscroll-behavior: none;
 }
 body{
       overscroll-behavior: none;
@@ -11,17 +12,26 @@ body{
       font-family: hind siliguri;
 }
 
-.top-logo{
+.top-logo_M_area{
       width: 100%;
+      background: rgba(0, 0, 0, .1);
+      backdrop-filter: blur(30px);
       align-items: center;
       height: 52px;
       align-items: center;
-      top: 0;
-      left: 0;
-      right: 0;
+      margin-top: -76.9px;
       position: fixed;
       z-index: 999;
+      left: 0;
 }
+#top-logo_M_img{
+  height: 50px;
+  width: auto;
+  margin-left: 5px;
+  border-radius: 50px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 5);
+}
+
 
 .top-logo-test{
   width: 100%;
@@ -30,7 +40,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 55px;
+  margin-top: 130px;
   z-index: 99;
   background: #ffffff;
   border-radius: 5px;
@@ -103,41 +113,44 @@ body{
       box-shadow: 1px 2px 3px rgba(0, 0, 0, 5);
 }
 
-
-
-
 /* Translate*/
 
 .lang-switch-container {
   position: fixed;
-  top: 55px;
-  right: 10px;
-  padding: 2px 2px;
+  top: 54px;
+  right: 3px;
+  padding: 11px 10px;
   border-radius: 5px;
-  background: black;
+  background: #111111;
   color: white;
   font-size: 13px;
   font-family: hind siliguri;
   font-weight: 700;
   z-index: 1001;
+  border: .1px solid #c5a059;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
 }
+.lang-label{
+  font-size: 13.5px;
+  color: #FFFFFF;
+}
 
-#lang-btn{
-  background: #00FFED;
-  color: black;
+#lang-btn {
+  background: #D4AF37;
+  color: #000000;
   border: none;
   padding: 2px 10px;
   border-radius: 20px;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   font-size: 13px;
   font-weight: bold;
   font-family: hind siliguri;
 }
-#lang-btn:hover{
-  background: #14DBE5;
-}
+
+
+
+
 
 
 
