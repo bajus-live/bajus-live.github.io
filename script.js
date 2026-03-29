@@ -146,7 +146,7 @@ function toggleLanguage() {
     // 2 change area
     if (currentLang === 'en') {
       dateText = dateText.replace('তারিখ:', 'Date:').replace('মার্চ', 'March');
-      timeText = timeText.replace('সময়:', 'Time:').replace('সকাল', 'Morning').replace('ঘটিকা', "o'clock");
+      timeText = timeText.replace('সময়:', 'Time:').replace('দুপুর', '').replace('ঘটিকা', "PM");
     } else {
       dateText = dateText.replace('Date:', 'তারিখ:').replace('March', 'মার্চ');
       timeText = timeText.replace('Time:', 'সময়:').replace('Morning', 'সকাল').replace("o'clock", 'ঘটিকা');
