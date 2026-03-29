@@ -7,8 +7,8 @@ const translations = {
     'last_up': 'সর্বশেষ আপডেট',
     'news_h1': 'সর্বশেষ সোনা ও রুপার মূল্য',
     'news_h2': 'হ্রাস/বৃদ্ধি',
-    'today_gold': 'আজ সোনার মূল্য',
-    'today_silver': 'কিন্তু, রুপার মূল্য',
+    'today_gold': 'সোনার মূল্য',
+    'today_silver': 'এবং, রূপার মূল্য',
     'status_dec': 'টাকা হ্রাস পেয়েছে',
     'status_inc': 'টাকা বৃদ্ধি পেয়েছে',
     'status_same': 'অপরিবর্তিতই আছে',
@@ -143,13 +143,29 @@ function toggleLanguage() {
   if (lastUpdatePs.length >= 2) {
     let dateText = lastUpdatePs[0].innerText;
     let timeText = lastUpdatePs[1].innerText;
-    // 2 change area সকাল সন্ধ্যা দুপুর & AM PM
+    // 2 change area last AM PM
     if (currentLang === 'en') {
       dateText = dateText.replace('তারিখ:', 'Date:').replace('মার্চ', 'March');
-      timeText = timeText.replace('সময়:', 'Time:').replace('সন্ধ্যা', '').replace('ঘটিকা', "PM");
+      timeText = timeText
+      .replace('সময়:', 'Time:')
+      .replace('সকাল', '')
+      .replace('দুপুর', '')
+      .replace('সন্ধ্যা', '')
+      .replace('রাত', '').replace('ঘটিকা', "PM");
     } else {
       dateText = dateText.replace('Date:', 'তারিখ:').replace('March', 'মার্চ');
-      timeText = timeText.replace('Time:', 'সময়:').replace('Morning', 'সকাল').replace("o'clock", 'ঘটিকা');
+      
+      
+      
+      
+      
+      timeText = timeText.replace('Time:', 'সময়:').replace('Morning', 'সকাল')
+      
+      .replace('PM', 'ঘটিকা').replace('AM', 'ঘটিকা');
+      
+      
+      
+      
     }
     lastUpdatePs[0].innerText = convertNum(dateText);
     lastUpdatePs[1].innerText = convertNum(timeText);
@@ -179,6 +195,22 @@ function toggleLanguage() {
         .replace(/per Gram Silver Price/g, 'প্রতি গ্রাম রূপার মূল্য');
     }
     ticker.innerHTML = convertNum(tText);
+    
+    // GIF 
+const tickerImgs = ticker.querySelectorAll('img');
+tickerImgs.forEach(img => {
+  const bn = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  const en = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  ['src', 'width', 'height'].forEach(attr => {
+    let val = img.getAttribute(attr);
+    if (val) {
+      for (let i = 0; i < 10; i++) {
+        val = val.replace(new RegExp(bn[i], 'g'), en[i]);
+      }
+      img.setAttribute(attr, val);
+    }
+  });
+});
   }
   const allPrices = document.querySelectorAll('.price1, .price2');
   allPrices.forEach(p => {
