@@ -152,6 +152,10 @@ body{
   font-weight: bold;
   font-family: hind siliguri;
 }
+#lang-btn:hover{
+  background: #7501FF;
+  color: white;
+}
 
 
 
