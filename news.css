@@ -7,14 +7,17 @@ body{
       background: #E8E8E8;
       font-family: hind siliguri;
       -webkit-touch-callout: none;
-     -webkit-user-select: none;
-     -moz-user-select: none;
-     -ms-user-select: none;
-     user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
 }
 
 .top-logo{
       width: 100%;
+      height: auto;
+      background: rgba(255, 255, 255, .1);
+      backdrop-filter: blur(50px);
       align-items: center;
       height: 52px;
       align-items: center;
@@ -31,17 +34,18 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0px;
+  margin-top: 50px;
   z-index: 99;
   background: #ffffff;
   border-radius: 5px;
   padding: 5px 0;
 }
 #top-logo-test{
-  height: 80px;
+  height: 95px;
   width: auto;
   border-radius: 10px;
   animation: logo 1.2s ease-out;
+  z-index: 99;
 }
 @keyframes logo{
   0%{
@@ -72,6 +76,7 @@ body{
   margin: 15px 0;
   margin-top: -35px;
   animation: sub_logo 1s ease-in;
+  z-index: 99;
 }
 @keyframes sub_logo{
   0%{
@@ -94,8 +99,8 @@ body{
 #top-logo{
       height: 50px;
       width: auto;
-      margin-left: 5px;
-      border-radius: 25px;
+      margin-left: 8px;
+      border-radius: 5px;
       box-shadow: 1px 2px 3px rgba(0, 0, 0, 5);
 }
 
@@ -168,5 +173,4 @@ body{
   margin-top: -12px;
   height: 780px;
   width: 100%;
-  position: '';
 }
