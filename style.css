@@ -166,6 +166,7 @@ body{
 
 
 
+
 /* Last update */
 .last-update{
   background-color: #FFFFFF;
@@ -244,7 +245,7 @@ body{
   color: red;
   text-align: center;
   margin: auto;
-  margin-bottom: 65px;
+  margin-bottom: 0px;
   align-items: center;
   margin-top: 11px;
   border: 1px solid #F1E5E5;
@@ -711,6 +712,7 @@ body{
   font-size: 14px;
   margin-top: 30px;
 }
+
 
 /* Will not download Any image */
 img {
