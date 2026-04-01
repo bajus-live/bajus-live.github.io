@@ -92,9 +92,9 @@ function toggleLanguage() {
     if (currentLang === 'en')
     // 2 Change
     {
-      text = text.replace('টাকা বৃদ্ধি পেয়েছে','BDT Increasde').replace('টাকা বৃদ্ধি পেয়েছ', 'Remain Unchanged');
+      text = text.replace('টাকা বৃদ্ধি পেয়েছে','BDT Increased').replace('অপরিবর্তিত আছে', 'Remain Unchanged');
     } else {
-      text = text.replace('BDT Decreased', 'অপরিবর্তিত আছে').replace('Remains Unchanged', 'অপরিবর্তিত আছে');
+      text = text.replace('BDT Decreased', 'টাকা হ্রাস পেয়েছে').replace('Remains Unchanged', 'অপরিবর্তিত আছে');
     }
     cell.innerText = convertNum(text);
   });
