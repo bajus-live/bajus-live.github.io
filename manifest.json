@@ -1,15 +1,23 @@
 {
   "name": "বাংলাদেশের জুয়েলারি সমিতি",
   "short_name": "বাজুস",
+  "description": "বাংলাদেশ জুয়েলারি সমিতির দৈনিক স্বর্ণ ও রূপার বাজারদর।",
   "start_url": "index.html",
   "display": "fullscreen",
   "background_color": "#ffffff",
   "theme_color": "#0b1b22",
   "icons": [
     {
-      "src": "icon-512x512.png",  
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "favicon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
