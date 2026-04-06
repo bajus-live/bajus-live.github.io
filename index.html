@@ -344,6 +344,20 @@ if ('serviceWorker' in navigator) {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+    import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-messaging.js";
+
+const messaging = getMessaging(app);
+
+// নোটিফিকেশন পারমিশন চাওয়া
+Notification.requestPermission().then((permission) => {
+    if (permission === 'granted') {
+        console.log('Notification permission granted.');
+        // টোকেন সংগ্রহ (VAPID key ছাড়া এটি কাজ করবে না)
+        getToken(messaging, { vapidKey: 'BAPT_iVAAY80EDQwHKQm4kIVWZ4Q4uxg0KyEsEjdSob6xYOjXoojd9Qti4NgbXfPmeBQvK9Um8B-RQMx0gkvP7I' })
+        .then((token) => console.log("FCM Token:", token))
+        .catch((err) => console.log("Token error:", err));
+    }
+});
   </script>
 </body>
 </html>
