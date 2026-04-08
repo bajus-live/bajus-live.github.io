@@ -117,7 +117,7 @@ function updateBanglaTime() {
     const bMinutes = toBanglaNumber(minutes < 10 ? '0' + minutes : minutes);
     const bSeconds = toBanglaNumber(seconds < 10 ? '0' + seconds : seconds);
 
-    const finalString = `${dayName} ${date} এ ${monthName} ${year}। ${period} ${bHours}:${bMinutes}:${bSeconds}`;
+    const finalString = `${dayName} ${date} ই ${monthName} ${year}, ${period} ${bHours}:${bMinutes}:${bSeconds}`;
 
     document.getElementById('bangla-date-time').innerText = finalString;
 }
