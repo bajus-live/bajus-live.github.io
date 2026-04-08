@@ -161,7 +161,50 @@ body{
 
 
 
+/* Time */
+.timer-container {
+    width: fit-content;
+    height: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ABF6FF;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    font-size: 1.1rem;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
+#bangla-date-time {
+    color: black;
+    font-size: 15px;
+    font-family: hind siliguri;
+}
+.reddot{
+    background: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    margin-top: 5px;
+    margin-left: -10px;
+    animation: red_dot 1s infinite;
+}
+@keyframes red_dot{
+    0%{
+        opacity: 0;
+        background: white;
+    }
+    100%{
+        opacity: 1;
+        background: red;
+    }
+}
 
 
 
