@@ -6,6 +6,8 @@ body{
       overscroll-behavior: none;
       height: 100vh;
       overflow-x: hidden;
+      align-items: center;
+      min-height: 100vh;
       background: #E8E8E8;
       margin-top: 50px;
       font-family: hind siliguri;
@@ -162,49 +164,68 @@ body{
 
 
 /* Time */
-.timer-container {
-    width: fit-content;
-    height: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #ABF6FF;
-    padding: 10px 15px;
-    border-radius: 20px;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    font-weight: bold;
-    border: 1px solid #ddd;
-    font-size: 1.1rem;
-    display: flex;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#bangla-date-time {
-    color: black;
-    font-size: 15px;
-    font-family: hind siliguri;
-}
-.reddot{
-    background: red;
-    width: 10px;
-    height: 10px;
-    border-radius: 50px;
-    margin-top: 5px;
-    margin-left: -10px;
-    animation: red_dot 1s infinite;
-}
-@keyframes red_dot{
-    0%{
+    .timer-container {
+      width: fit-content;
+      background-color: #e0f7fa;
+      padding: 10px 10px;
+      border-radius: 10px;
+      font-family: hind siliguri, sans-serif;
+      color: #333;
+      font-weight: bold;
+      border: 1px solid #b2ebf2;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    
+    #bangla-date-time {
+      color: #000000;
+      font-size: 15px;
+      font-family: Hind Siliguri, sans-serif;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .reddot {
+      background: red;
+      width: 10px;
+      height: 10px;
+      border-radius: 50px;
+      position: relative;
+      display: inline-block;
+      margin: 0;
+    }
+    
+    .reddot::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: red;
+      border-radius: 50%;
+      animation: pulse_layers 2s infinite;
+      opacity: 0;
+    }
+    
+    
+    @keyframes pulse_layers {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+      
+      100% {
+        transform: scale(2.5);
         opacity: 0;
-        background: white;
+      }
     }
-    100%{
-        opacity: 1;
-        background: red;
-    }
-}
 
 
 
