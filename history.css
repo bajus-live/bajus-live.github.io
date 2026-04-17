@@ -3,14 +3,24 @@ html{
       scroll-behavior: smooth;
       min-height: 100%;
 }
-body{
-      background: #E8E8E8;
-      font-family: hind siliguri;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+body {
+  overscroll-behavior: none;
+  overflow-x: hidden;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('https://bajus-live.github.io/storage/photos/bg.jpg');
+  background-size: 100px;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin-top: 0px;
+  font-family: hind siliguri;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .top-logo{
@@ -33,7 +43,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 52px; /* change */
+  margin-top: 0px; /* change */
   z-index: 99;
   background: #ffffff;
   border-radius: 5px;
@@ -103,16 +113,16 @@ body{
 }
 
 
-/*Bottom Navbar */
-.navbar{
+/* Navbar */
+    .navbar{
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       width: 100%;
-      padding: 20px 0;
+      padding: 11.5px 0;
       background-color: rgba(0, 0, 0, 1);
-      border: .1px solid #F1E5E9;
+      border: 0.1px solid #F1E5E9;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -146,6 +156,34 @@ body{
       color: #FFFFFF;
       box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
       border-radius: 10px;
+      border: .1px solid white;
+      transition: all 0.3s ease-in-out;
+      }
+      .nav-item a:hover{
+        transition: 0.3s all ease-in;
+        transform: scale(1.04);
+        border: .1px solid black;
+        box-shadow: 0 0 15px #20BBFF, 0 0 5px rgba(0, 255, 255, .7);
+      }
+      .nav-item.active a{
+        transition: 0.3s all ease-in;
+        border: 1px solid black;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 1), 0 0 4px rgba(0, 255, 255, 1);
+      }
+      .nav1{
+        padding: 10px 21px;
+      }
+      .nav2{
+        padding: 10px 13.5px;
+      }
+      .nav3{
+        padding: 10px 11px;
+      }
+      .nav4{
+        padding: 10px 0px;
+      }
+     .nav5{
+        padding: 10px 6.5px;
       }
     .nav-item i{
       font-size: 18px;
@@ -166,6 +204,8 @@ body{
       color: #00FFF0;
       font-weight: bold;
     }
+/* End */
+    
     
     
     
@@ -183,15 +223,14 @@ body{
     transition: .5s all ease;
 }
 .old_doc:hover {
-    transform: scale(1.003);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0);
 }
 .old_doc_head{
-    font-size: 22px;
+    font-size: 19px;
     font-weight: 900;
     text-align: center;
     color: black;
-    margin-top: 70px;
+    margin-top: 20px;
     
 }
 #old_doc_head_position{
@@ -299,7 +338,7 @@ body{
 .visitor_c {
   text-align: left;
   font-size: 14px;
-  margin-bottom: -30px;
+  margin-bottom: 90px;
 }
 
 
