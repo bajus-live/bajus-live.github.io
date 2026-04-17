@@ -16,7 +16,7 @@
 <!-- THEME -->
 <meta name="theme-color" content="#d4af77">
 
-  <!-- ===== Open Graph / Social (WhatsApp + Home Screen Preview) ===== -->
+  <!--Social (WhatsApp + Home Screen Preview) ===== -->
   <meta property="og:title" content="বাংলাদেশ জুয়েলারি অ্যাপ - আজকের সোনা ও রুপার দর">
   <meta property="og:description" content="বাংলাদেশ জুয়েলার্স অ্যাসোসিয়েশনের দৈনিক স্বর্ণ ও রূপার বাজারদর">
   <meta property="og:url" content="https://bajus-live.github.io/">
@@ -49,19 +49,6 @@
   </script>
 </head>
 <body>
-  <!-- Main Logo -->
-     <div class="top-logo_M_area">
-     <a href="index.html">
-       <img src="https://bajus-live.github.io/storage/photos/logo.jpg" alt="logo" id="top-logo_M_img">
-     </a>
-   </div>
-
-   <!-- Translate -->
-   <div class="lang-switch-container">
-   <span class="lang-label">ভাষাঃ</span>
-  <button id="lang-btn" onclick="toggleLanguage()">EN</button>
-</div>
-   
    <!-- Logo -->
    <div class="top-logo-test">
      <a href="index.html">
@@ -117,7 +104,7 @@ function updateBanglaTime() {
     const bMinutes = toBanglaNumber(minutes < 10 ? '0' + minutes : minutes);
     const bSeconds = toBanglaNumber(seconds < 10 ? '0' + seconds : seconds);
 
-    const finalString = `${dayName} ${date} ই ${monthName} ${year}, ${period} ${bHours}:${bMinutes}:${bSeconds}`;
+    const finalString = `${dayName} ${date} ${monthName} ${year}, ${period} ${bHours}:${bMinutes}:${bSeconds}`;
 
     document.getElementById('bangla-date-time').innerText = finalString;
 }
@@ -125,24 +112,11 @@ function updateBanglaTime() {
 setInterval(updateBanglaTime, 1000);
 updateBanglaTime();
   </script>
-
-
-  
-  
 <!-- Last Update -->
-   <div class="last-update">
-     <div class="last-update-banner">
-        <h3 class="last-update-h">সর্বশেষ আপডেট</h3>
-     <p class="last-update-b">
-       <i class="fa-solid fa-arrow-rotate-left" id="history" style="color: red;"></i>
-       তারিখ: ১৬ এপ্রিল, ২০২৬</p>
-     <p class="last-update-b">
-
-       <i class="fa-solid fa-arrow-rotate-left" id="history" style="color: red;"></i>
-     সময়: সকাল ১২:৪৩ ঘটিকা</p>
-     </div>
-   </div>
-   
+ <div class="last_Up">
+     <p class="last_Up_text">আপডেটেড: ১৭ এপ্রিল ২০২৬, সন্ধ্যা ০৬:২৪ মিনিট</p>
+ </div>
+<!-- News -->
    <div class="news">
      <table border="0" style="width: 100%; border: 1px solid #F1E5E9;">
        <tr class="news-tr">
@@ -151,58 +125,17 @@ updateBanglaTime();
        </tr>
        <tr class="news-th">
          <td class="news-td">সোনার মূল্য</td>
-     <!--   <td class="news-td-c">২২১৬ টাকা বৃদ্ধি পেয়েছে</td> -->
+     <!--<td class="news-td-c">২২১৬ টাকা বৃদ্ধি পেয়েছে</td>-->
          <td class="news-td-c">অপরিবর্তিত আছে</td>
        </tr>
        <tr class="news-th">
          <td class="news-td">এবং, রুপার মূল্যও</td>
-    <!-- <td class="news-td-c">৩৫০ টাকা বৃদ্ধি পেয়েছে</td> -->
+    <!--<td class="news-td-c">৩৫০ টাকা বৃদ্ধি পেয়েছে</td>-->
          <td class="news-td-c">অপরিবর্তিতই আছে</td> 
          </tr>
      </table>
    </div>
    <br>
-   
-   <!-- Gram Banner -->
-   <div class="price-g">
-    <div class="price-banner-g">
-   <!-- Download Image -->
-   <!-- Change1 -->
-  <img src="https://bajus-live.github.io/storage/banner/(15-04-2026)_banner.jpg" alt="gram-banner" class="banner-g">
-    </div>
-    <!-- Change1 -->
-    <a href="https://raw.githubusercontent.com/bajus-live/bajus-live.github.io/main/storage/banner/(15-04-2026)_banner.jpg" download="gram-price.jpg" class="download-btn">
-<span class="material-symbols-outlined" style="font-size: 22px; color: white;">download</span>
-<span class="btn-text">ডাউনলোড</span>
-</a>
-</div>
-
-<br>
-<!-- vori banner -->
-<div class="price-v">
-  <div class="price-banner-v">
-    <!-- Change1 -->
-    <img src="https://bajus-live.github.io/storage/screenshot/(15-04-2026)_screenshort.png" alt="vori-banner" class="banner-v">
-  </div>
-  <div class="button-group">
-    
-<!-- Preview pdf -->
-   <!-- Change1 -->
-  <a href="https://bajus-live.github.io/storage/files/(15-04-2026)_bajus.pdf" target="_blank" class="view-btn">
-    <i class="fa-solid fa-eye" style="font-size: 13px; color: black;"></i>
-    <span class="btn-text">দেখুন</span>
-  </a>
-  
-  <!-- Download pdf -->
-  <!-- Change2 -->
-  <a href="https://raw.githubusercontent.com/bajus-live/bajus-live.github.io/main/storage/files/(15-04-2026)_bajus.pdf" download="(15-04-2026)_Bajus-Rate.pdf" target="_blank" class="download-btn">
-    <span class="material-symbols-outlined" style="font-size: 22px; color: white;">download</span>
-    <span class="btn-text">ডাউনলোড</span>
-  </a>
-</div>
-</div>
-
-<br>
 <!-- Gold Rate -->
 <div id="golddown">
   <table border="1" class="goldtable">
@@ -278,9 +211,6 @@ updateBanglaTime();
 </table>
 </div>
 <br>
-   
-   
-   
 <!-- Scroll text -->
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker">
@@ -312,10 +242,61 @@ updateBanglaTime();
   </div>
 </div>
 
+<!-- vori banner -->
+<div class="price-v">
+  <div class="price-banner-v">
+    <!-- Change1 -->
+    <img src="https://bajus-live.github.io/storage/screenshot/(15-04-2026)_screenshort.png" alt="vori-banner" class="banner-v">
+  </div>
+  <div class="button-group">
+    
+    <!-- Preview pdf -->
+    <!-- Change1 -->
+    <a href="https://bajus-live.github.io/storage/files/(15-04-2026)_bajus.pdf" target="_blank" class="view-btn">
+      <!-- <i class="fa-solid fa-eye" style="font-size: 13px; color: black;"></i>-->
+      <span class="btn-text">
+        <img src="https://bajus-live.github.io/storage/photos/pdf.png" class="pdf_i">পিডিএফ
+      </span>
+    </a>
+    
+    <!-- Download pdf -->
+    <!-- Change2 -->
+    <a href="https://raw.githubusercontent.com/bajus-live/bajus-live.github.io/main/storage/files/(15-04-2026)_bajus.pdf" download="(15-04-2026)_Bajus-Rate.pdf" target="_blank" class="download-btn2">
+      <span class="material-symbols-outlined" style="font-size: 22px; color: white;">download</span>
+      <span class="btn-text">ডাউনলোড</span>
+    </a>
+  </div>
+</div>
+<br>
+
+
+
+
+
+
+
+
+   <!-- Gram Banner -->
+   <div class="price-g">
+     <div class="price-banner-g">
+       <!-- Download Image -->
+       <!-- Change1 -->
+       <img src="https://bajus-live.github.io/storage/banner/(15-04-2026)_banner.jpg" alt="gram-banner" class="banner-g">
+     </div>
+     <!-- Change1 -->
+     <a href="https://raw.githubusercontent.com/bajus-live/bajus-live.github.io/main/storage/banner/(15-04-2026)_banner.jpg" download="gram-price.jpg" class="download-btn1">
+       <span class="material-symbols-outlined" style="font-size: 22px; color: white;">download</span>
+       <span class="btn-text">ডাউনলোড</span>
+     </a>
+   </div>
+<!-- Copyright -->
 <code class="copyright">
+  <a href="https://bajus.org/" class="copyright_link">
   © কপিরাইট ২০২৬ বাংলাদেশ জুয়েলারি সমিতি <br> (বাজুস)
+  </a>
 </code>
 
+<!-- Visitor -->
 <div class="visitor_c"> 
 মোট ভিউয়ার্সঃ 
   <!-- hitwebcounter Code START -->
@@ -336,12 +317,12 @@ updateBanglaTime();
     <!-- Bottom Navbar-->
   <nav class="navbar">
   <div class="nav-item active">
-       <a href="index.html">
+       <a href="index.html" class="nav1">
        <i class="fa-solid fa-house"></i>
         <span>হোম</span></a>
   </div>
   <div class="nav-item">
-      <a href="history.html">
+      <a href="history.html" class="nav2">
         <!-- test
       <i class="fa-etch fa-solid fa-circle-info"></i> -->
       
@@ -350,18 +331,18 @@ updateBanglaTime();
       <span>সর্বশেষ</span></a>
   </div>
   <div class="nav-item">
-      <a href="news.html">
-    <i class="fa-solid fa-newspaper"></i>
-      <span>খবর</span></a>
+      <a href="gallery.html" class="nav3">
+<i class="fa-solid fa-images"></i>
+      <span>গ্যালারি</span></a>
   </div>
   <div class="nav-item">
-     <a href="international.html">
+     <a href="international.html" class="nav4">
      <i class="fa-solid fa-globe"></i>
      <span>আন্তর্জাতিক</span></a>
     </div>
   </div>
   <div class="nav-item">
-     <a href="contact.html">
+     <a href="contact.html" class="nav5">
        <i class="fa-sharp fa-solid fa-phone-volume"></i>
       <span>যোগাযোগ</span></a>
   </div>
@@ -381,7 +362,6 @@ if ('serviceWorker' in navigator) {
 
 <!-- Google Firebase -->
   <script type="module">
-  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
   // TODO: Add SDKs for Firebase products that you want to use
@@ -410,7 +390,6 @@ const messaging = getMessaging(app);
 Notification.requestPermission().then((permission) => {
     if (permission === 'granted') {
         console.log('Notification permission granted.');
-        // টোকেন সংগ্রহ (VAPID key ছাড়া এটি কাজ করবে না)
         getToken(messaging, { vapidKey: 'BAPT_iVAAY80EDQwHKQm4kIVWZ4Q4uxg0KyEsEjdSob6xYOjXoojd9Qti4NgbXfPmeBQvK9Um8B-RQMx0gkvP7I' })
         .then((currentToken) => {
           if (currentToken) {
@@ -429,13 +408,9 @@ requestPermission();
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  // ব্রাউজারের ডিফল্ট প্রম্পট আটকে দেওয়া
   e.preventDefault();
   deferredPrompt = e;
   console.log('PWA Install prompt is ready');
-  
-  // আপনি যদি চান কোনো বাটন দিয়ে ইউজারকে ইন্সটল করাতে, 
-  // তবে সেই বাটনের আইডি এখানে ব্যবহার করতে পারেন।
 });
 
 function installPWA() {
