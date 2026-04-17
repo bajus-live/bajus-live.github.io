@@ -8,8 +8,8 @@ self.addEventListener("install", e => {
         "./index.html",
         "./style.css",
         "./favicon.png",
-        "./icon_192×192.png",
-        "./icon_512×512.png"
+        "./icon(192×192).png",
+        "./icon(512×512).png"
       ]);
     })
   );
