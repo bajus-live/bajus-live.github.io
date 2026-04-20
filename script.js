@@ -1,5 +1,4 @@
-// Alert Message
-alert('"বর্তমানে ওয়েব সাইটটি শুধুমাত্র Android ইউজারদের জন্যই সীমাবদ্ধ রয়েছে, পরবর্তীতে PC উজারদের জন্যও এটি উন্মুক্ত করা হবে" ধন্যবাদ');
+// Alert Message alert('"বর্তমানে ওয়েব সাইটটি শুধুমাত্র Android ইউজারদের জন্যই সীমাবদ্ধ রয়েছে, পরবর্তীতে PC উজারদের জন্যও এটি উন্মুক্ত করা হবে" ধন্যবাদ');
 // scroll up button
     var scrollButton = document.getElementById("scrollUpButton");
 
