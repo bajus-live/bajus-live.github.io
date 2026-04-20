@@ -209,5 +209,5 @@ body {
   margin-top: -12px;
   height: 260px;
   width: 100%;
-  position: '';
+  overflow: hidden;
 }
