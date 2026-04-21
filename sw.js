@@ -1,4 +1,4 @@
-const CACHE_NAME = "bajus-v1.2";
+const CACHE_NAME = "bajus-v1.3";
 
 self.addEventListener("install", e => {
   e.waitUntil(
