@@ -122,16 +122,19 @@ body{
   color: #B28A00;
 }
 /* Time */
-    .timer-container {
-      width: 270px;
+.timer-container {
+      width: fit-content;
+      max-width: 95%;
+      white-space: nowrap;
       background-color: white;
-      padding: 10px 10px;
+      padding: 10px 15px;
       border-radius: 10px;
       font-family: hind siliguri, sans-serif;
       color: #333;
       font-weight: bold;
-      border: .1px solid black;
-      box-shadow: 0 0 15px rgba(0, 0, 0, .3), 0 0 5px;
+      border-radius: 10px;
+      border: .1px solid white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, .5), 0 0 5px;
       font-size: 15px;
       display: flex;
       align-items: center;
@@ -140,9 +143,10 @@ body{
       margin-right: auto;
       margin-top: 20px;
       margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(184, 134, 11, 0.12), 0 4px 8px rgba(184, 134, 11, 0.06);
     }
     
-    #bangla-date-time {
+#bangla-date-time {
       color: #000000;
       font-size: 15px;
       font-family: Hind Siliguri, sans-serif;
@@ -150,7 +154,7 @@ body{
       margin-right: auto;
     }
     
-    .reddot {
+.reddot {
       background: red;
       width: 10px;
       height: 10px;
@@ -160,7 +164,7 @@ body{
       margin: 0;
     }
     
-    .reddot::after {
+.reddot::after {
       content: '';
       position: absolute;
       top: 0;
@@ -174,7 +178,7 @@ body{
     }
     
     
-    @keyframes pulse_layers {
+@keyframes pulse_layers {
       0% {
         transform: scale(1);
         opacity: 0.6;
@@ -610,7 +614,7 @@ body{
       width: 100%;
       padding: 11.5px 0;
       background-color: rgba(0, 0, 0, 1);
-      border: 0.1px solid #F1E5E9;
+      border: 0.1px solid black;
       display: flex;
       justify-content: space-around;
       align-items: center;
