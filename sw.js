@@ -1,4 +1,4 @@
-const CACHE_NAME = "bajus-v2.7";
+const CACHE_NAME = "bajus-v2.8";
 
 self.addEventListener("install", e => {
   self.skipWaiting();
@@ -10,7 +10,9 @@ self.addEventListener("install", e => {
         "./style.css",
         "./favicon.png",
         "./icon(192×192).png",
-        "./icon(512×512).png"
+        "./icon(512×512).png",
+        "./icon-maskable-192.png",
+        "./icon-maskable-512.png"
       ]);
     })
   );
