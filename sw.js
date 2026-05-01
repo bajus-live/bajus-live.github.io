@@ -1,4 +1,4 @@
-const CACHE_NAME = "bajus-v3.1";
+const CACHE_NAME = "bajus-v3.3";
 
 self.addEventListener("install", e => {
   self.skipWaiting();
@@ -10,9 +10,7 @@ self.addEventListener("install", e => {
         "./style.css",
         "./favicon.png",
         "./icon(192×192).png",
-        "./icon(512×512).png",
-        "./icon-maskable-192.png",
-        "./icon-maskable-512.png"
+        "./icon(512×512).png"
       ]);
     })
   );
@@ -32,7 +30,7 @@ self.addEventListener("activate", e => {
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
             console.log("পুরনো ক্যাশ ডিলিট করা হলো:", cacheName);
-            return caches.delete(cacheName); 
+            return caches.delete(cacheName);
           }
         })
       );
