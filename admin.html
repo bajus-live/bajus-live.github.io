@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAJUS Live - Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #f4f6f9;
+            --card-bg: #ffffff;
+            --primary: #ff9800;
+            --text: #333333;
+            --border: #e0e0e0;
+            --section-border: #eaedf2;
+            --section-title-bg: #f8fafc;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+        .admin-container {
+            max-width: 650px;
+            margin: 30px auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        h2 { text-align: center; color: var(--primary); margin-top: 0; margin-bottom: 25px; font-size: 24px; }
+        
+        /* 🧱 সেকশন বা ভাগের ডিজাইন */
+        .dashboard-section-block {
+            border: 2px solid var(--section-border);
+            border-radius: 12px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+        .section-header-title {
+            background: var(--section-title-bg);
+            padding: 12px 18px;
+            margin: 0;
+            font-size: 15px;
+            font-weight: 700;
+            color: #475569;
+            border-bottom: 2px solid var(--section-border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-body-content {
+            padding: 20px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #555; }
+        
+        /* 👁️ পাসওয়ার্ড ফিল্ড ও আই বাটন */
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-wrapper input {
+            padding-right: 45px;
+        }
+        .toggle-password-btn {
+            position: absolute;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+            width: auto;
+            display: inline-flex;
+        }
+        .toggle-password-btn:hover {
+            color: var(--primary);
+            background: none;
+        }
+
+        /* 📊 গ্রাফ গ্রিড লেআউট (পাশাপাশি) */
+        .graph-day-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .graph-day-row:last-child {
+            border-bottom: none;
+        }
+        .day-label {
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--primary);
+            min-width: 60px;
+        }
+        .graph-inputs {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+        }
+
+        input, textarea {
+            width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px;
+            box-sizing: border-box; font-size: 15px; transition: 0.3s; background: #fafafa;
+        }
+        input:focus, textarea:focus { border-color: var(--primary); outline: none; background: #fff; box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1); }
+        
+        button {
+            width: 100%; padding: 14px; background: var(--primary); border: none; color: white;
+            font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 15px;
+            transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        button:hover { background: #e68a00; }
+        .tab-btn-group { display: flex; gap: 12px; margin-bottom: 20px; }
+        .tab-btn {
+            flex: 1; padding: 11px; background: #e5e7eb; color: #4b5563; border: none;
+            cursor: pointer; border-radius: 8px; font-weight: bold; font-size: 14px; transition: 0.3s;
+        }
+        .tab-btn.active { background: var(--primary); color: white; }
+        
+        /* Toggling */
+        #loginSection { max-width: 400px; margin: 80px auto; display: block; }
+        #dashboardSection{ display: none; } 
+        
+        /* 🌟 টোস্ট নোটিফিকেশন */
+        .toast-notification {
+            position: fixed; top: 25px; right: -400px; background: #10b981; color: #ffffff;
+            padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;
+            font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.25); white-space: nowrap;
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
+        }
+        .toast-notification.show { right: 20px; }
+        .toast-icon { font-size: 16px; }
+        
+        /* 📋 হিস্ট্রি লিস্ট স্টাইল */
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .history-details { font-size: 13px; color: #333; flex: 1; padding-right: 10px; }
+        .history-time { font-size: 11px; color: #94a3b8; display: block; margin-top: 2px; }
+        .delete-notif-btn {
+            background: #ef4444; width: auto; padding: 6px 12px; font-size: 12px; margin-top: 0; border-radius: 4px;
+        }
+        .delete-notif-btn:hover { background: #dc2626; }
+    </style>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+<div class="admin-container" id="loginSection">
+    <h2><i class="fa-solid fa-lock"></i> Admin Login</h2>
+    <form id="loginForm">
+        <div class="form-group">
+            <label>Gmail Address</label>
+            <input type="email" id="loginEmail" placeholder="admin@gmail.com" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+                <button type="button" class="toggle-password-btn" id="togglePasswordBtn" onclick="togglePasswordVisibility()">
+                    <i class="fa-solid fa-eye-slash" id="eyeIcon"></i>
+                </button>
+            </div>
+        </div>
+        <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+    </form>
+</div>
+
+<div class="admin-container" id="dashboardSection">
+    <h2><i class="fa-solid fa-user-shield"></i> BAJUS Live Admin Panel</h2>
+    
+    <div class="dashboard-section-block">
+        <h3 class="section-header-title">
+            <i class="fa-solid fa-paper-plane"></i> Send Live Notification / Message
+        </h3>
+        <div class="section-body-content">
+            <div class="form-group">
+                <label>নোটিফিকেশন টাইটেল / শিরোনাম</label>
+                <input type="text" id="noticeTitle" placeholder="যেমন: আজকের বিশেষ অফার, জরুরী নোটিশ">
+            </div>
+            <div class="form-group">
+                <label>মেসেজ বা নোটিশ লিখুন</label>
+                <textarea id="noticeMessage" rows="3" placeholder="এখানে আপনার নোটিশ বা অফার মেসেজটি লিখুন..."></textarea>
+            </div>
+            <button type="button" onclick="sendLiveNotice()" style="background: #3b82f6; margin-top: 0;"><i class="fa-solid fa-bell"></i> Send Live Notice</button>
+        </div>
+    </div>
+
+    <div class="tab-btn-group">
+        <button class="tab-btn active" id="goldTabBtn" onclick="switchAdminTab('gold')"><i class="fa-solid fa-coins"></i> Gold Price</button>
+        <button class="tab-btn" id="silverTabBtn" onclick="switchAdminTab('silver')"><i class="fa-solid fa-circle"></i> Silver Price</button>
+    </div>
+
+    <form id="priceForm">
+        <div class="dashboard-section-block">
+            <h3 class="section-header-title">
+                <i class="fa-solid fa-pen-to-square"></i> Live Price Management Section
+            </h3>
+            <div class="section-body-content">
+                <div class="form-group">
+                    <label id="badgeLabel">টপ নোটিশ / স্বর্ণের ব্যাজ টেক্সট</label>
+                    <input type="text" id="appBadge" required>
+                </div>
+                
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>22K Today</label>
+                        <input type="text" id="k22" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>22K Yesterday</label>
+                        <input type="text" id="k22_yesterday" placeholder="yesterday price" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>22K Change</label>
+                        <input type="text" id="k22_change" placeholder="অটো ক্যালকুলেট হবে" readonly style="background: #e2e8f0; cursor: not-allowed;">
+                    </div>
+                </div>
+                
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>21K Today</label>
+                        <input type="text" id="k21" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>21K Yesterday</label>
+                        <input type="text" id="k21_yesterday" placeholder="yesterday price" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>21K Change</label>
+                        <input type="text" id="k21_change" placeholder="অটো ক্যালকুলেট হবে" readonly style="background: #e2e8f0; cursor: not-allowed;">
+                    </div>
+                </div>
+                
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>18K Today</label>
+                        <input type="text" id="k18" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>18K Yesterday</label>
+                        <input type="text" id="k18_yesterday" placeholder="yesterday price" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>18K Change</label>
+                        <input type="text" id="k18_change" placeholder="অটো ক্যালকুলেট হবে" readonly style="background: #e2e8f0; cursor: not-allowed;">
+                    </div>
+                </div>
+                
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>Sanatan Today</label>
+                        <input type="text" id="kSanatan" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Sanatan Yesterday</label>
+                        <input type="text" id="kSanatan_yesterday" placeholder="yesterday price" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Sanatan Change</label>
+                        <input type="text" id="kSanatan_change" placeholder="অটো ক্যালকুলেট হবে" readonly style="background: #e2e8f0; cursor: not-allowed;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-section-block">
+            <h3 class="section-header-title" id="graphSectionTitle">
+                <i class="fa-solid fa-chart-line"></i> Gold 7-Days Graph Section
+            </h3>
+            <div class="section-body-content">
+                <p style="margin-top:0; font-size:13px; color:#666;">গ্রাফের জন্য গত ৭ দিনের তারিখ এবং পরিবর্তনের পরিমাণ (+/-) এখানে আপডেট করুন। Day 1 স্বয়ংক্রিয়ভাবে আজকের ডেটা নিয়ে নেবে।</p>
+                
+                <div id="graphDaysContainer">
+                    <script>
+                        for(let i=1; i<=7; i++) {
+                            const isReadOnly = (i === 1) ? 'readonly style="background: #e2e8f0; cursor: not-allowed;"' : '';
+                            const placeholderDate = (i === 1) ? 'আজকের তারিখ (অটো)' : 'তারিখ (e.g. 26 May)';
+                            const placeholderChange = (i === 1) ? 'আজকের চেঞ্জ (অটো)' : 'পরিবর্তন (e.g. +500)';
+                            
+                            document.write(`
+                                <div class="graph-day-row">
+                                    <div class="day-label">Day ${i}</div>
+                                    <div class="graph-inputs">
+                                        <input type="text" id="g_date_${i}" placeholder="${placeholderDate}" ${isReadOnly} required>
+                                        <input type="text" id="g_change_${i}" placeholder="${placeholderChange}" ${isReadOnly} required>
+                                    </div>
+                                </div>
+                            `);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        
+        <button type="submit"><i class="fa-solid fa-cloud-arrow-up"></i> Update All Live Data</button>
+    </form>
+
+    <div class="dashboard-section-block">
+        <h3 class="section-header-title">
+            <i class="fa-solid fa-history"></i> Notification History & Management
+        </h3>
+        <div class="section-body-content">
+            <div id="notificationHistoryList" style="max-height: 250px; overflow-y: auto;">
+                <p style="color: #666; font-size: 14px;">কোনো নোটিফিকেশন পাওয়া যায়নি...</p>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="logout()" style="background:#ef4444; margin-top:10px;"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
+</div>
+
+<div id="successToast" class="toast-notification">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span id="toastMessage">Database Updated Successfully</span>
+</div>
+
+<script>
+    // Firebase Config
+    const firebaseConfig = {
+        apiKey: "AIzaSyCGb4nMjRhK7yFJ3m4kR3rlT0oSnEEcxMo",
+        authDomain: "bangladesh-jeweller-s-asso.firebaseapp.com",
+        databaseURL: "https://bangladesh-jeweller-s-asso-default-rtdb.firebaseio.com/",
+        projectId: "bangladesh-jeweller-s-asso",
+        storageBucket: "bangladesh-jeweller-s-asso.firebasestorage.app",
+        messagingSenderId: "646542194702",
+        appId: "1:646542194702:web:f99399f05a199721c4a45f"
+    };
+
+    // Firebase ইনিশিয়ালাইজেশন
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const database = firebase.database();
+
+    let currentType = 'gold';
+
+    // 👁️ পাসওয়ার্ড হাইড/শো লজিক
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('loginPassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        }
+    }
+
+    // 🌟 টপ-রাইট টোস্ট নোটিফিকেশন
+    function showSuccessToast(message) {
+        const toast = document.getElementById('successToast');
+        const toastMsg = document.getElementById('toastMessage');
+        if (toast) {
+            if (message) toastMsg.innerText = message; 
+            toast.classList.add('show'); 
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+    }
+
+    // 🔒 লগইন সেশন ট্র্যাকার
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+            fetchCurrentPrices();
+            fetchCurrentNotice(); 
+            loadNotificationHistory();
+        } else {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('dashboardSection').style.display = 'none';
+        }
+    });
+
+    // 🔑 লগইন সাবমিট
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const pass = document.getElementById('loginPassword').value;
+        auth.signInWithEmailAndPassword(email, pass).catch((error) => {
+            alert("লগইন ব্যর্থ হয়েছে: " + error.message);
+        });
+    });
+
+    // 🔓 লগআউট
+    function logout() {
+        auth.signOut().then(() => {
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginPassword').type = 'password';
+            document.getElementById('eyeIcon').className = 'fa-solid fa-eye-slash';
+        });
+    }
+
+    // ট্যাব পরিবর্তন লজিক
+    function switchAdminTab(type) {
+        currentType = type;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        if (type === 'gold') {
+            document.getElementById('goldTabBtn').classList.add('active');
+            document.getElementById('graphSectionTitle').innerHTML = '<i class="fa-solid fa-chart-line"></i> Gold 7-Days Graph Section';
+        } else {
+            document.getElementById('silverTabBtn').classList.add('active');
+            document.getElementById('graphSectionTitle').innerHTML = '<i class="fa-solid fa-chart-line"></i> Silver 7-Days Graph Section';
+        }
+        const badgeLabel = document.getElementById('badgeLabel');
+        badgeLabel.innerText = type === 'gold' ? "টপ নোটিশ / স্বর্ণের ব্যাজ টেক্সট" : "টপ নোটিশ / রূপার ব্যাজ টেক্সট";
+        fetchCurrentPrices();
+    }
+
+    // 📥 ডাটাবেস থেকে পূর্বের নোটিশ আনা
+    function fetchCurrentNotice() {
+        database.ref('notifications/liveNotice').once('value').then((snapshot) => {
+            if(snapshot.exists()) {
+                document.getElementById('noticeMessage').value = snapshot.val();
+            }
+        });
+    }
+
+    // 🚀 নোটিফিকেশন/মেসেজ পাঠানোর ফাংশন
+    function sendLiveNotice() {
+        const noticeTitle = document.getElementById('noticeTitle').value.trim() || "BAJUS Live Notice"; 
+        const noticeText = document.getElementById('noticeMessage').value;
+        
+        if (!noticeText.trim()) {
+            alert("অনুগ্রহ করে একটি মেসেজ লিখুন!");
+            return;
+        }
+        
+        const newNotifId = Date.now().toString();
+        
+        const now = new Date();
+        let hours = now.getHours();
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        const currentTimeString = `${hours}:${minutes} ${ampm}`;
+        
+        const notifData = {
+            id: newNotifId,
+            title: noticeTitle,
+            message: noticeText,
+            time: currentTimeString
+        };
+        
+        database.ref('notifications/liveNotice').set(noticeText);
+        database.ref('notifications/timestamp').set(Date.now());
+        database.ref('notifications/latest').set(notifData);
+        
+        database.ref('notifications/list').push(notifData)
+            .then(() => {
+                showSuccessToast("Live Notice Sent Successfully!");
+                document.getElementById('noticeTitle').value = ''; 
+                document.getElementById('noticeMessage').value = '';
+            }).catch((error) => {
+                alert("Error: " + error.message);
+            });
+    }
+
+    // 📥 ইনপুট ফিল্ড থেকে সংখ্যায় কনভার্ট করার হেল্পার ফাংশন
+    function getFloatValue(id) {
+        const val = document.getElementById(id).value.trim();
+        return parseFloat(val) || 0;
+    }
+
+    // 📥 ডাটাবেস থেকে লাইভ ডেটা এবং গ্রাফ ডেটা ফর্মে আনা
+    function fetchCurrentPrices() {
+        database.ref('prices/' + currentType).once('value').then((snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                if (data.cards) {
+                    document.getElementById('appBadge').value = data.badge || '';
+                    document.getElementById('k22').value = data.cards[0].price || '';
+                    document.getElementById('k21').value = data.cards[1].price || '';
+                    document.getElementById('k18').value = data.cards[2].price || '';
+                    document.getElementById('kSanatan').value = data.cards[3].price || '';
+                    
+                    document.getElementById('k22_yesterday').value = data.cards[0].yesterday || '';
+                    document.getElementById('k21_yesterday').value = data.cards[1].yesterday || '';
+                    document.getElementById('k18_yesterday').value = data.cards[2].yesterday || '';
+                    document.getElementById('kSanatan_yesterday').value = data.cards[3].yesterday || '';
+
+                    document.getElementById('k22_change').value = data.cards[0].change || '';
+                    document.getElementById('k21_change').value = data.cards[1].change || '';
+                    document.getElementById('k18_change').value = data.cards[2].change || '';
+                    document.getElementById('kSanatan_change').value = data.cards[3].change || '';
+                }
+
+                if (data.graphData) {
+                    for (let i = 1; i <= 7; i++) {
+                        if (data.graphData[i - 1]) {
+                            document.getElementById(`g_date_${i}`).value = data.graphData[i - 1].date || '';
+                            document.getElementById(`g_change_${i}`).value = data.graphData[i - 1].change || '';
+                        }
+                    }
+                } else {
+                    clearGraphFields();
+                }
+            } else {
+                clearForm();
+            }
+        });
+    }
+
+    function clearForm() {
+        document.getElementById('appBadge').value = '';
+        ['k22', 'k21', 'k18', 'kSanatan'].forEach(id => {
+            document.getElementById(id).value = '';
+            document.getElementById(id + '_yesterday').value = '';
+            document.getElementById(id + '_change').value = '';
+        });
+        clearGraphFields();
+    }
+
+    function clearGraphFields() {
+        for (let i = 1; i <= 7; i++) {
+            document.getElementById(`g_date_${i}`).value = '';
+            document.getElementById(`g_change_${i}`).value = '';
+        }
+    }
+
+    // 📤 ডাটাবেসে প্রাইস এবং অটোমেটিক গ্রাফ ডেটা সেট করা
+    document.getElementById('priceForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+    
+        const badgeText = document.getElementById('appBadge').value;
+        
+        // Date and Time Formatting
+        const now = new Date();
+        const formattedTime = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+        const formattedDate = now.toLocaleDateString('bn-BD', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        
+        const carets = ['k22', 'k21', 'k18', 'kSanatan'];
+        const caretNames = {
+            'k22': currentType === 'gold' ? "২২ ক্যারেট" : "২২ ক্যারেট রূপা",
+            'k21': currentType === 'gold' ? "২১ ক্যারেট" : "২১ ক্যারেট রূপা",
+            'k18': currentType === 'gold' ? "১৮ ক্যারেট" : "১৮ ক্যারেট রূপা",
+            'kSanatan': currentType === 'gold' ? "সনাতন" : "সনাতন রূপা"
+        };
+        
+        let cardsData = [];
+        
+        // ১. অটোমেটিক পরিবর্তন (+/-) হিসাব করার লজিক
+        carets.forEach(id => {
+            const todayPrice = getFloatValue(id);
+            const yesterdayPrice = getFloatValue(id + '_yesterday');
+            
+            const changeAmount = todayPrice - yesterdayPrice; 
+            let changeText = "০";
+            
+            if (changeAmount > 0) {
+                changeText = `+${changeAmount}`;
+            } else if (changeAmount < 0) {
+                changeText = `${changeAmount}`; 
+            }
+            
+            document.getElementById(id + '_change').value = changeText;
+            
+            cardsData.push({
+                karat: caretNames[id],
+                price: document.getElementById(id).value,
+                yesterday: document.getElementById(id + '_yesterday').value,
+                change: changeText
+            });
+        });
+
+        // ২. অটোমেটিক গ্রাফের ডেটা তৈরি
+        const mainChange = document.getElementById('k22_change').value;
+        const options = { day: 'numeric', month: 'short' };
+        const todayDate = new Date().toLocaleDateString('en-US', options);
+        
+        document.getElementById('g_date_1').value = todayDate;
+        document.getElementById('g_change_1').value = mainChange;
+
+        const graphDataObject = {};
+        for (let i = 1; i <= 7; i++) {
+            graphDataObject[i - 1] = {
+                date: document.getElementById(`g_date_${i}`).value,
+                change: document.getElementById(`g_change_${i}`).value
+            };
+        }
+        
+        // ফায়ারবেসে সম্পূর্ণ ডেটা পাঠানো
+        database.ref('prices/' + currentType).set({
+            badge: badgeText,
+            cards: cardsData,
+            graphData: graphDataObject,
+            updateTime: formattedTime,
+            updateDate: formattedDate
+        }).then(() => {
+            showSuccessToast("Database & Auto-Calculations Updated!");
+        }).catch((error) => {
+            alert("Error: " + error.message);
+        });
+    });
+    
+    // 📥 ডাটাবেস থেকে নোটিফিকেশন লিস্ট আনা ও দেখানো
+    function loadNotificationHistory() {
+        database.ref('notifications/list').on('value', (snapshot) => {
+            const historyContainer = document.getElementById('notificationHistoryList');
+            historyContainer.innerHTML = ''; 
+            
+            if (snapshot.exists()) {
+                snapshot.forEach((childSnapshot) => {
+                    const key = childSnapshot.key; 
+                    const data = childSnapshot.val();
+                    
+                    const itemHTML = `
+                        <div class="history-item">
+                            <div class="history-details">
+                                <strong>${data.title || 'No Title'}</strong>: ${data.message}
+                                <span class="history-time"><i class="fa-regular fa-clock"></i> ${data.time || ''}</span>
+                            </div>
+                            <button class="delete-notif-btn" onclick="deleteNotification('${key}')">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    historyContainer.insertAdjacentHTML('afterbegin', itemHTML); 
+                });
+            } else {
+                historyContainer.innerHTML = '<p style="color: #666; font-size: 14px;">কোনো নোটিফিকেশন পাওয়া যায়নি...</p>';
+            }
+        });
+    }
+
+    // 🗑️ নির্দিষ্ট নোটিফিকেশন ডিলিট করার লজিক
+    function deleteNotification(key) {
+        if (confirm("আপনি কি নিশ্চিত যে এই নোটিফিকেশনটি ডিলিট করতে চান?")) {
+            database.ref(`notifications/list/${key}`).remove()
+                .then(() => {
+                    showSuccessToast("Notification Deleted Successfully!");
+                }).catch((error) => {
+                    alert("Error deleting: " + error.message);
+                });
+        }
+    }
+</script>
+</body>
+</html>
