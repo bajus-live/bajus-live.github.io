@@ -555,12 +555,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-// app.js এর শেষে এই ফাংশনটি বসান
+// Admin Password Protected page
 function showAdminLogin() {
     const password = prompt("Enter Admin Password:");
-    // আপনার পাসওয়ার্ডটি এখানে দিন
+    
+
+    if (password === null || password === "") {
+        return;
+    }
+    
     if (password === "admin123") {
-        window.location.href = "admin.html"; // এটি আপনার admin.html এ নিয়ে যাবে
+        window.location.href = "admin.html";
     } else {
         alert("Access Denied!");
     }
