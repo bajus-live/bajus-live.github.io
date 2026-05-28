@@ -504,31 +504,6 @@ h3 { font-size: 16px; font-weight: 600; }
 .update-details p { font-size: 11px; color: var(--text-muted); }
 .update-time-tag { margin-left: auto; font-size: 10px; color: var(--text-muted); white-space: nowrap; } */
 
-
-
-/* Install Banner */
-.install-banner {
-    position: absolute;
-    bottom: 66px;
-    left: 12px;
-    right: 12px;
-    background: rgba(13, 27, 42, 0.95);
-    backdrop-filter: blur(10px);
-    border: 1px solid #1e3a5f;
-    border-radius: 12px;
-    padding: 10px 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 5;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
-}
-.install-left { display: flex; align-items: center; gap: 10px; }
-.mini-logo { background: var(--accent-gold); color: #000; font-weight: bold; font-size: 10px; padding: 4px 6px; border-radius: 4px; }
-.install-text h4 { font-size: 12px; color: #fff; }
-.install-text p { font-size: 10px; color: #8fa0b5; }
-.btn-install { background-color: var(--accent-gold); color: #000; border: none; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 12px; cursor: pointer; }
-
 /* Bottom Navigation Styling */
 .bottom-nav {
     position: fixed;
