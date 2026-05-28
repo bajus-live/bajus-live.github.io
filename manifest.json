@@ -1,0 +1,23 @@
+{
+  "name": "বাংলাদেশ জুয়েলারি সমিতি",
+  "short_name": "বাজুস",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#d4af77",
+  "icons": [
+    {
+      "src": "icon_(192×192).png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon_(512×512).png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
