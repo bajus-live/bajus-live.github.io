@@ -172,7 +172,7 @@ function renderUI(type, liveData) {
             grid.innerHTML += `
                 <div class="price-card animate-fade">
                     <span class="karat-tag">${item.karat}</span>
-                    <div class="price-amount">${formattedPrice} <span class="unit">/gram</span></div>
+                    <div class="price-amount">${formattedPrice} <span class="unit">/ভরি</span></div>
                     <div class="changeup" style="color: ${statusColor}"><i class="fa-solid ${statusIcon}"></i> ${formattedChange}</div>
                     <p class="yesterday">(গতকাল: ${formattedYesterday})</p>
                 </div>
@@ -220,7 +220,7 @@ function renderUI(type, liveData) {
 
         chartBriefArea.innerHTML = `
             <span class="karat-tag" style="color:${accentColor}">${topKarat}</span>
-            <div class="price-amount">${formattedTopPrice} <span class="unit">/gram</span></div>
+            <div class="price-amount">${formattedTopPrice} <span class="unit">/ভরি</span></div>
             <div class="changeup" style="color: ${topStatusColor}">
                 <i class="fa-solid ${topStatusIcon}"></i> ${formattedTopChange} 
                 <span style="color:var(--text-muted); font-weight:normal; font-size:10px;">(গতকাল: ${formattedTopYesterday})</span>
