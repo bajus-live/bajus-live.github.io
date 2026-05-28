@@ -129,18 +129,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// অ্যাডমিন বাটন ফাংশন
+
+// Admin Password Protected page
 function showAdminLogin() {
     const password = prompt("Enter Admin Password:");
+    
+    
+    if (password === null || password === "") {
+        return;
+    }
+    
     if (password === "admin123") {
         window.location.href = "admin.html";
     } else {
         alert("Access Denied!");
     }
 }
-
-
-
 
 
 // ==========================================
