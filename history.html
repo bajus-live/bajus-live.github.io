@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইতিহাস - BAJUS Live</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="history.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+     <div id="splashScreen">
+     <div class="splash-logo-box">বাজুস</div>
+     <div class="splash-title">বাংলাদেশ জুয়েলার্স সমিতি</div>
+     <div class="splash-subtitle">Live Gold & Silver Tracker</div>
+     <div class="loader-ring">
+         <svg>
+             <circle cx="35" cy="35" r="30"></circle>
+             <circle id="loaderProgress" cx="35" cy="35" r="30"></circle>
+         </svg>
+         <div id="progressText">0%</div>
+     </div>
+ </div>
+    
+    <div class="drawer-overlay" id="drawerOverlay">
+        <div class="side-drawer left-drawer" id="leftDrawer">
+            <div class="drawer-header">BAJUS মেনু</div>
+            <ul class="drawer-links">
+                <li><i class="fa-solid fa-user-shield"></i> সদস্য প্রোফাইল</li>
+                <li><i class="fa-solid fa-chart-pie"></i> বাজার বিশ্লেষণ রিপোর্ট</li>
+                <li><i class="fa-solid fa-building-columns"></i> সমিতি নীতিমালা</li>
+            </ul>
+        </div>
+        <div class="side-drawer right-drawer" id="rightDrawer">
+            <div class="drawer-header">
+                <span><i class="fa-solid fa-bell"></i> লাইভ নোটিফিকেশন</span>
+                <i class="fa-solid fa-xmark close-drawer-btn" id="closeNotifBtn"></i>
+            </div>
+            <div id="dynamicNotifList"></div>
+        </div>
+    </div>
+    
+    <div class="app-container">
+        <header>
+            <div class="header-left">
+                <i class="fa-solid fa-bars menu-btn" id="menuBtn"></i>
+                <div class="logo-area">
+                    <div class="logo-icon">বাজুস</div>
+                    <div>
+                        <h1>বাংলাদেশ জুয়েলার্স সমিতি</h1>
+                        <p class="subtitle">Live Gold & Silver Rates</p>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <i class="fa-solid fa-moon theme-toggle" id="themeBtn"></i>
+                <div class="notif-icon-wrapper" id="notifBtn">
+                    <i class="fa-solid fa-bell notification-btn"></i>
+                    <span id="notifBadge"></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-scroll" id="historyContainer">
+            
+            <h3 class="top_title">মূল্য তালিকা ইতিহাস</h3>
+            
+            
+            
+            
+            
+            
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i> <span>হোম</span></a>
+            <a href="history.html" class="nav-item active"><i class="fas fa-history"></i> <span>ইতিহাস</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-image"></i> <span>গ্যালারি</span></a>
+            <a href="#" class="nav-item"><i class="fas fa-globe"></i> <span>আন্তর্জাতিক</span></a>
+            <a href="admin.html" class="nav-item" onclick="showAdminLogin()"><i class="fas fa-shield-alt"></i> <span>অ্যাডমিন</span></a>
+        </nav>
+    </div>
+
+    <div id="notifPopup" class="popup-overlay" style="display:none;">
+        <div class="popup-box">
+            <i class="fas fa-bell"></i>
+            <h3>নতুন নোটিফিকেশন!</h3>
+            <p id="popupMessage"></p>
+            <button onclick="document.getElementById('notifPopup').style.display='none'">ঠিক আছে</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCGb4nMjRhK7yFJ3m4kR3rlT0oSnEEcxMo",
+            authDomain: "bangladesh-jeweller-s-asso.firebaseapp.com",
+            databaseURL: "https://bangladesh-jeweller-s-asso-default-rtdb.firebaseio.com/",
+            projectId: "bangladesh-jeweller-s-asso",
+            storageBucket: "bangladesh-jeweller-s-asso.firebasestorage.app",
+            messagingSenderId: "646542194702",
+            appId: "1:646542194702:web:f99399f05a199721c4a45f"
+        };
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+    </script>
+    <script src="history.js"></script>
+</body>
+</html>
