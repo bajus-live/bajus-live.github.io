@@ -553,3 +553,9 @@ h3 { font-size: 16px; font-weight: 600; }
     font-size: 20px;
     margin-bottom: 2px;
 }
+
+/* Index-history */
+.index_history{
+    text-decoration: none;
+    color: white;
+}
