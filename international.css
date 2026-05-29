@@ -123,6 +123,46 @@
 
 
 /* Work */
+body {
+    align-items: center;
+    min-height: 100vh;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 .top_title{
     text-align: center;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    font-family: hind siliguri;
+}
+.live{
+    background: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 15px;
+    animation: live_on_off 1.5s infinite;
+    opacity: 0;
+}
+@keyframes live_on_off{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+/* iframe */
+.webpage {
+  margin-top: 20px;
+  height: 260px;
+  width: 100%;
+  overflow: hidden;
 }
