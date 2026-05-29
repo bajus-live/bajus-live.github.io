@@ -195,7 +195,6 @@ img {
 .document_list_body{
     border: none;
     background: var(--card-bg) !important;
-    border: 1px dotted white;
 }
 #doc_h{
     width: 100%;
@@ -228,6 +227,14 @@ img {
     height: 40px;
     padding: 11px 0px;
     justify-content: center;
+}
+.mm{
+    display: flex;
+}
+.increase_img, .decrease_img{
+    width: auto;
+    height: 15px;
+    margin-top: 2px;
 }
 .document_area{
     display: flex;
@@ -276,7 +283,7 @@ img {
 .list_title{
     background: var(--card-bg);
     color: var(--text-main);
-    border: 1px dotted white;
+    border: .1px dotted white;
     padding: 10px 0px;
 }
 
@@ -297,11 +304,11 @@ body {
  /*work3 */
 
 .document_list_area tr {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 10px solid var(--border-color);
 }
 
 
 .document_list_area td {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 10px solid var(--border-color);
     padding: 5px 0px;
 }
