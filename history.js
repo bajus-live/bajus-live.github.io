@@ -1,6 +1,4 @@
-// ==========================================
-// 🚀 history.js - পূর্ণাঙ্গ ও সংশোধিত কোড
-// ==========================================
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // ১. এলিমেন্ট সিলেক্ট করা
@@ -129,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
 // Admin Password Protected page
 function showAdminLogin() {
     const password = prompt("Enter Admin Password:");
@@ -227,3 +224,27 @@ function listenToNotifications() {
 window.addEventListener('DOMContentLoaded', () => {
     listenToNotifications();
 });
+
+// Work
+
+function addHistoryEntry(date, price, status) {
+    const list = document.getElementById('history-list');
+    const item = document.createElement('div');
+    item.className = 'history-item';
+    
+    // স্ট্যাটাস অনুযায়ী রং নির্ধারণ
+    const statusClass = status === 'up' ? 'status-up' : 'status-down';
+    
+    item.innerHTML = `
+        <span>${date}</span>
+        <span>${price}</span>
+        <span class="${statusClass}">${status === 'up' ? '▲ বৃদ্ধি' : '▼ হ্রাস'}</span>
+    `;
+    
+    // এখানে prepend ব্যবহার করা হয়েছে যাতে নতুন ডেটা উপরে আসে
+    list.prepend(item);
+}
+
+
+//work
+document.documentElement.setAttribute('data-theme', newTheme);
