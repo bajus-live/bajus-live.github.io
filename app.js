@@ -292,11 +292,11 @@ function switchTab(type) {
     if (type === 'gold') {
         if (goldBtn) goldBtn.classList.add('active');
         if (silverBtn) silverBtn.classList.remove('active');
-        if (tabImage) tabImage.src = 'https://i.postimg.cc/jSJPFbKk/gold-silver.png';
+        if (tabImage) tabImage.src = 'https://bajus-live.github.io/storage/photos/gold_bar.png';
     } else {
         if (silverBtn) silverBtn.classList.add('active');
         if (goldBtn) goldBtn.classList.remove('active');
-        if (tabImage) tabImage.src = 'https://i.postimg.cc/jSJPFbKk/gold-silver.png';
+        if (tabImage) tabImage.src = 'https://bajus-live.github.io/storage/photos/gold_bar.png';
     }
     
     database.ref('prices/gold').off();
