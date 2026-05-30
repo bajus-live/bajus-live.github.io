@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ক্যালকুলেটর - Gold Calculator | Bangladesh</title>
+    <style>
+        :root {
+            --gold: #D4A017;
+            --gold-dark: #B8860B;
+            --gold-light: #FFD700;
+            --gold-bg: #FFF8E7;
+            --gold-gradient: linear-gradient(135deg, #B8860B, #D4A017, #F0C040);
+            --card-bg: #ffffff;
+            --text: #2C1810;
+            --text-light: #5D4037;
+            --border: #E0C080;
+            --shadow: 0 8px 32px rgba(184, 134, 11, 0.18);
+            --shadow-sm: 0 2px 8px rgba(184, 134, 11, 0.10);
+            --danger: #C62828;
+            --success: #2E7D32;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Sans Bengali', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #1a1a0a 0%, #2d2410 15%, #3d2e14 30%, #fdf5e6 50%, #fef9f0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Gold particles background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 75% 20%, rgba(218, 165, 32, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 60% 70%, rgba(255, 193, 7, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 30% 80%, rgba(184, 134, 11, 0.05) 0%, transparent 35%);
+            pointer-events: none;
+            z-index: 0;
+            animation: shimmer 12s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(1%, -0.5%) rotate(0.5deg);
+            }
+            66% {
+                transform: translate(-0.5%, 1%) rotate(-0.3deg);
+            }
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 620px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Header Card */
+        .header-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gold-gradient);
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .header-icon {
+            font-size: 44px;
+            margin-bottom: 4px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #5D3A1A;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+        .header-subtitle {
+            font-size: 0.9rem;
+            color: #8D6E63;
+            margin-top: 2px;
+        }
+
+        /* Rate Display */
+        .rate-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            padding: 10px 16px;
+            background: var(--gold-bg);
+            border-radius: 30px;
+            border: 1.5px dashed var(--border);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #5D3A1A;
+        }
+        .rate-display .rate-value {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #B8860B;
+            background: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        .rate-display .rate-unit {
+            font-size: 0.85rem;
+            color: #8D6E63;
+        }
+        .rate-updated {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        /* Admin gear button */
+        .admin-toggle-btn {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: transparent;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #B8860B;
+            opacity: 0.6;
+            transition: var(--transition);
+            z-index: 5;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .admin-toggle-btn:hover {
+            opacity: 1;
+            background: var(--gold-bg);
+            transform: rotate(45deg);
+        }
+        .admin-toggle-btn.active {
+            opacity: 1;
+            background: #B8860B;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            box-shadow: none;
+            border: none;
+            transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+        .admin-panel.open {
+            max-height: 500px;
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            opacity: 1;
+        }
+        .admin-panel-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .admin-label {
+            font-weight: 700;
+            color: #5D3A1A;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .admin-input-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .admin-input {
+            flex: 1;
+            min-width: 180px;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #5D3A1A;
+            background: #FFFDF7;
+            transition: var(--transition);
+            outline: none;
+        }
+        .admin-input:focus {
+            border-color: #D4A017;
+            box-shadow: 0 0 0 4px rgba(212, 160, 23, 0.1);
+            background: #fff;
+        }
+        .admin-unit {
+            font-weight: 700;
+            color: #8D6E63;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        .btn {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-save {
+            background: var(--gold-gradient);
+            color: #3D1C00;
+            box-shadow: 0 4px 14px rgba(184, 134, 11, 0.35);
+        }
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(184, 134, 11, 0.5);
+        }
+        .btn-save:active {
+            transform: scale(0.96);
+        }
+        .btn-reset {
+            background: #fff;
+            color: #8D6E63;
+            border: 1.5px solid #ddd;
+        }
+        .btn-reset:hover {
+            background: #fafafa;
+            border-color: #ccc;
+        }
+        .admin-status {
+            font-size: 0.8rem;
+            color: #2E7D32;
+            font-weight: 600;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+        .admin-status.show {
+            display: flex;
+            animation: fadeInUp 0.4s ease;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Calculator Card */
+        .calc-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .calc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gold-gradient);
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        .calc-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #5D3A1A;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+        .calc-hint {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 16px;
+        }
+
+        /* Input Grid */
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        @media (min-width: 500px) {
+            .input-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .input-group label {
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: #6D4C41;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .input-group label .unit-icon {
+            font-size: 1rem;
+        }
+        .input-group input {
+            padding: 11px 14px;
+            border: 2px solid #E8D5B0;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            color: #3D1C00;
+            background: #FFFDF7;
+            transition: var(--transition);
+            outline: none;
+            width: 100%;
+        }
+        .input-group input:focus {
+            border-color: #D4A017;
+            box-shadow: 0 0 0 5px rgba(212, 160, 23, 0.08);
+            background: #fff;
+        }
+        .input-group input.source-active {
+            border-color: #B8860B;
+            background: #FFFDE8;
+            box-shadow: 0 0 0 6px rgba(184, 134, 11, 0.12);
+            animation: pulseBorder 1.5s ease-in-out infinite;
+        }
+        @keyframes pulseBorder {
+            0%,
+            100% {
+                box-shadow: 0 0 0 6px rgba(184, 134, 11, 0.12);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(184, 134, 11, 0.04);
+            }
+        }
+
+        /* Total Price Display */
+        .price-display {
+            text-align: center;
+            padding: 18px 20px;
+            background: var(--gold-gradient);
+            border-radius: var(--radius-sm);
+            margin: 8px 0 16px;
+            color: #3D1C00;
+            box-shadow: 0 6px 22px rgba(184, 134, 11, 0.3);
+        }
+        .price-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.85;
+            margin-bottom: 2px;
+        }
+        .price-value {
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            word-break: break-all;
+        }
+        .price-value.zero {
+            opacity: 0.5;
+            font-size: 1.6rem;
+        }
+
+        /* Conversion summary */
+        .conversion-summary {
+            background: #FFFDF5;
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            border: 1px solid #F0E0C0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            font-size: 0.82rem;
+        }
+        @media (min-width: 450px) {
+            .conversion-summary {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+        .conv-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3px 0;
+        }
+        .conv-item .conv-label {
+            color: #8D6E63;
+            font-weight: 500;
+        }
+        .conv-item .conv-value {
+            font-weight: 700;
+            color: #3D1C00;
+            text-align: right;
+        }
+        .conv-divider {
+            grid-column: 1 / -1;
+            border-top: 1px dashed #E0D0B0;
+            margin: 2px 0;
+        }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 4px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120px);
+            background: #2E7D32;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 999;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            .header-title {
+                font-size: 1.4rem;
+            }
+            .price-value {
+                font-size: 1.6rem;
+            }
+            .input-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .calc-card {
+                padding: 16px 12px;
+            }
+            .input-group input {
+                padding: 10px 10px;
+                font-size: 0.9rem;
+            }
+            .conversion-summary {
+                grid-template-columns: 1fr 1fr;
+                font-size: 0.75rem;
+                gap: 4px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">✅ সংরক্ষিত হয়েছে</div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+
+        <!-- Header Card -->
+        <div class="header-card" id="headerCard">
+            <button class="admin-toggle-btn" id="adminToggleBtn" title="অ্যাডমিন প্যানেল">
+                ⚙️
+            </button>
+            <span class="header-icon">🪙</span>
+            <h1 class="header-title">ক্যালকুলেটর</h1>
+            <p class="header-subtitle">Gold & Sipver Price Calculator</p>
+            <div class="rate-display">
+                <span>📌 আজকের বাজার দর:</span>
+                <span class="rate-value" id="currentRateDisplay">১,০০,০০০</span>
+                <span class="rate-unit">টাকা / ভরি</span>
+            </div>
+            <div class="rate-updated" id="rateUpdatedText">আপডেট: এখনো সেট করা হয়নি</div>
+        </div>
+
+        <!-- Admin Panel (Collapsible) -->
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-panel-inner">
+                <span class="admin-label">🔐 অ্যাডমিন প্যানেল — স্বর্ণের বাজারদর আপডেট করুন</span>
+                <div class="admin-input-row">
+                    <input
+                    type="number"
+                    class="admin-input"
+                    id="adminRateInput"
+                    placeholder="উদাঃ ১২০০০০"
+                    min="1"
+                    step="any"
+                    >
+                    <span class="admin-unit">টাকা / ভরি</span>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+                    <button class="btn btn-save" id="btnSaveRate">💾 সেভ করুন</button>
+                    <button class="btn btn-reset" id="btnResetRate">🔄 ডিফল্টে ফিরুন</button>
+                    <span class="admin-status" id="adminStatus">✅ সফলভাবে আপডেট হয়েছে!</span>
+                </div>
+                <small style="color:#999;font-size:0.7rem;">
+                    * এখানে আপডেট করলেই ক্যালকুলেটরে স্বয়ংক্রিয়ভাবে দাম পরিবর্তন হবে। localStorage-এ ডাটা সংরক্ষিত থাকবে।
+                </small>
+            </div>
+        </div>
+
+        <!-- Calculator Card -->
+        <div class="calc-card" id="calcCard">
+            <h2 class="calc-title">মূল্য হিসাব করুন</h2>
+            <p class="calc-hint">👇 নিচের যেকোনো একটি ঘরে সংখ্যা লিখুন — বাকিগুলো অটোমেটিক্যালি হিসাব হবে</p>
+
+            <!-- Input Grid -->
+            <div class="input-grid">
+                <div class="input-group">
+                    <label><span class="unit-icon"></span> ভরি (Vori)</label>
+                    <input type="number" id="inputVori" placeholder="0" step="any" min="0">
+                </div>
+                <div class="input-group">
+                    <label><span class="unit-icon"></span> আনা (Ana)</label>
+                    <input type="number" id="inputAna" placeholder="0" step="any" min="0">
+                </div>
+                <div class="input-group">
+                    <label><span class="unit-icon"></span> রতি (Roti)</label>
+                    <input type="number" id="inputRoti" placeholder="0" step="any" min="0">
+                </div>
+                <div class="input-group">
+                    <label><span class="unit-icon"></span> পয়েন্ট (Point)</label>
+                    <input type="number" id="inputPoint" placeholder="0" step="any" min="0">
+                </div>
+                <div class="input-group">
+                    <label><span class="unit-icon"></span> গ্রাম (Gram)</label>
+                    <input type="number" id="inputGram" placeholder="0" step="any" min="0">
+                </div>
+                <div class="input-group">
+                    <label><span class="unit-icon"></span> কেজি (Kg)</label>
+                    <input type="number" id="inputKg" placeholder="0" step="any" min="0">
+                </div>
+            </div>
+
+            <!-- Total Price -->
+            <div class="price-display">
+                <div class="price-label">💰 মোট মূল্য</div>
+                <div class="price-value zero" id="totalPriceDisplay">০ টাকা</div>
+            </div>
+
+            <!-- Conversion Summary -->
+            <div class="conversion-summary" id="conversionSummary">
+                <div class="conv-item"><span class="conv-label">ভরি</span> <span class="conv-value" id="sumVori">—</span></div>
+                <div class="conv-item"><span class="conv-label">আনা</span> <span class="conv-value" id="sumAna">—</span></div>
+                <div class="conv-item"><span class="conv-label">রতি</span> <span class="conv-value" id="sumRoti">—</span></div>
+                <div class="conv-item"><span class="conv-label">পয়েন্ট</span> <span class="conv-value" id="sumPoint">—</span></div>
+                <div class="conv-item"><span class="conv-label">গ্রাম</span> <span class="conv-value" id="sumGram">—</span></div>
+                <div class="conv-item"><span class="conv-label">কেজি</span> <span class="conv-value" id="sumKg">—</span></div>
+            </div>
+        </div>
+
+        <p class="footer-note">Gold Calculator</p>
+        <p class="footer-note"> Made By R@KA</p>
+    </div>
+
+    <script>
+        (function() {
+            // ==================== CONSTANTS ====================
+            const VORI_TO_GRAM = 11.664; // 1 Vori = 11.664 grams (Bangladesh standard)
+            const VORI_TO_ANA = 16; // 1 Vori = 16 Ana
+            const ANA_TO_ROTI = 6; // 1 Ana = 6 Roti
+            const ROTI_TO_POINT = 10; // 1 Roti = 10 Point
+            const VORI_TO_ROTI = VORI_TO_ANA * ANA_TO_ROTI; // 96
+            const VORI_TO_POINT = VORI_TO_ROTI * ROTI_TO_POINT; // 960
+            const GRAM_TO_KG = 1000; // 1 Kg = 1000 grams
+            
+// ==================== Default price value ==================== 
+
+            const DEFAULT_RATE_PER_VORI = 238120; // Default: 1,00,000 Taka per Vori
+            const STORAGE_KEY_RATE = 'goldCalculator_ratePerVori';
+            const STORAGE_KEY_TIMESTAMP = 'goldCalculator_lastUpdated';
+
+            // ==================== DOM ELEMENTS ====================
+            const adminToggleBtn = document.getElementById('adminToggleBtn');
+            const adminPanel = document.getElementById('adminPanel');
+            const adminRateInput = document.getElementById('adminRateInput');
+            const btnSaveRate = document.getElementById('btnSaveRate');
+            const btnResetRate = document.getElementById('btnResetRate');
+            const adminStatus = document.getElementById('adminStatus');
+            const currentRateDisplay = document.getElementById('currentRateDisplay');
+            const rateUpdatedText = document.getElementById('rateUpdatedText');
+            const totalPriceDisplay = document.getElementById('totalPriceDisplay');
+            const toast = document.getElementById('toast');
+
+            // Input fields
+            const inputVori = document.getElementById('inputVori');
+            const inputAna = document.getElementById('inputAna');
+            const inputRoti = document.getElementById('inputRoti');
+            const inputPoint = document.getElementById('inputPoint');
+            const inputGram = document.getElementById('inputGram');
+            const inputKg = document.getElementById('inputKg');
+
+            // Summary fields
+            const sumVori = document.getElementById('sumVori');
+            const sumAna = document.getElementById('sumAna');
+            const sumRoti = document.getElementById('sumRoti');
+            const sumPoint = document.getElementById('sumPoint');
+            const sumGram = document.getElementById('sumGram');
+            const sumKg = document.getElementById('sumKg');
+
+            const allInputs = [inputVori, inputAna, inputRoti, inputPoint, inputGram, inputKg];
+
+            // ==================== STATE ====================
+            let ratePerVori = DEFAULT_RATE_PER_VORI;
+            let lastUpdatedTimestamp = null;
+            let lastEditedInputId = null; // Track which input was last edited
+            let isUpdating = false; // Flag to prevent circular updates
+
+            // ==================== INITIALIZATION ====================
+            function loadRateFromStorage() {
+                const storedRate = localStorage.getItem(STORAGE_KEY_RATE);
+                const storedTimestamp = localStorage.getItem(STORAGE_KEY_TIMESTAMP);
+
+                if (storedRate !== null) {
+                    const parsed = parseFloat(storedRate);
+                    if (!isNaN(parsed) && parsed > 0) {
+                        ratePerVori = parsed;
+                    }
+                }
+                if (storedTimestamp !== null) {
+                    lastUpdatedTimestamp = storedTimestamp;
+                }
+                updateRateDisplay();
+                updateAdminInput();
+            }
+
+            function saveRateToStorage(rate) {
+                localStorage.setItem(STORAGE_KEY_RATE, rate.toString());
+                const now = new Date().toISOString();
+                localStorage.setItem(STORAGE_KEY_TIMESTAMP, now);
+                lastUpdatedTimestamp = now;
+                ratePerVori = rate;
+                updateRateDisplay();
+                updateAdminInput();
+                recalculateFromLastSource();
+            }
+
+            function updateRateDisplay() {
+                currentRateDisplay.textContent = formatIndianNumber(ratePerVori);
+                if (lastUpdatedTimestamp) {
+                    const date = new Date(lastUpdatedTimestamp);
+                    const formattedDate = date.toLocaleDateString('bn-BD', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                    });
+                    rateUpdatedText.textContent = 'আপডেট: ' + formattedDate;
+                } else {
+                    rateUpdatedText.textContent = 'আপডেট: ডিফল্ট দর (সংরক্ষিত নেই)';
+                }
+            }
+
+            function updateAdminInput() {
+                adminRateInput.value = ratePerVori;
+            }
+
+            function formatIndianNumber(num) {
+                if (isNaN(num) || num === null || num === undefined) return '০';
+                // Use Bangladeshi/Indian number formatting
+                const formatted = Math.round(num).toLocaleString('en-IN');
+                return formatted;
+            }
+
+            function formatDecimal(num, decimals) {
+                if (isNaN(num) || num === null || num === undefined) return '—';
+                return Number(num).toFixed(decimals);
+            }
+
+            function formatTaka(amount) {
+                if (isNaN(amount) || amount === null || amount === undefined || amount < 0) return '০ টাকা';
+                const rounded = Math.round(amount);
+                if (rounded === 0 && amount > 0 && amount < 0.5) return '১ টাকা (প্রায়)';
+                if (rounded === 0) return '০ টাকা';
+                return formatIndianNumber(rounded) + ' টাকা';
+            }
+
+            // ==================== CONVERSION LOGIC ====================
+            function convertToVori(value, unitType) {
+                if (isNaN(value) || value === null || value === undefined || value < 0) return null;
+                if (value === 0) return 0;
+                switch (unitType) {
+                    case 'vori':
+                        return value;
+                    case 'ana':
+                        return value / VORI_TO_ANA;
+                    case 'roti':
+                        return value / VORI_TO_ROTI;
+                    case 'point':
+                        return value / VORI_TO_POINT;
+                    case 'gram':
+                        return value / VORI_TO_GRAM;
+                    case 'kg':
+                        return (value * GRAM_TO_KG) / VORI_TO_GRAM;
+                    default:
+                        return null;
+                }
+            }
+
+            function calculateAllFromVori(voriValue) {
+                if (voriValue === null || voriValue === undefined || isNaN(voriValue) || voriValue < 0) {
+                    return null;
+                }
+                return {
+                    vori: voriValue,
+                    ana: voriValue * VORI_TO_ANA,
+                    roti: voriValue * VORI_TO_ROTI,
+                    point: voriValue * VORI_TO_POINT,
+                    gram: voriValue * VORI_TO_GRAM,
+                    kg: (voriValue * VORI_TO_GRAM) / GRAM_TO_KG,
+                    price: voriValue * ratePerVori,
+                };
+            }
+
+            function getUnitTypeFromInputId(inputId) {
+                const map = {
+                    'inputVori': 'vori',
+                    'inputAna': 'ana',
+                    'inputRoti': 'roti',
+                    'inputPoint': 'point',
+                    'inputGram': 'gram',
+                    'inputKg': 'kg',
+                };
+                return map[inputId] || null;
+            }
+
+            function getInputByUnitType(unitType) {
+                const map = {
+                    'vori': inputVori,
+                    'ana': inputAna,
+                    'roti': inputRoti,
+                    'point': inputPoint,
+                    'gram': inputGram,
+                    'kg': inputKg,
+                };
+                return map[unitType] || null;
+            }
+
+            // ==================== UI UPDATE ====================
+            function updateAllFields(results, sourceInputId) {
+                isUpdating = true;
+
+                // Update input fields
+                if (results) {
+                    setInputValue(inputVori, results.vori, 4, sourceInputId === 'inputVori');
+                    setInputValue(inputAna, results.ana, 2, sourceInputId === 'inputAna');
+                    setInputValue(inputRoti, results.roti, 2, sourceInputId === 'inputRoti');
+                    setInputValue(inputPoint, results.point, 1, sourceInputId === 'inputPoint');
+                    setInputValue(inputGram, results.gram, 3, sourceInputId === 'inputGram');
+                    setInputValue(inputKg, results.kg, 6, sourceInputId === 'inputKg');
+
+                    // Update summary
+                    sumVori.textContent = formatDecimal(results.vori, 4);
+                    sumAna.textContent = formatDecimal(results.ana, 2);
+                    sumRoti.textContent = formatDecimal(results.roti, 2);
+                    sumPoint.textContent = formatDecimal(results.point, 1);
+                    sumGram.textContent = formatDecimal(results.gram, 3);
+                    sumKg.textContent = formatDecimal(results.kg, 6);
+
+                    // Update price
+                    const priceRounded = Math.round(results.price);
+                    if (priceRounded > 0) {
+                        totalPriceDisplay.textContent = formatTaka(results.price);
+                        totalPriceDisplay.classList.remove('zero');
+                    } else if (results.vori > 0 && results.price > 0 && priceRounded === 0) {
+                        totalPriceDisplay.textContent = '১ টাকা (প্রায়)';
+                        totalPriceDisplay.classList.remove('zero');
+                    } else {
+                        totalPriceDisplay.textContent = '০ টাকা';
+                        totalPriceDisplay.classList.add('zero');
+                    }
+                } else {
+                    // Clear all
+                    clearAllFields();
+                }
+
+                // Highlight source input
+                allInputs.forEach(inp => inp.classList.remove('source-active'));
+                if (sourceInputId) {
+                    const sourceInput = document.getElementById(sourceInputId);
+                    if (sourceInput && sourceInput.value !== '' && parseFloat(sourceInput.value) > 0) {
+                        sourceInput.classList.add('source-active');
+                    }
+                }
+
+                isUpdating = false;
+            }
+
+            function setInputValue(inputElement, value, decimals, isSource) {
+                if (!isSource || inputElement.value === '' || document.activeElement !== inputElement) {
+                    if (value === 0 || (value !== null && !isNaN(value) && value >= 0)) {
+                        inputElement.value = parseFloat(value.toFixed(decimals));
+                    }
+                }
+                // If this is the source input, don't overwrite what the user is typing
+                if (isSource && document.activeElement === inputElement) {
+                    // Keep the user's typed value as-is
+                    return;
+                }
+                if (!isSource) {
+                    if (value === 0 || (value !== null && !isNaN(value) && value >= 0)) {
+                        inputElement.value = parseFloat(value.toFixed(decimals));
+                    }
+                }
+            }
+
+            function clearAllFields() {
+                allInputs.forEach(inp => {
+                    inp.value = '';
+                    inp.classList.remove('source-active');
+                });
+                sumVori.textContent = '—';
+                sumAna.textContent = '—';
+                sumRoti.textContent = '—';
+                sumPoint.textContent = '—';
+                sumGram.textContent = '—';
+                sumKg.textContent = '—';
+                totalPriceDisplay.textContent = '০ টাকা';
+                totalPriceDisplay.classList.add('zero');
+                lastEditedInputId = null;
+            }
+
+            function recalculateFromLastSource() {
+                if (!lastEditedInputId) return;
+                const inputEl = document.getElementById(lastEditedInputId);
+                if (!inputEl) return;
+                const rawValue = inputEl.value.trim();
+                if (rawValue === '') {
+                    // If source is now empty, clear everything
+                    clearAllFields();
+                    return;
+                }
+                const value = parseFloat(rawValue);
+                if (isNaN(value) || value < 0) {
+                    clearAllFields();
+                    return;
+                }
+                const unitType = getUnitTypeFromInputId(lastEditedInputId);
+                if (!unitType) return;
+                const voriValue = convertToVori(value, unitType);
+                const results = calculateAllFromVori(voriValue);
+                updateAllFields(results, lastEditedInputId);
+            }
+
+            // ==================== EVENT HANDLERS ====================
+            function handleInputChange(event) {
+                if (isUpdating) return;
+                const inputEl = event.target;
+                const inputId = inputEl.id;
+                const rawValue = inputEl.value.trim();
+
+                // Track this as the last edited input
+                lastEditedInputId = inputId;
+
+                if (rawValue === '') {
+                    clearAllFields();
+                    return;
+                }
+
+                const value = parseFloat(rawValue);
+                if (isNaN(value) || value < 0) {
+                    clearAllFields();
+                    return;
+                }
+
+                const unitType = getUnitTypeFromInputId(inputId);
+                if (!unitType) return;
+
+                const voriValue = convertToVori(value, unitType);
+                const results = calculateAllFromVori(voriValue);
+                updateAllFields(results, inputId);
+            }
+
+            // Attach input event listeners
+            allInputs.forEach(inputEl => {
+                inputEl.addEventListener('input', handleInputChange);
+                inputEl.addEventListener('focus', function() {
+                    lastEditedInputId = this.id;
+                    // Re-highlight
+                    allInputs.forEach(inp => inp.classList.remove('source-active'));
+                    if (this.value !== '' && parseFloat(this.value) > 0) {
+                        this.classList.add('source-active');
+                    }
+                });
+                inputEl.addEventListener('blur', function() {
+                    // Recalculate on blur to format nicely
+                    if (lastEditedInputId === this.id && this.value.trim() !== '') {
+                        recalculateFromLastSource();
+                    }
+                });
+            });
+
+            // ==================== ADMIN PANEL ====================
+            let adminPanelOpen = false;
+
+            adminToggleBtn.addEventListener('click', function() {
+                adminPanelOpen = !adminPanelOpen;
+                if (adminPanelOpen) {
+                    adminPanel.classList.add('open');
+                    adminToggleBtn.classList.add('active');
+                    adminRateInput.value = ratePerVori;
+                    // Scroll to admin panel
+                    adminPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    adminPanel.classList.remove('open');
+                    adminToggleBtn.classList.remove('active');
+                }
+                // Hide status message when toggling
+                adminStatus.classList.remove('show');
+            });
+
+            btnSaveRate.addEventListener('click', function() {
+                const newRate = parseFloat(adminRateInput.value.trim());
+                if (isNaN(newRate) || newRate <= 0) {
+                    showToast('⚠️ দয়া করে সঠিক দাম লিখুন (শূন্য নয়)', '#C62828');
+                    shakeElement(adminRateInput);
+                    return;
+                }
+                if (newRate > 100000000) {
+                    showToast('⚠️ দাম খুব বেশি মনে হচ্ছে, দয়া করে চেক করুন', '#E65100');
+                    return;
+                }
+                saveRateToStorage(newRate);
+                adminStatus.classList.add('show');
+                showToast('✅ স্বর্ণের বাজারদর সফলভাবে আপডেট হয়েছে!');
+                // Auto-hide status after 3 seconds
+                setTimeout(() => {
+                    adminStatus.classList.remove('show');
+                }, 3000);
+                // Recalculate if there's an active calculation
+                recalculateFromLastSource();
+            });
+// ==================== Default price value alert message ==================== 
+            btnResetRate.addEventListener('click', function() {
+                if (confirm('আপনি কি নিশ্চিত ডিফল্ট দরে (২,৩৮,১২০ টাকা/ভরি) ফিরে যেতে চান?')) {
+                    saveRateToStorage(DEFAULT_RATE_PER_VORI);
+                    adminRateInput.value = DEFAULT_RATE_PER_VORI;
+                    adminStatus.classList.add('show');
+                    adminStatus.textContent = '🔄 ডিফল্ট দরে ফিরে গেছে';
+                    showToast('🔄 ডিফল্ট দর পুনরুদ্ধার করা হয়েছে');
+                    setTimeout(() => {
+                        adminStatus.classList.remove('show');
+                        adminStatus.textContent = '✅ সফলভাবে আপডেট হয়েছে!';
+                    }, 3000);
+                    recalculateFromLastSource();
+                }
+            });
+
+            // Allow Enter key to save in admin panel
+            adminRateInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    btnSaveRate.click();
+                }
+            });
+
+            // ==================== TOAST ====================
+            let toastTimeout;
+
+            function showToast(message, bgColor = '#2E7D32') {
+                toast.textContent = message;
+                toast.style.background = bgColor;
+                toast.classList.add('show');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2500);
+            }
+
+            // ==================== UTILS ====================
+            function shakeElement(el) {
+                el.style.animation = 'none';
+                el.offsetHeight; // trigger reflow
+                el.style.animation = 'shake 0.5s ease';
+                setTimeout(() => {
+                    el.style.animation = '';
+                }, 500);
+            }
+
+            // Add shake keyframes dynamically
+            const shakeStyle = document.createElement('style');
+            shakeStyle.textContent = `
+                        @keyframes shake {
+                            0%,100% { transform: translateX(0); }
+                            15% { transform: translateX(-8px); }
+                            30% { transform: translateX(8px); }
+                            45% { transform: translateX(-6px); }
+                            60% { transform: translateX(6px); }
+                            75% { transform: translateX(-3px); }
+                            90% { transform: translateX(3px); }
+                        }
+                    `;
+            document.head.appendChild(shakeStyle);
+
+            // ==================== INITIAL SETUP ====================
+            loadRateFromStorage();
+            adminRateInput.value = ratePerVori;
+
+            // Pre-fill with a default example so the calculator looks alive
+            // (optional: show 1 Vori as example)
+            // inputVori.value = '1';
+            // lastEditedInputId = 'inputVori';
+            // recalculateFromLastSource();
+
+            console.log('✅ ক্যালকুলেটর প্রস্তুত!');
+            console.log('💰 বর্তমান দর:', ratePerVori, 'টাকা/ভরি');
+            console.log('🔐 অ্যাডমিন প্যানেল খুলতে ⚙️ বাটনে ক্লিক করুন');
+            console.log('📌 localStorage-এ ডাটা সংরক্ষিত হয়, পেজ রিলোড করলেও দাম থাকবে');
+            console.log('🔄 ১ ভরি = ১১.৬৬৪ গ্রাম | ১ ভরি = ১৬ আনা = ৯৬ রতি = ৯৬০ পয়েন্ট');
+        })();
+    </script>
+</body>
+</html>
