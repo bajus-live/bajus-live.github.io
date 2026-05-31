@@ -26,7 +26,7 @@ const fallbackData = {
     gold: {
         badge: "Gold ↑ +৫০০৳ today",
         title: "স্বর্ণের বাজার দর",
-        subtitle: "Last 7 Days Gold Price Trend",
+        subtitle: "গত ৭ দিনের সোনার মূল্যের গ্রাফ",
         cards: [
             { karat: "২২ ক্যারেট", price: "20850", change: "+356", yesterday: "20500" },
             { karat: "২১ ক্যারেট", price: "19910", change: "+320", yesterday: "19590" },
@@ -42,7 +42,7 @@ const fallbackData = {
     silver: {
         badge: "Silver ↑ +১৫৳ today",
         title: "রূপার বাজার দর",
-        subtitle: "Last 7 Days Silver Price Trend",
+        subtitle: "গত ৭ দিনের রূপার মূল্যের গ্রাফ",
         cards: [
             { karat: "২২ ক্যারেট রূপা", price: "1850", change: "+45", yesterday: "1800" },
             { karat: "২১ ক্যারেট রূপা", price: "1780", change: "+40", yesterday: "1740" },
