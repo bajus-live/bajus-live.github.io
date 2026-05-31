@@ -18,7 +18,7 @@
 }
 
 /* ===================================================================
-   ২. স্প্ল্যাশ স্ক্রিন (লোডারের স্টাইল)
+   ২. স্প্ল্যাশ স্ক্রিন (লোটি অ্যানিমেশন সহ)
    =================================================================== */
 #splashScreen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -27,12 +27,6 @@
     display: flex; flex-direction: column;
     justify-content: center; align-items: center;
     transition: opacity 0.5s ease;
-}
-
-.loader-container {
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 20px;
 }
 
 .splash-logo-box {
@@ -47,15 +41,6 @@
 }
 
 .splash-fade-out { opacity: 0; pointer-events: none; }
-
-.progress-ring { width: 60px; height: 60px; }
-.progress-ring__circle {
-    stroke: #eab308; stroke-width: 4;
-    fill: transparent; transform: rotate(-90deg);
-    transform-origin: 50% 50%;
-    transition: stroke-dashoffset 0.05s linear;
-}
-#progressText { color: white; font-size: 14px; font-weight: bold; }
 
 /* ===================================================================
    ৩. মেইন অ্যাপ কন্টেইনার ও লেআউট
@@ -166,4 +151,69 @@ body {
   height: 260px;
   width: 100%;
   overflow: hidden;
+}
+
+/* ===================================================================
+   ৬. মডেল উইন্ডো স্টাইল
+   =================================================================== */
+.menu-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-modal.open {
+    display: flex;
+}
+
+.menu-modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    border-radius: 16px;
+    padding: 30px 25px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border: 1px solid var(--border-color);
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.menu-modal-close:hover {
+    color: var(--accent-gold);
+}
+
+#menuModalTitle {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--accent-gold);
+}
+
+#menuModalBody {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-main);
 }
