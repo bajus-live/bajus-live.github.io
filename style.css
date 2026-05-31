@@ -482,7 +482,7 @@ h3 { font-size: 16px; font-weight: 600; }
 .chart-node-dot { fill: var(--card-bg); stroke-width: 2.5; }
 
 .quick-features { 
-    margin-bottom: -75px;
+    margin-bottom: -20px;
 }
 .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
 .feature-item {
