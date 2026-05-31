@@ -1,5 +1,5 @@
 // ==========================================
-// 🚀 international.js - পূর্ণাঙ্গ ও সংশোধিত কোড
+// 🚀 international.js - পূর্ণাঙ্গ ও সংশোধিত
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,44 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const rightDrawer = document.getElementById('rightDrawer');
   const themeBtn = document.getElementById('themeBtn');
   
-  // স্প্ল্যাশ স্ক্রিন এলিমেন্ট
+  // স্প্ল্যাশ স্ক্রিন এলিমেন্ট (লোটি)
   const splashScreen = document.getElementById('splashScreen');
-  const progressCircle = document.getElementById('loaderProgress');
-  const progressText = document.getElementById('progressText');
   
-  // ২. উন্নত স্প্ল্যাশ স্ক্রিন লোডার লজিক
-  let count = 0;
-  const radius = 40;
-  const circumference = 2 * Math.PI * radius;
-  
-  if (progressCircle) {
-    progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-    progressCircle.style.strokeDashoffset = circumference;
+  // ২. লোটি অ্যানিমেশন সহ স্প্ল্যাশ স্ক্রিন (৪ সেকেন্ড পর স্বয়ংক্রিয়ভাবে লুকাবে)
+  if (splashScreen) {
+    setTimeout(() => {
+      splashScreen.classList.add('splash-fade-out');
+      setTimeout(() => {
+        splashScreen.style.display = 'none';
+      }, 550);
+    }, 4000);
   }
-  
-  const loaderInterval = setInterval(() => {
-    count += 2;
-    if (count > 100) count = 100;
-    
-    if (progressText) progressText.innerText = `${count}%`;
-    
-    if (progressCircle) {
-      const offset = circumference - (count / 100) * circumference;
-      progressCircle.style.strokeDashoffset = offset;
-    }
-    
-    if (count >= 100) {
-      clearInterval(loaderInterval);
-      if (splashScreen) {
-        splashScreen.classList.add('splash-fade-out');
-        setTimeout(() => {
-          splashScreen.style.display = 'none';
-        }, 550);
-      }
-    }
-  }, 40);
-  
-  
   
   // ৪. ড্রয়ার কন্ট্রোল
   function closeDrawers() {
@@ -74,6 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
       closeDrawers();
       drawerOverlay.classList.add('open');
       rightDrawer.style.right = '0';
+      leftDrawer.style.left = '-285px'; // বাম ড্রয়ার বন্ধ রাখতে
+      
+      // 🆕 লাল ডট হাইড ও লাস্ট রিড সেভ
+      const notifBadge = document.getElementById('notifBadge');
+      if (notifBadge) notifBadge.style.display = 'none';
+      
+      database.ref('notifications/latest').once('value').then((snapshot) => {
+        const data = snapshot.val();
+        if (data && data.id) {
+          localStorage.setItem('last_read_notif_id', data.id);
+        }
+      });
     });
   }
   
@@ -132,12 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // Admin Password Protected page
 function showAdminLogin() {
   const password = prompt("Enter Admin Password:");
-  
-  
   if (password === null || password === "") {
     return;
   }
-  
   if (password === "admin123") {
     window.location.href = "admin.html";
   } else {
@@ -146,11 +129,8 @@ function showAdminLogin() {
 }
 
 
-
-
-
 // ==========================================
-// 🔔 ৭. রিয়েল-টাইম নোটিফিকেশন, পপ-আপ ও লাল ডট ইঞ্জিন
+// 🔔 রিয়েল-টাইম নোটিফিকেশন (পপ-আপ ও লাল ডট)
 // ==========================================
 function showMiddlePopup(message) {
   const oldPopup = document.getElementById('customMiddlePopup');
@@ -192,13 +172,19 @@ function showMiddlePopup(message) {
 function listenToNotifications() {
   database.ref('notifications/latest').on('value', (snapshot) => {
     const data = snapshot.val();
+    const notifBadge = document.getElementById('notifBadge');
     if (data && data.message) {
       const lastNotifId = localStorage.getItem('last_read_notif_id') || '';
       if (data.id !== lastNotifId) {
-        const notifBadge = document.getElementById('notifBadge');
         if (notifBadge) notifBadge.style.display = 'block';
         showMiddlePopup(data.message);
+      } else {
+        // আগেরটা পড়া হয়ে গেলে লাল ডট আড়াল
+        if (notifBadge) notifBadge.style.display = 'none';
       }
+    } else {
+      // কোনো নোটিফিকেশন না থাকলে ডট হাইড
+      if (notifBadge) notifBadge.style.display = 'none';
     }
   });
   
@@ -228,4 +214,76 @@ function listenToNotifications() {
 
 window.addEventListener('DOMContentLoaded', () => {
   listenToNotifications();
+});
+
+
+// --------------- মেনু মডেল কন্টেন্ট ও লজিক ---------------
+const menuContents = {
+  profile: {
+    title: 'সদস্য প্রোফাইল',
+    body: `
+            <p>স্বাগতম! সদস্য প্রোফাইলের মাধ্যমে আপনি আপনার ব্যক্তিগত তথ্য, সদস্যপদ নম্বর ও লেনদেনের ইতিহাস দেখতে পারবেন।</p>
+            <p style="margin-top:10px;">বর্তমানে এই ফিচারটি উন্নয়নের অধীনে রয়েছে। খুব শীঘ্রই এটি চালু হবে।</p>
+            <p style="margin-top:10px;"><strong>হেল্পলাইন:</strong> ০১৭০০-০০০০০০</p>
+        `
+  },
+  report: {
+    title: 'বাজার বিশ্লেষণ রিপোর্ট',
+    body: `
+            <p>এখানে স্বর্ণ ও রূপার বাজারের দৈনিক, সাপ্তাহিক ও মাসিক বিশ্লেষণ প্রকাশ করা হবে।</p>
+            <p style="margin-top:10px;">বর্তমান প্রবণতা: গত ৭ দিনে স্বর্ণের দাম গড়ে ২.৪% বৃদ্ধি পেয়েছে। রূপার বাজার স্থিতিশীল রয়েছে।</p>
+            <p style="margin-top:10px;">বিস্তারিত রিপোর্ট খুব শীঘ্রই পাওয়া যাবে।</p>
+        `
+  },
+  policy: {
+    title: 'সমিতি নীতিমালা',
+    body: `
+            <p><strong>বাংলাদেশ জুয়েলার্স সমিতির (BAJUS) নীতিমালা:</strong></p>
+            <ul style="padding-left:20px; margin-top:10px;">
+                <li>সকল সদস্যকে অবশ্যই নীতিমালা মেনে চলতে হবে।</li>
+                <li>হলমার্কিং বাধ্যতামূলক।</li>
+                <li>মূল্য নির্ধারণে স্বচ্ছতা বজায় রাখতে হবে।</li>
+                <li>ক্রেতাদের অভিযোগ দ্রুত নিষ্পত্তি করতে হবে।</li>
+            </ul>
+            <p style="margin-top:10px;">পূর্ণাঙ্গ নীতিমালা PDF আকারে শীঘ্রই আপলোড করা হবে।</p>
+        `
+  },
+  contact: {
+    title: 'যোগাযোগ ও সহায়তা',
+    body: `
+            <p><i class="fa-solid fa-location-dot"></i> <strong>ঠিকানা:</strong> BAJUS ভবন, ১২৩, মতিঝিল বাণিজ্যিক এলাকা, ঢাকা-১০০০</p>
+            <p style="margin-top:10px;"><i class="fa-solid fa-phone"></i> <strong>ফোন:</strong> +৮৮০-২-৯৫৬৭৩২১</p>
+            <p style="margin-top:10px;"><i class="fa-solid fa-envelope"></i> <strong>ইমেইল:</strong> info@bajus.org.bd</p>
+            <p style="margin-top:10px;"><i class="fa-solid fa-clock"></i> <strong>অফিস সময়:</strong> রবি-বৃহস্পতি, সকাল ১০টা থেকে বিকাল ৫টা</p>
+        `
+  }
+};
+
+// মেনু আইটেম ক্লিক ইভেন্ট
+document.getElementById('menu-profile').addEventListener('click', () => openMenuModal('profile'));
+document.getElementById('menu-report').addEventListener('click', () => openMenuModal('report'));
+document.getElementById('menu-policy').addEventListener('click', () => openMenuModal('policy'));
+document.getElementById('menu-contact').addEventListener('click', () => openMenuModal('contact'));
+
+function openMenuModal(key) {
+  const modal = document.getElementById('menuModal');
+  const title = document.getElementById('menuModalTitle');
+  const body = document.getElementById('menuModalBody');
+  if (menuContents[key]) {
+    title.innerText = menuContents[key].title;
+    body.innerHTML = menuContents[key].body;
+    modal.classList.add('open');
+    closeDrawers(); // বাম ড্রয়ার বন্ধ করবে
+  }
+}
+
+// মডেল বন্ধ করা
+document.getElementById('closeMenuModal').addEventListener('click', () => {
+  document.getElementById('menuModal').classList.remove('open');
+});
+
+document.getElementById('menuModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) {
+    e.currentTarget.classList.remove('open');
+  }
 });
