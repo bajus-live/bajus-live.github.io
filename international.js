@@ -224,7 +224,7 @@ const menuContents = {
     body: `
             <p>স্বাগতম! সদস্য প্রোফাইলের মাধ্যমে আপনি আপনার ব্যক্তিগত তথ্য, সদস্যপদ নম্বর ও লেনদেনের ইতিহাস দেখতে পারবেন।</p>
             <p style="margin-top:10px;">বর্তমানে এই ফিচারটি উন্নয়নের অধীনে রয়েছে। খুব শীঘ্রই এটি চালু হবে।</p>
-            <p style="margin-top:10px;"><strong>হেল্পলাইন:</strong> ০১৭০০-০০০০০০</p>
+            <p style="margin-top:10px;"><strong>হেল্পলাইন: +880241031722</strong> </p>
         `
   },
   report: {
@@ -251,14 +251,15 @@ const menuContents = {
   contact: {
     title: 'যোগাযোগ ও সহায়তা',
     body: `
-            <p><i class="fa-solid fa-location-dot"></i> <strong>ঠিকানা:</strong> BAJUS ভবন, ১২৩, মতিঝিল বাণিজ্যিক এলাকা, ঢাকা-১০০০</p>
-            <p style="margin-top:10px;"><i class="fa-solid fa-phone"></i> <strong>ফোন:</strong> +৮৮০-২-৯৫৬৭৩২১</p>
+            <p><i class="fa-solid fa-location-dot"></i> <strong>ঠিকানা:</strong> 15, New Eskaton Road, Level-6, Moghbazar, Ramna, Dhaka-1000, Bangladesh.</p>
+            <p style="margin-top:10px;"><i class="fa-solid fa-phone"></i> <strong>ফোন:</strong> +880241031722<br><br>
+            <strong>
+            <i class="fa fa-whatsapp" style="font-size:18px"></i> Whatsapp:</strong><p> +8801817538878</p></p>
             <p style="margin-top:10px;"><i class="fa-solid fa-envelope"></i> <strong>ইমেইল:</strong> info@bajus.org.bd</p>
             <p style="margin-top:10px;"><i class="fa-solid fa-clock"></i> <strong>অফিস সময়:</strong> রবি-বৃহস্পতি, সকাল ১০টা থেকে বিকাল ৫টা</p>
         `
   }
 };
-
 // মেনু আইটেম ক্লিক ইভেন্ট
 document.getElementById('menu-profile').addEventListener('click', () => openMenuModal('profile'));
 document.getElementById('menu-report').addEventListener('click', () => openMenuModal('report'));
