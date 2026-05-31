@@ -4,84 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
-  
-    <!-- Favicon -->
-<link rel="icon" href="favicon.png?v=2.0" type="image/png">
-    
-<!-- THEME -->
-<meta name="theme-color" content="#0f172a">
-
-<!--Social (WhatsApp + Home Screen Preview) -->
-<meta property="og:title" content="বাজুস লাইভ (BAJUS Live) - আজকের সোনা ও রুপার দর">
-<meta property="og:description" content="বাংলাদেশ জুয়েলার্স সমিতির (BAJUS) অনুমোদিত দৈনিক স্বর্ণ ও রূপার সঠিক বাজারদর।">
-<meta property="og:url" content="https://bajus-live.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://bajus-live.github.io/favicon.png">
-
-<!-- Social Meta - og:image এবং twitter:image -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="বাজুস লাইভ (BAJUS Live) - আজকের সোনা ও রুপার দর">
-<meta name="twitter:description" content="বাংলাদেশ জুয়েলার্স সমিতির দৈনিক স্বর্ণ ও রূপার সঠিক বাজারদর।">
-<meta name="twitter:image" content="https://bajus-live.github.io/favicon.png">
-
-<!-- অন্যান্য মেটা -->
-<meta name="description" content="বাজুস লাইভ (BAJUS Live) - বাংলাদেশ জুয়েলারি সমিতির দৈনিক স্বর্ণ ও রূপার সঠিক বাজারদর পাবলিশ করে। প্রতিদিনের আপডেট পেতে ভিজিট করুন আমাদের ওয়েবসাইট">
-<meta name="keywords" content="bajus, bajus gold price, bajus live, gold price bangladesh, gold rate, বাজুস, বাজুস লাইভ, স্বর্ণের দাম ২০২৬, বাংলাদেশে সোনার দাম, গোল্ড রেট">
-<meta name="author" content="BAJUS Live">
-
-<link rel="canonical" href="https://bajus-live.github.io/">
-    
-<!-- Stylesheet -->
- <!-- version change -->
-<link rel="stylesheet" href="style.css?v=2.0">
-    
-<!-- MANIFEST -->
-<!-- version change -->
-<link rel="manifest" href="manifest.json?v=2.0">
-    
-<title>বাংলাদেশ জুয়েলারি সমিতি</title>
+    <link rel="icon" href="favicon.png?v=2.0" type="image/png">
+    <meta name="theme-color" content="#0f172a">
+    <meta property="og:title" content="বাজুস লাইভ (BAJUS Live) - আজকের সোনা ও রুপার দর">
+    <meta property="og:description" content="বাংলাদেশ জুয়েলার্স সমিতির (BAJUS) অনুমোদিত দৈনিক স্বর্ণ ও রূপার সঠিক বাজারদর।">
+    <meta property="og:url" content="https://bajus-live.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://bajus-live.github.io/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="বাজুস লাইভ (BAJUS Live) - আজকের সোনা ও রুপার দর">
+    <meta name="twitter:description" content="বাংলাদেশ জুয়েলার্স সমিতির দৈনিক স্বর্ণ ও রূপার সঠিক বাজারদর।">
+    <meta name="twitter:image" content="https://bajus-live.github.io/favicon.png">
+    <meta name="description" content="বাজুস লাইভ (BAJUS Live) - বাংলাদেশ জুয়েলারি সমিতির দৈনিক স্বর্ণ ও রূপার সঠিক বাজারদর পাবলিশ করে। প্রতিদিনের আপডেট পেতে ভিজিট করুন আমাদের ওয়েবসাইট">
+    <meta name="keywords" content="bajus, bajus gold price, bajus live, gold price bangladesh, gold rate, বাজুস, বাজুস লাইভ, স্বর্ণের দাম ২০২৬, বাংলাদেশে সোনার দাম, গোল্ড রেট">
+    <meta name="author" content="BAJUS Live">
+    <link rel="canonical" href="https://bajus-live.github.io/">
+    <link rel="stylesheet" href="style.css?v=2.1">
+    <link rel="manifest" href="manifest.json?v=2.0">
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
+    <title>বাংলাদেশ জুয়েলারি সমিতি</title>
 </head>
 <body>
-
     <div id="splashScreen">
         <div class="splash-logo-box">বাজুস</div> 
         <div class="splash-title">বাংলাদেশ জুয়েলার্স সমিতি</div>
         <div class="splash-subtitle">Live Gold & Silver Rates</div>
-        <div class="loader-ring">
-            <svg>
-                <circle cx="35" cy="35" r="30"></circle>
-                <circle id="loaderProgress" cx="35" cy="35" r="30"></circle>
-            </svg>
-            <div id="progressText">0%</div>
-        </div>
+        <dotlottie-wc 
+            src="https://lottie.host/d3ca82f8-d32b-4fdc-a3f2-c609bcc11227/muFTs6jxrB.lottie" 
+            style="width: 150px; height: 150px;" 
+            autoplay 
+            loop>
+        </dotlottie-wc>
     </div>
 
     <div class="drawer-overlay" id="drawerOverlay">
         <div class="side-drawer left-drawer" id="leftDrawer">
             <div class="drawer-header">BAJUS মেনু</div>
             <ul class="drawer-links">
-                <li><i class="fa-solid fa-user-shield"></i> সদস্য প্রোফাইল</li>
-                <li><i class="fa-solid fa-chart-pie"></i>বাজার বিশ্লেষণ রিপোর্ট</li>
-                <li><i class="fa-solid fa-building-columns"></i> সমিতি নীতিমালা</li>
-                <li><i class="fa-solid fa-envelope"></i> যোগাযোগ ও সহায়তা</li>
+                <li id="menu-profile"><i class="fa-solid fa-user-shield"></i> সদস্য প্রোফাইল</li>
+                <li id="menu-report"><i class="fa-solid fa-chart-pie"></i>বাজার বিশ্লেষণ রিপোর্ট</li>
+                <li id="menu-policy"><i class="fa-solid fa-building-columns"></i> সমিতি নীতিমালা</li>
+                <li id="menu-contact"><i class="fa-solid fa-envelope"></i> যোগাযোগ ও সহায়তা</li>
             </ul>
         </div>
-
         <div class="side-drawer right-drawer" id="rightDrawer">
             <div class="drawer-header" style="padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0;">
                 <span style="font-size:18px; font-weight:bold;"><i class="fa-solid fa-bell"></i> লাইভ নোটিফিকেশন</span>
                 <i class="fa-solid fa-xmark close-drawer-btn" id="closeNotifBtn" style="cursor:pointer; font-size:20px;"></i>
             </div>
-             
             <div id="dynamicNotifList" style="padding: 15px; height: calc(100% - 70px); overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
                 <p id="notifEmptyText" style="text-align:center; color:#94a3b8; margin-top:20px; font-size:14px;">কোনো নোটিফিকেশন পাওয়া যায়নি</p>
             </div>
         </div>
     </div>
 
+    <!-- 🆕 মডেল উইন্ডো (মেনু কন্টেন্ট দেখানোর জন্য) -->
+    <div id="menuModal" class="menu-modal">
+        <div class="menu-modal-content">
+            <span class="menu-modal-close" id="closeMenuModal">&times;</span>
+            <h2 id="menuModalTitle"></h2>
+            <div id="menuModalBody"></div>
+        </div>
+    </div>
+
     <div class="app-container">
-         
         <header>
             <div class="header-left">
                 <i class="fa-solid fa-bars menu-btn" id="menuBtn"></i>
@@ -95,7 +83,6 @@
             </div>
             <div class="header-right">
                 <i class="fa-solid fa-moon theme-toggle" id="themeBtn"></i>
-                 
                 <div class="notif-icon-wrapper" id="notifBtn" style="position: relative; cursor: pointer;">
                     <i class="fa-solid fa-bell notification-btn"></i>
                     <span id="notifBadge" style="display: none; position: absolute; top: -2px; right: -2px; width: 9px; height: 9px; background-color: #ef4444; border-radius: 50%; border: 1.5px solid var(--surface, #1e293b);"></span>
@@ -104,7 +91,6 @@
         </header>
 
         <main class="content-scroll">
-             
             <div class="live-status-bar">
                 <div class="live-indicator">
                     <span class="dot animate-pulse"></span>
@@ -113,7 +99,6 @@
                 <div class="gold-badge" id="heroBadge">Gold <i class="fa-solid fa-arrow-up"></i> +৫০০৳ today</div>
                 <button class="share-btn"><i class="fa-solid fa-share-nodes"></i> Share</button>
             </div>
-            <!-- change -->
             <p class="update-time" id="lastUpdatedTime">Updated: 07:44 AM</p>
             <div class="hero-banner">
                 <div class="hero-text">
@@ -123,38 +108,31 @@
                 <img id="tabImage" src="https://bajus-live.github.io/storage/photos/gold_bar.png" alt="Market Rate" style="width: 100%; max-width: 100px; height: auto; object-fit: contain; margin-top: 10px;">
             </div>
 
-           <section class="price-section">
-    <div class="section-header">
-        <!-- Change -->
-        <h3>আজকের বাজার দর <span class="date-text">(রবিবার, ৩১ মে ২০২৬)</span></h3>
-        <button class="all-rates-btn"><i class="fa-solid fa-circle-info"></i> All Rates</button>
-    </div>
-    
-    <div class="tab-container">
-        <button class="tab-btn active" id="goldTabBtn" onclick="switchTab('gold')">Gold</button>
-        <button class="tab-btn" id="silverTabBtn" onclick="switchTab('silver')">Silver</button>
-    </div>
-    
-    <div class="price-grid" id="priceGrid"></div>
-    
-    <div class="update-info" style="text-align: center; margin-top: 15px; margin-bottom: 10px; font-size: 14px; color: #94a3b8;">
-        <span id="lastUpdatedTime"></span>
-        <span id="currentBanglaDate"></span>
-    </div>
-</section>
-             
+            <section class="price-section">
+                <div class="section-header">
+                    <h3>আজকের বাজার দর <span class="date-text" id="dynamicBanglaDate">(রবিবার, ৩১ মে ২০২৬)</span></h3>
+                    <button class="all-rates-btn"><i class="fa-solid fa-circle-info"></i> All Rates</button>
+                </div>
+                <div class="tab-container">
+                    <button class="tab-btn active" id="goldTabBtn" onclick="switchTab('gold')">Gold</button>
+                    <button class="tab-btn" id="silverTabBtn" onclick="switchTab('silver')">Silver</button>
+                </div>
+                <div class="price-grid" id="priceGrid"></div>
+                <div class="update-info" style="text-align: center; margin-top: 15px; margin-bottom: 10px; font-size: 14px; color: #94a3b8;">
+                    <span id="lastUpdatedTime"></span>
+                    <span id="currentBanglaDate"></span>
+                </div>
+            </section>
+
             <section class="chart-section">
                 <h3 id="chartTitle">স্বর্ণের বাজার দর</h3>
                 <span class="chart-subtitle" id="chartSubtitle">Last 7 Days Gold Price Trend</span>
-                 
                 <div class="chart-brief-area" id="chartBriefArea"></div>
-
                 <div class="chart-container">
                     <svg class="trend-svg" viewBox="0 0 400 120">
                         <line class="svg-grid" x1="0" y1="20" x2="400" y2="20"></line>
                         <line class="svg-grid" x1="0" y1="60" x2="400" y2="60"></line>
                         <line class="svg-grid" x1="0" y1="100" x2="400" y2="100"></line>
-                         
                         <path id="chartAreaFill" opacity="0.15"></path>
                         <path id="chartLineStroke" fill="none" stroke-width="3" stroke-linecap="round"></path>
                         <g id="chartNodesGroup"></g>
@@ -166,9 +144,6 @@
             <section class="quick-features">
                 <h3>দ্রুত এক নজরে</h3>
                 <div class="features-grid">
-                    
-                    <!-- work -->              
-    
                     <a href="history.html" class="index_history">
                         <div class="feature-item">
                             <i class="fa-solid fa-clipboard-list"></i>
@@ -176,13 +151,6 @@
                             <p class="f-sub">লিস্ট</p>
                         </div>
                     </a>
-                    <!--              
-                    <div class="feature-item">
-                    <i class="fa-solid fa-scale-balanced"></i>
-                    <span>দাম তুলনা</span>
-                    <p class="f-sub">Compare</p>
-                </div>
-                    -->
                     <a href="calculator.html" class="index_calculator">
                         <div class="feature-item">
                             <i class="fa-solid fa-calculator"></i>
@@ -190,16 +158,8 @@
                             <p class="f-sub">Calculator</p>
                         </div>
                     </a>
-                    <!--
-                    <div class="feature-item">
-                    <i class="fa-solid fa-bell"></i>
-                    <span>দাম অ্যালার্ট</span>
-                    <p class="f-sub">Price Alert</p>
-                </div>
-                    -->
                 </div>
             </section>
-
         </main>
 
         <nav class="bottom-nav">
@@ -219,14 +179,12 @@
                 <i class="fa-solid fa-earth-americas"></i>
                 <span>আন্তর্জাতিক</span>
             </a>
-            <!-- Admin Password Protected -->
             <a href="javascript:void(0);" class="nav-item" onclick="showAdminLogin()"><i class="fas fa-shield-alt"></i> <span>অ্যাডমিন</span></a>
         </nav>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-
     <script src="app.js"></script>
 </body>
 </html>
