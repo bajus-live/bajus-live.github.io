@@ -481,7 +481,9 @@ h3 { font-size: 16px; font-weight: 600; }
 .chart-x-axis span { font-size: 9px; color: var(--text-muted); }
 .chart-node-dot { fill: var(--card-bg); stroke-width: 2.5; }
 
-.quick-features { margin-bottom: 20px; }
+.quick-features { 
+    margin-bottom: -75px;
+}
 .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
 .feature-item {
     background-color: var(--card-bg);
