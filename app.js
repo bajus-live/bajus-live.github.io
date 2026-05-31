@@ -8,11 +8,9 @@ const firebaseConfig = {
     appId: "1:646542194702:web:f99399f05a199721c4a45f"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// 🔢 সংখ্যাকে ডাইনামিক কমা ফরম্যাটে রূপান্তর করার হেল্পার ফাংশন
 function formatMyPrice(num) {
     if (num === null || num === undefined || num === '') return "0";
     let numStr = String(num).trim();
@@ -24,7 +22,6 @@ function formatMyPrice(num) {
     return isNegative ? '-' + formatted : formatted;
 }
 
-// ডিফল্ট ব্যাকআপ ডাটা ম্যাট্রিক্স (ফায়ারবেস বা লোকাল স্টোরেজ কোনোটিই কাজ না করলে এটি লোড হবে)
 const fallbackData = {
     gold: {
         badge: "Gold ↑ +৫০০৳ today",
@@ -62,9 +59,6 @@ const fallbackData = {
 
 let currentTab = 'gold';
 
-// ==========================================
-// 📈 কাস্টম SVG গ্রাফ ক্যালকুলেশন ও রেন্ডারিং ইঞ্জিন
-// ==========================================
 function drawLiveSVGChart(dates, prices, color) {
     const xAxisContainer = document.getElementById('chartXAxis');
     const chartLineStroke = document.getElementById('chartLineStroke');
@@ -126,26 +120,23 @@ function drawLiveSVGChart(dates, prices, color) {
     });
 }
 
-// ==========================================
-// 🔄 ২. রিয়েল-টাইম ডাটা রেন্ডারিং ইঞ্জিন
-// ==========================================
 function renderUI(type, liveData) {
     const badge = liveData.badge || fallbackData[type].badge;
     const title = fallbackData[type].title;
     const subtitle = fallbackData[type].subtitle;
     const color = fallbackData[type].color;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    if (liveData.updateTime) {
+        const upperTime = document.getElementById('lastUpdatedTime');
+        if (upperTime) upperTime.innerText = `Updated: ${liveData.updateTime}`;
+        const lowerTime = document.querySelector('.update-info #lastUpdatedTime');
+        if (lowerTime) lowerTime.innerText = `Updated: ${liveData.updateTime}`;
+    }
+    if (liveData.updateDate) {
+        const lowerDate = document.getElementById('currentBanglaDate');
+        if (lowerDate) lowerDate.innerText = `(${liveData.updateDate})`;
+    }
+
     const grid = document.getElementById('priceGrid');
     if (grid && liveData.cards) {
         grid.innerHTML = '';
@@ -178,21 +169,6 @@ function renderUI(type, liveData) {
                 </div>
             `;
         });
-
-
-
-
-// ৩. মেইন রেন্ডারিং ইঞ্জিন
-function renderUI(type, liveData) {
-    const badge = liveData.badge || "Live Update";
-    const grid = document.getElementById('priceGrid');
-    if (liveData.updateTime) {
-        document.getElementById('lastUpdatedTime').innerText = `Updated: ${liveData.updateTime}`;
-    }
-    if (liveData.updateDate) {
-        document.getElementById('currentBanglaDate').innerText = `(${liveData.updateDate})`;
-    }
-}
     }
 
     const chartBriefArea = document.getElementById('chartBriefArea');
@@ -242,7 +218,7 @@ function renderUI(type, liveData) {
                 let cleanPrice = liveData.graphData[i].change || liveData.graphData[i].price || "0";
                 
                 if (typeof cleanPrice === 'string') {
-                    const banglaDigits = {'০':'0','১':'1','২':'2','৩':'3','৪':'4','৫':'5','⑥':'6','৭':'7','৮':'8','৯':'9'};
+                    const banglaDigits = {'০':'0','১':'1','২':'2','৩':'3','৪':'4','⑤':'5','⑥':'6','৭':'7','৮':'8','৯':'9'};
                     cleanPrice = cleanPrice.replace(/[০-৯]/g, match => banglaDigits[match]);
                     cleanPrice = cleanPrice.replace(/[৳,+-]/g, '').trim();
                 }
@@ -255,9 +231,7 @@ function renderUI(type, liveData) {
     }
 }
 
-// ফায়ারবেস রিয়েল-টাইম লিসেনার + লোকাল স্টোরেজ ক্যাশিং অব অপ্টিমাইজেশন (অফলাইন সাপোর্ট)
 function listenToLivePrices(type) {
-    // ১. প্রথমে লোকাল স্টোরেজ থেকে সেভ থাকা আগের ক্যাশ ডাটা দ্রুত লোড করা
     const cachedData = localStorage.getItem(`cached_prices_${type}`);
     if (cachedData) {
         try {
@@ -269,12 +243,10 @@ function listenToLivePrices(type) {
         renderUI(type, fallbackData[type]);
     }
 
-    // ২. এবার ফায়ারবেস থেকে লাইভ ডাটা আনা এবং ক্যাশে আপডেট করা
     database.ref('prices/' + type).on('value', (snapshot) => {
         const liveData = snapshot.val();
         if (liveData && liveData.cards) {
             renderUI(type, liveData);
-            // লোকাল স্টোরেজে ডাটা ক্যাশ (সেভ) করে রাখা
             localStorage.setItem(`cached_prices_${type}`, JSON.stringify(liveData));
         }
     }, (error) => {
@@ -282,7 +254,6 @@ function listenToLivePrices(type) {
     });
 }
 
-// ট্যাব সুইচিং লজিক
 function switchTab(type) {
     currentTab = type;
     const goldBtn = document.getElementById('goldTabBtn');
@@ -305,11 +276,24 @@ function switchTab(type) {
     listenToLivePrices(type);
 }
 
-// ==========================================
-// ⏳ ③. স্প্ল্যাশ স্ক্রিন ও প্রিলোভ থিম অ্যাক্টিভেশন
-// ==========================================
+function updateDynamicBanglaDate() {
+    const banglaDays = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
+    const banglaMonths = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+    
+    const now = new Date();
+    const dayName = banglaDays[now.getDay()];
+    const date = now.getDate();
+    const monthName = banglaMonths[now.getMonth()];
+    const year = now.getFullYear();
+    
+    const formatted = `${dayName}, ${date} ${monthName} ${year}`;
+    const span = document.getElementById('dynamicBanglaDate');
+    if (span) {
+        span.textContent = `(${formatted})`;
+    }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
-    // 🌗 [রিলোড মেমোরি] অ্যাপ খোলার সাথে সাথে লোকাল স্টোরেজ থেকে থিম লোড করা
     const savedTheme = localStorage.getItem('user_app_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const themeBtn = document.getElementById('themeBtn');
@@ -322,40 +306,22 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     switchTab('gold');
-    
-    const progressCircle = document.getElementById('loaderProgress');
-    const progressText = document.getElementById('progressText');
+    updateDynamicBanglaDate();
+
     const splashScreen = document.getElementById('splashScreen');
-    
-    let count = 0;
-    const circumference = 2 * Math.PI * 30;
-    
-    const loaderInterval = setInterval(() => {
-        count += 5;
-        if (count > 100) count = 100;
-        
-        const offset = circumference - (count / 100) * circumference;
-        if (progressCircle) progressCircle.style.strokeDashoffset = offset;
-        if (progressText) progressText.innerText = `${count}%`;
-        
-        if (count === 100) {
-            clearInterval(loaderInterval);
-            setTimeout(() => {
-                if (splashScreen) splashScreen.classList.add('splash-fade-out');
-                const bottomNav = document.querySelector('.bottom-nav');
-                if (bottomNav) bottomNav.style.display = 'flex';
-            }, 300);
-        }
-    }, 40);
+    if (splashScreen) {
+        setTimeout(() => {
+            splashScreen.classList.add('splash-fade-out');
+            const bottomNav = document.querySelector('.bottom-nav');
+            if (bottomNav) bottomNav.style.display = 'flex';
+        }, 4000);
+    }
 });
 
-// ==========================================
-// 📊 ৪. সাইড ড্রয়ার মেনু ও নোটিফিকেশন লজিক
-// ==========================================
+// --------------- সাইড ড্রয়ার ---------------
 const overlay = document.getElementById('drawerOverlay');
 const leftDrawer = document.getElementById('leftDrawer');
 const rightDrawer = document.getElementById('rightDrawer');
-
 const menuBtn = document.getElementById('menuBtn');
 const notifBtn = document.getElementById('notifBtn');
 const closeNotifBtn = document.getElementById('closeNotifBtn');
@@ -401,9 +367,7 @@ if (overlay) {
     });
 }
 
-// ==========================================
-// 🌗 五. লাইট/ডার্ক থিম সুইচার ইঞ্জিন (মেমোরি সেভিং সহ)
-// ==========================================
+// --------------- থিম সুইচ ---------------
 const themeBtn = document.getElementById('themeBtn');
 if (themeBtn) {
     themeBtn.addEventListener('click', () => {
@@ -418,33 +382,13 @@ if (themeBtn) {
         }
         
         document.documentElement.setAttribute('data-theme', newTheme);
-        // লোকাল স্টোরেজে ইউজারের পছন্দের থিমটি চিরতরে সেভ করে রাখা
         localStorage.setItem('user_app_theme', newTheme);
     });
 }
 
-// ==========================================
-// 📱 六. PWA ইনস্টল ব্যানার ও ইউটিলিটি লজিক
-// ==========================================
-const installBanner = document.getElementById('installBanner');
-const btnInstall = document.getElementById('btnInstall');
-
-if (btnInstall) {
-    btnInstall.addEventListener('click', () => {
-        alert('BAJUS Live PWA ট্র্যাকার ইনস্টল করার জন্য ধন্যবাদ!');
-        if (installBanner) installBanner.style.display = 'none';
-    });
-}
-
-function resetHeight() {
-    document.body.style.height = window.innerHeight + "px";
-}
-window.addEventListener("resize", resetHeight);
-window.addEventListener("orientationchange", resetHeight);
-resetHeight();
-
+// --------------- শেয়ার বাটন ---------------
 document.addEventListener("DOMContentLoaded", () => {
-    const shareBtn = document.querySelector(".share-btn") || document.querySelector("[class*='Share']");
+    const shareBtn = document.querySelector(".share-btn");
     if (shareBtn) {
         shareBtn.addEventListener("click", async () => {
             if (navigator.share) {
@@ -465,6 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// --------------- বটম নেভ ---------------
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', function() {
         document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
@@ -472,9 +417,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
     });
 });
 
-// ==========================================
-// 🔔 ৭. রিয়েল-টাইম নোটিফিকেশন, পপ-আপ ও লাল ডট ইঞ্জিন
-// ==========================================
+// --------------- নোটিফিকেশন পপআপ ও রিয়েল-টাইম ---------------
 function showMiddlePopup(message) {
     const oldPopup = document.getElementById('customMiddlePopup');
     if (oldPopup) oldPopup.remove();
@@ -521,6 +464,9 @@ function listenToNotifications() {
                 const notifBadge = document.getElementById('notifBadge');
                 if (notifBadge) notifBadge.style.display = 'block';
                 showMiddlePopup(data.message);
+            } else {
+                const notifBadge = document.getElementById('notifBadge');
+                if (notifBadge) notifBadge.style.display = 'none';
             }
         }
     });
@@ -553,20 +499,90 @@ window.addEventListener('DOMContentLoaded', () => {
     listenToNotifications();
 });
 
-
-
-// Admin Password Protected page
+// --------------- অ্যাডমিন লগইন ---------------
 function showAdminLogin() {
     const password = prompt("Enter Admin Password:");
-    
-
-    if (password === null || password === "") {
-        return;
-    }
-    
+    if (password === null || password === "") return;
     if (password === "admin123") {
         window.location.href = "admin.html";
     } else {
         alert("Access Denied!");
     }
 }
+
+// --------------- 🆕 মেনু মডেল কন্টেন্ট ও লজিক ---------------
+const menuModal = document.getElementById('menuModal');
+const closeMenuModalBtn = document.getElementById('closeMenuModal');
+const menuModalTitle = document.getElementById('menuModalTitle');
+const menuModalBody = document.getElementById('menuModalBody');
+
+// কন্টেন্ট ডাটা
+const menuContents = {
+    profile: {
+        title: 'সদস্য প্রোফাইল',
+        body: `
+            <p>স্বাগতম! সদস্য প্রোফাইলের মাধ্যমে আপনি আপনার ব্যক্তিগত তথ্য, সদস্যপদ নম্বর ও লেনদেনের ইতিহাস দেখতে পারবেন।</p>
+            <p style="margin-top:10px;">বর্তমানে এই ফিচারটি উন্নয়নের অধীনে রয়েছে। খুব শীঘ্রই এটি চালু হবে।</p>
+            <p style="margin-top:10px;"><strong>হেল্পলাইন:</strong> +880241031722</p>
+        `
+    },
+    report: {
+        title: 'বাজার বিশ্লেষণ রিপোর্ট',
+        body: `
+            <p>এখানে স্বর্ণ ও রূপার বাজারের দৈনিক, সাপ্তাহিক ও মাসিক বিশ্লেষণ প্রকাশ করা হবে।</p>
+            <p style="margin-top:10px;">বর্তমান প্রবণতা: গত ৭ দিনে স্বর্ণের দাম গড়ে ২.৪% বৃদ্ধি পেয়েছে। রূপার বাজার স্থিতিশীল রয়েছে।</p>
+            <p style="margin-top:10px;">বিস্তারিত রিপোর্ট খুব শীঘ্রই পাওয়া যাবে।</p>
+        `
+    },
+    policy: {
+        title: 'সমিতি নীতিমালা',
+        body: `
+            <p><strong>বাংলাদেশ জুয়েলার্স সমিতির (BAJUS) নীতিমালা:</strong></p>
+            <ul style="padding-left:20px; margin-top:10px;">
+                <li>সকল সদস্যকে অবশ্যই নীতিমালা মেনে চলতে হবে।</li>
+                <li>হলমার্কিং বাধ্যতামূলক।</li>
+                <li>মূল্য নির্ধারণে স্বচ্ছতা বজায় রাখতে হবে।</li>
+                <li>ক্রেতাদের অভিযোগ দ্রুত নিষ্পত্তি করতে হবে।</li>
+            </ul>
+            <p style="margin-top:10px;">পূর্ণাঙ্গ নীতিমালা PDF আকারে শীঘ্রই আপলোড করা হবে।</p>
+        `
+    },
+    contact: {
+        title: 'যোগাযোগ ও সহায়তা',
+        body: `
+            <p><i class="fa-solid fa-location-dot"></i> <strong>ঠিকানা:</strong> 15, New Eskaton Road, Level-6, Moghbazar, Ramna, Dhaka-1000, Bangladesh.</p>
+            <p style="margin-top:10px;"><i class="fa-solid fa-phone"></i> <strong>ফোন:</strong> +880241031722<br><br>
+            <strong>
+            <i class="fa fa-whatsapp" style="font-size:18px"></i> Whatsapp:</strong><p> +8801817538878</p></p>
+            <p style="margin-top:10px;"><i class="fa-solid fa-envelope"></i> <strong>ইমেইল:</strong> info@bajus.org.bd</p>
+            <p style="margin-top:10px;"><i class="fa-solid fa-clock"></i> <strong>অফিস সময়:</strong> রবি-বৃহস্পতি, সকাল ১০টা থেকে বিকাল ৫টা</p>
+        `
+    }
+};
+
+// মেনু আইটেম ক্লিক ইভেন্ট
+document.getElementById('menu-profile').addEventListener('click', () => openMenuModal('profile'));
+document.getElementById('menu-report').addEventListener('click', () => openMenuModal('report'));
+document.getElementById('menu-policy').addEventListener('click', () => openMenuModal('policy'));
+document.getElementById('menu-contact').addEventListener('click', () => openMenuModal('contact'));
+
+function openMenuModal(key) {
+    if (menuContents[key]) {
+        menuModalTitle.innerText = menuContents[key].title;
+        menuModalBody.innerHTML = menuContents[key].body;
+        menuModal.classList.add('open');
+        closeDrawers(); // বাম ড্রয়ার বন্ধ করবে
+    }
+}
+
+// মডেল বন্ধ করা
+closeMenuModalBtn.addEventListener('click', () => {
+    menuModal.classList.remove('open');
+});
+
+// মডেলের বাইরে ক্লিক করলে বন্ধ
+menuModal.addEventListener('click', (e) => {
+    if (e.target === menuModal) {
+        menuModal.classList.remove('open');
+    }
+});
