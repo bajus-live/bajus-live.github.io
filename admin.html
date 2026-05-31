@@ -7,67 +7,116 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #f4f6f9;
+            --bg: #f0f4f8;
             --card-bg: #ffffff;
             --primary: #ff9800;
-            --text: #333333;
-            --border: #e0e0e0;
-            --section-border: #eaedf2;
+            --primary-dark: #e68a00;
+            --text: #1e293b;
+            --text-light: #475569;
+            --border: #e2e8f0;
+            --section-border: #e9eef2;
             --section-title-bg: #f8fafc;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 10px 25px rgba(0,0,0,0.05), 0 4px 10px rgba(0,0,0,0.03);
+            --radius: 14px;
+            --radius-sm: 8px;
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg);
+            background-image: radial-gradient(circle at 50% 0%, #f8fafc 0%, #eef2f6 100%);
             color: var(--text);
             margin: 0;
             padding: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
         }
+
         .admin-container {
-            max-width: 650px;
+            max-width: 680px;
             margin: 30px auto;
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 30px 28px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md), 0 0 0 1px rgba(148,163,184,0.05);
+            transition: all 0.2s ease;
         }
-        h2 { text-align: center; color: var(--primary); margin-top: 0; margin-bottom: 25px; font-size: 24px; }
-        
-        /* 🧱 সেকশন বা ভাগের ডিজাইন */
+
+        h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Dashboard Section Block */
         .dashboard-section-block {
-            border: 2px solid var(--section-border);
-            border-radius: 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             margin-bottom: 25px;
             overflow: hidden;
             background: #ffffff;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s;
         }
+
+        .dashboard-section-block:hover {
+            box-shadow: var(--shadow-md);
+        }
+
         .section-header-title {
-            background: var(--section-title-bg);
-            padding: 12px 18px;
+            background: linear-gradient(to right, #fafbfc, #ffffff);
+            padding: 14px 20px;
             margin: 0;
             font-size: 15px;
             font-weight: 700;
-            color: #475569;
-            border-bottom: 2px solid var(--section-border);
+            color: #334155;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-        .section-body-content {
-            padding: 20px;
+            gap: 10px;
         }
 
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #555; }
-        
-        /* 👁️ পাসওয়ার্ড ফিল্ড ও আই বাটন */
+        .section-body-content {
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        /* Password wrapper */
         .password-wrapper {
             position: relative;
             display: flex;
             align-items: center;
         }
+
         .password-wrapper input {
             padding-right: 45px;
         }
+
         .toggle-password-btn {
             position: absolute;
             right: 15px;
@@ -80,13 +129,15 @@
             margin: 0;
             width: auto;
             display: inline-flex;
+            transition: color 0.2s;
         }
+
         .toggle-password-btn:hover {
             color: var(--primary);
             background: none;
         }
 
-        /* 📊 গ্রাফ গ্রিড লেআউট (পাশাপাশি) */
+        /* Graph row */
         .graph-day-row {
             display: flex;
             gap: 15px;
@@ -94,15 +145,22 @@
             padding: 10px 0;
             border-bottom: 1px dashed #e2e8f0;
         }
+
         .graph-day-row:last-child {
             border-bottom: none;
         }
+
         .day-label {
-            font-weight: bold;
+            font-weight: 700;
             font-size: 14px;
             color: var(--primary);
             min-width: 60px;
+            background: rgba(255,152,0,0.08);
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-align: center;
         }
+
         .graph-inputs {
             display: flex;
             gap: 10px;
@@ -110,56 +168,218 @@
         }
 
         input, textarea {
-            width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px;
-            box-sizing: border-box; font-size: 15px; transition: 0.3s; background: #fafafa;
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: 0.25s;
+            background: #f9fafb;
+            color: var(--text);
+            font-family: inherit;
         }
-        input:focus, textarea:focus { border-color: var(--primary); outline: none; background: #fff; box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1); }
-        
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.12);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #94a3b8;
+        }
+
         button {
-            width: 100%; padding: 14px; background: var(--primary); border: none; color: white;
-            font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 15px;
-            transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            border: none;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.25s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(255,152,0,0.3);
+            letter-spacing: 0.3px;
         }
-        button:hover { background: #e68a00; }
-        .tab-btn-group { display: flex; gap: 12px; margin-bottom: 20px; }
+
+        button:hover {
+            background: linear-gradient(135deg, #fb8c00, #ef6c00);
+            box-shadow: 0 6px 15px rgba(255,152,0,0.4);
+            transform: translateY(-1px);
+        }
+
+        .tab-btn-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
         .tab-btn {
-            flex: 1; padding: 11px; background: #e5e7eb; color: #4b5563; border: none;
-            cursor: pointer; border-radius: 8px; font-weight: bold; font-size: 14px; transition: 0.3s;
+            flex: 1;
+            padding: 12px;
+            background: #f1f5f9;
+            color: #475569;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
-        .tab-btn.active { background: var(--primary); color: white; }
-        
-        /* Toggling */
-        #loginSection { max-width: 400px; margin: 80px auto; display: block; }
-        #dashboardSection{ display: none; } 
-        
-        /* 🌟 টোস্ট নোটিফিকেশন */
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255,152,0,0.3);
+        }
+
+        #loginSection {
+            max-width: 400px;
+            margin: 80px auto;
+            display: block;
+        }
+
+        #dashboardSection {
+            display: none;
+        }
+
+        /* Toast */
         .toast-notification {
-            position: fixed; top: 25px; right: -400px; background: #10b981; color: #ffffff;
-            padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;
-            font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.25); white-space: nowrap;
-            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999;
+            position: fixed;
+            top: 25px;
+            right: -400px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+            white-space: nowrap;
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 9999;
         }
-        .toast-notification.show { right: 20px; }
-        .toast-icon { font-size: 16px; }
-        
-        /* 📋 হিস্ট্রি লিস্ট স্টাইল */
+
+        .toast-notification.show {
+            right: 20px;
+        }
+
+        .toast-icon {
+            font-size: 18px;
+        }
+
+        /* History list */
         .history-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #f8fafc;
-            padding: 10px 12px;
-            border-radius: 6px;
+            background: #f9fafb;
+            padding: 12px 14px;
+            border-radius: 10px;
             margin-bottom: 8px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e9eef2;
+            transition: background 0.2s;
         }
-        .history-details { font-size: 13px; color: #333; flex: 1; padding-right: 10px; }
-        .history-time { font-size: 11px; color: #94a3b8; display: block; margin-top: 2px; }
+
+        .history-item:hover {
+            background: #f1f5f9;
+        }
+
+        .history-details {
+            font-size: 13px;
+            color: #334155;
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .history-time {
+            font-size: 11px;
+            color: #64748b;
+            display: block;
+            margin-top: 4px;
+        }
+
         .delete-notif-btn {
-            background: #ef4444; width: auto; padding: 6px 12px; font-size: 12px; margin-top: 0; border-radius: 4px;
+            background: #ef4444;
+            width: auto;
+            padding: 6px 12px;
+            font-size: 12px;
+            margin-top: 0;
+            border-radius: 6px;
+            background: #fee2e2;
+            color: #b91c1c;
+            border: none;
+            font-weight: 600;
+            transition: all 0.2s;
         }
-        .delete-notif-btn:hover { background: #dc2626; }
+
+        .delete-notif-btn:hover {
+            background: #fecaca;
+            color: #991b1b;
+        }
+
+        /* Logout button */
+        #logoutBtn {
+            background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+            box-shadow: 0 4px 10px rgba(239,68,68,0.3);
+            margin-top: 10px;
+        }
+
+        #logoutBtn:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+            box-shadow: 0 6px 15px rgba(239,68,68,0.4);
+        }
+
+        /* Login specific button */
+        #loginForm button {
+            margin-top: 20px;
+        }
+
+        /* Send notification button */
+        button[onclick="sendLiveNotice()"] {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            margin-top: 0;
+            box-shadow: 0 4px 10px rgba(59,130,246,0.3);
+        }
+
+        button[onclick="sendLiveNotice()"]:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            box-shadow: 0 6px 15px rgba(59,130,246,0.4);
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 500px) {
+            .admin-container {
+                padding: 20px 16px;
+            }
+            .form-group[style*="display: flex"] {
+                flex-direction: column;
+                gap: 12px !important;
+            }
+        }
+        
+        #eyeIcon {
+    margin-top: -15px;
+    
+}
     </style>
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -173,7 +393,7 @@
     <form id="loginForm">
         <div class="form-group">
             <label>Gmail Address</label>
-            <input type="email" id="loginEmail" placeholder="Gmail Address" required>
+            <input type="email" id="loginEmail" placeholder="Email Address" required>
         </div>
         <div class="form-group">
             <label>Password</label>
@@ -190,7 +410,7 @@
 
 <div class="admin-container" id="dashboardSection">
     <h2><i class="fa-solid fa-user-shield"></i> BAJUS Live Admin Panel</h2>
-    
+
     <div class="dashboard-section-block">
         <h3 class="section-header-title">
             <i class="fa-solid fa-paper-plane"></i> Send Live Notification / Message
@@ -329,7 +549,7 @@
         </div>
     </div>
 
-    <button onclick="logout()" style="background:#ef4444; margin-top:10px;"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
+    <button onclick="logout()" style="background:#ef4444; margin-top:10px;" id="logoutBtn"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
 </div>
 
 <div id="successToast" class="toast-notification">
@@ -659,6 +879,25 @@
                 });
         }
     }
+    
+// নতুন হিস্ট্রি সেভ করার ফাংশন
+function addNewHistory() {
+    const date = document.getElementById('newDate').value;
+    const price = document.getElementById('newPrice').value;
+    const status = document.getElementById('newStatus').value;
+    
+    if (!date || !price) {
+        alert("দয়া করে তারিখ এবং দর লিখুন!");
+        return;
+    }
+    
+    const historyData = {
+        date: date,
+        price: price,
+        status: status,
+        timestamp: Date.now()
+    };
+}
 </script>
 </body>
 </html>
