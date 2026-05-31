@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ইতিহাস - BAJUS Live</title>
+    <title>আন্তর্জাতিক - BAJUS Live</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="international.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- লোটি অ্যানিমেশন স্ক্রিপ্ট -->
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
 </head>
 <body>
-     <div id="splashScreen">
-     <div class="splash-logo-box">বাজুস</div>
-     <div class="splash-title">বাংলাদেশ জুয়েলার্স সমিতি</div>
-     <div class="splash-subtitle">Live Gold & Silver Rates</div>
-     <div class="loader-ring">
-         <svg>
-             <circle cx="35" cy="35" r="30"></circle>
-             <circle id="loaderProgress" cx="35" cy="35" r="30"></circle>
-         </svg>
-         <div id="progressText">0%</div>
-     </div>
- </div>
+    <!-- স্প্ল্যাশ স্ক্রিন (লোটি অ্যানিমেশন) -->
+    <div id="splashScreen">
+        <div class="splash-logo-box">বাজুস</div>
+        <div class="splash-title">বাংলাদেশ জুয়েলার্স সমিতি</div>
+        <div class="splash-subtitle">Live Gold & Silver Rates</div>
+        <dotlottie-wc 
+            src="https://lottie.host/d3ca82f8-d32b-4fdc-a3f2-c609bcc11227/muFTs6jxrB.lottie" 
+            style="width: 150px; height: 150px;" 
+            autoplay 
+            loop>
+        </dotlottie-wc>
+    </div>
     
     <div class="drawer-overlay" id="drawerOverlay">
         <div class="side-drawer left-drawer" id="leftDrawer">
             <div class="drawer-header">BAJUS মেনু</div>
             <ul class="drawer-links">
-                <li><i class="fa-solid fa-user-shield"></i> সদস্য প্রোফাইল</li>
-                <li><i class="fa-solid fa-chart-pie"></i> বাজার বিশ্লেষণ রিপোর্ট</li>
-                <li><i class="fa-solid fa-building-columns"></i> সমিতি নীতিমালা</li>
+                <li id="menu-profile"><i class="fa-solid fa-user-shield"></i> সদস্য প্রোফাইল</li>
+                <li id="menu-report"><i class="fa-solid fa-chart-pie"></i> বাজার বিশ্লেষণ রিপোর্ট</li>
+                <li id="menu-policy"><i class="fa-solid fa-building-columns"></i> সমিতি নীতিমালা</li>
+                <li id="menu-contact"><i class="fa-solid fa-envelope"></i> যোগাযোগ ও সহায়তা</li>
             </ul>
         </div>
         <div class="side-drawer right-drawer" id="rightDrawer">
@@ -37,6 +40,15 @@
                 <i class="fa-solid fa-xmark close-drawer-btn" id="closeNotifBtn"></i>
             </div>
             <div id="dynamicNotifList"></div>
+        </div>
+    </div>
+
+    <!-- 🆕 মডেল উইন্ডো (মেনু কন্টেন্ট দেখানোর জন্য) -->
+    <div id="menuModal" class="menu-modal">
+        <div class="menu-modal-content">
+            <span class="menu-modal-close" id="closeMenuModal">&times;</span>
+            <h2 id="menuModalTitle"></h2>
+            <div id="menuModalBody"></div>
         </div>
     </div>
     
@@ -56,31 +68,25 @@
                 <i class="fa-solid fa-moon theme-toggle" id="themeBtn"></i>
                 <div class="notif-icon-wrapper" id="notifBtn">
                     <i class="fa-solid fa-bell notification-btn"></i>
-                    <span id="notifBadge"></span>
+                    <span id="notifBadge" style="display: none; position: absolute; top: -2px; right: -2px; width: 9px; height: 9px; background-color: #ef4444; border-radius: 50%; border: 1.5px solid var(--surface, #1e293b);"></span>
                 </div>
             </div>
         </header>
 
         <main class="content-scroll" id="internationalContainer">
+            <!-- work -->
+            <h3 class="top_title">
+                <p class="live">Live</p>&nbsp;
+                আন্তর্জাতিক বাজার
+            </h3>
             
-            
-            
- <!-- work -->
-    <h3 class="top_title">
-    <p class="live">Live</p>&nbsp;
-        আন্তর্জাতিক বাজার
-   </h3>
-   
-   <!-- live Area -->
-   <iframe src="https://www.livepriceofgold.com/bangladesh-gold-price.html" frameborder="0" scrolling="no" class="webpage"></iframe>
-            
-            
-            
+            <!-- live Area -->
+            <iframe src="https://www.livepriceofgold.com/bangladesh-gold-price.html" frameborder="0" scrolling="no" class="webpage"></iframe>
         </main>
 
         <nav class="bottom-nav">
             <a href="index.html" class="nav-item"><i class="fas fa-home"></i> <span>হোম</span></a>
-            <a href="history.html" class="nav-item"><i class="fas fa-clipboard-list""></i> <span>রেকর্ড</span></a>
+            <a href="history.html" class="nav-item"><i class="fas fa-clipboard-list"></i> <span>রেকর্ড</span></a>
             <a href="gallery.html" class="nav-item"><i class="fas fa-image"></i> <span>গ্যালারি</span></a>
             <a href="international.html" class="nav-item active"><i class="fas fa-globe"></i> <span>আন্তর্জাতিক</span></a>
             
