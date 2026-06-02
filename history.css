@@ -247,11 +247,9 @@ img {
     align-items: center;
     text-align: center;
 }
+
 .table_property:hover{
-  background: #F677FF;
-}
-.table_property:hover{
-  background: #F677FF;
+  background: #FF7C7C;
   color: white;
   border: 10px solid red;
 }
