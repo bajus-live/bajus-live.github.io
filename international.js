@@ -228,12 +228,12 @@ const menuContents = {
         `
   },
   report: {
-        title: 'বাজার বিশ্লেষণ রিপোর্ট',
-        body: `
+  title: 'বাজার বিশ্লেষণ রিপোর্ট',
+  body: `
             <p style="text-align:center; font-size:16px; font-weight:bold; margin-bottom:15px;">সর্বশেষ বাজার বিশ্লেষণ রিপোর্ট</p>
             <p style="text-align:center;">নিচের লিংক থেকে PDF ডাউনলোড করুন:</p>
             <div style="text-align:center; margin: 20px 0;">
-                <a href="https://bajus-live.github.io/storage/files/market_report_may_2026.pdf" 
+                <a href="https://bajus-live.github.io/storage/bazar_analysis_report/may-2026.pdf" 
                    target="_blank" 
                    style="background: var(--accent-gold); color: #000; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
                     <i class="fa-solid fa-download"></i> PDF ডাউনলোড করুন
@@ -243,7 +243,7 @@ const menuContents = {
                 সর্বশেষ আপডেট: ০৩ জুন ২০২৬
             </p>
         `
-    },
+},
   policy: {
     title: 'সমিতি নীতিমালা',
     body: `
