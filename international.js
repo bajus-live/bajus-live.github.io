@@ -228,13 +228,22 @@ const menuContents = {
         `
   },
   report: {
-    title: 'বাজার বিশ্লেষণ রিপোর্ট',
-    body: `
-            <p>এখানে স্বর্ণ ও রূপার বাজারের দৈনিক, সাপ্তাহিক ও মাসিক বিশ্লেষণ প্রকাশ করা হবে।</p>
-            <p style="margin-top:10px;">বর্তমান প্রবণতা: গত ৭ দিনে স্বর্ণের দাম গড়ে ২.৪% বৃদ্ধি পেয়েছে। রূপার বাজার স্থিতিশীল রয়েছে।</p>
-            <p style="margin-top:10px;">বিস্তারিত রিপোর্ট খুব শীঘ্রই পাওয়া যাবে।</p>
+        title: 'বাজার বিশ্লেষণ রিপোর্ট',
+        body: `
+            <p style="text-align:center; font-size:16px; font-weight:bold; margin-bottom:15px;">সর্বশেষ বাজার বিশ্লেষণ রিপোর্ট</p>
+            <p style="text-align:center;">নিচের লিংক থেকে PDF ডাউনলোড করুন:</p>
+            <div style="text-align:center; margin: 20px 0;">
+                <a href="https://bajus-live.github.io/storage/files/market_report_may_2026.pdf" 
+                   target="_blank" 
+                   style="background: var(--accent-gold); color: #000; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
+                    <i class="fa-solid fa-download"></i> PDF ডাউনলোড করুন
+                </a>
+            </div>
+            <p style="text-align:center; font-size:13px; margin-top:10px; color: var(--text-muted);">
+                সর্বশেষ আপডেট: ০৩ জুন ২০২৬
+            </p>
         `
-  },
+    },
   policy: {
     title: 'সমিতি নীতিমালা',
     body: `
