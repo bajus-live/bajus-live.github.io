@@ -526,6 +526,7 @@ const menuContents = {
             <p style="margin-top:10px;"><strong>হেল্পলাইন:</strong> +880241031722</p>
         `
     },
+    // Bazar bishlasan report 
     report: {
   title: 'বাজার বিশ্লেষণ রিপোর্ট',
   body: `
