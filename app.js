@@ -503,7 +503,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function showAdminLogin() {
     const password = prompt("Enter Admin Password:");
     if (password === null || password === "") return;
-    if (password === "admin123") {
+    if (password === "@dmin853775") {
         window.location.href = "admin.html";
     } else {
         alert("Access Denied!");
