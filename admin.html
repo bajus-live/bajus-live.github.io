@@ -446,60 +446,60 @@
                 
                 <div class="form-group" style="display: flex; gap: 10px;">
                     <div style="flex: 1;">
-                        <label>22K Today</label>
+                        <label>22K Latest Rate</label>
                         <input type="text" id="k22" required>
                     </div>
                     <div style="flex: 1;">
-                        <label>22K Yesterday</label>
+                        <label>22K Previous Rate</label>
                         <input type="text" id="k22_yesterday" placeholder="yesterday price" required>
                     </div>
                     <div style="flex: 1;">
-                        <label>22K Change</label>
+                        <label>Change</label>
                         <input type="text" id="k22_change" placeholder="অটো ক্যালকুলেট হবে" readonly style="background: #e2e8f0; cursor: not-allowed;">
                     </div>
                 </div>
                 
                 <div class="form-group" style="display: flex; gap: 10px;">
                     <div style="flex: 1;">
-                        <label>21K Today</label>
+                        <label>21K Latest Rate</label>
                         <input type="text" id="k21" required>
                     </div>
                     <div style="flex: 1;">
-                        <label>21K Yesterday</label>
+                        <label>21K Previous Rate</label>
                         <input type="text" id="k21_yesterday" placeholder="yesterday price" required>
                     </div>
                     <div style="flex: 1;">
-                        <label>21K Change</label>
+                        <label>Change</label>
                         <input type="text" id="k21_change" placeholder="অটো ক্যালকুলেট হবে" readonly style="background: #e2e8f0; cursor: not-allowed;">
                     </div>
                 </div>
                 
                 <div class="form-group" style="display: flex; gap: 10px;">
                     <div style="flex: 1;">
-                        <label>18K Today</label>
+                        <label>18K Latest Rate</label>
                         <input type="text" id="k18" required>
                     </div>
                     <div style="flex: 1;">
-                        <label>18K Yesterday</label>
+                        <label>18K Previous Rate</label>
                         <input type="text" id="k18_yesterday" placeholder="yesterday price" required>
                     </div>
                     <div style="flex: 1;">
-                        <label>18K Change</label>
+                        <label>Change</label>
                         <input type="text" id="k18_change" placeholder="অটো ক্যালকুলেট হবে" readonly style="background: #e2e8f0; cursor: not-allowed;">
                     </div>
                 </div>
                 
                 <div class="form-group" style="display: flex; gap: 10px;">
                     <div style="flex: 1;">
-                        <label>Sanatan Today</label>
+                        <label>Sanatan Latest Rate</label>
                         <input type="text" id="kSanatan" required>
                     </div>
                     <div style="flex: 1;">
-                        <label>Sanatan Yesterday</label>
+                        <label>Sanatan Previous Rate</label>
                         <input type="text" id="kSanatan_yesterday" placeholder="yesterday price" required>
                     </div>
                     <div style="flex: 1;">
-                        <label>Sanatan Change</label>
+                        <label>Change</label>
                         <input type="text" id="kSanatan_change" placeholder="অটো ক্যালকুলেট হবে" readonly style="background: #e2e8f0; cursor: not-allowed;">
                     </div>
                 </div>
@@ -832,7 +832,7 @@
             updateTime: formattedTime,
             updateDate: formattedDate
         }).then(() => {
-            showSuccessToast("Database & Auto-Calculations Updated!");
+            showSuccessToast("Updated Successfully ✅");
         }).catch((error) => {
             alert("Error: " + error.message);
         });
