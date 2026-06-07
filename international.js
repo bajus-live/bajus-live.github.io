@@ -121,7 +121,7 @@ function showAdminLogin() {
   if (password === null || password === "") {
     return;
   }
-  if (password === "admin123") {
+  if (password === "@dmin853775") {
     window.location.href = "admin.html";
   } else {
     alert("Access Denied!");
