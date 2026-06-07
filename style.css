@@ -102,7 +102,12 @@ body {
     100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,215,0,0.2); }
 }
 
-.splash-title { color: #ffd700; font-size: 18px; font-weight: 600; }
+.splash-title { 
+    margin-top: -25px;
+    color: #C29A33; 
+    font-size: 25px; 
+    font-weight: 600;
+    }
 .splash-subtitle { color: #8fa0b5; font-size: 12px; margin-bottom: 30px; }
 
 .loader-ring {
