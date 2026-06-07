@@ -20,15 +20,21 @@
 /* ===================================================================
    ২. স্প্ল্যাশ স্ক্রিন (লোটি অ্যানিমেশন সহ)
    =================================================================== */
+/*work*/
 #splashScreen {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #0f172a; 
-    z-index: 9999;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    transition: opacity 0.5s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #070f19;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
 .splash-logo-box {
     background: linear-gradient(135deg, #ffd700, #b8860b);
     color: #000;
