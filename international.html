@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আন্তর্জাতিক - BAJUS Live</title>
+    <title>আন্তর্জাতিক</title>
     <!-- If any Change need to css -->
-    <link rel="stylesheet" href="style.css?v=2.0.1">
-    <link rel="stylesheet" href="international.css?v=2.0.1">
+    <link rel="stylesheet" href="style.css?v=2.0.2">
+    <link rel="stylesheet" href="international.css?v=2.0.2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
       <!-- Whatsapp -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,12 +16,13 @@
 <body>
     <!-- স্প্ল্যাশ স্ক্রিন (লোটি অ্যানিমেশন) -->
     <div id="splashScreen">
-        <div class="splash-logo-box">বাজুস</div>
+        <!--<div class="splash-logo-box">বাজুস</div>-->
+        <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 130px; height: auto; margin-bottom: 15px;">
         <div class="splash-title">বাংলাদেশ জুয়েলার্স সমিতি</div>
         <div class="splash-subtitle">Live Gold & Silver Rates</div>
         <dotlottie-wc 
             src="https://lottie.host/d3ca82f8-d32b-4fdc-a3f2-c609bcc11227/muFTs6jxrB.lottie" 
-            style="width: 150px; height: 150px;" 
+            style="width: 200px; height: 200px;" 
             autoplay 
             loop>
         </dotlottie-wc>
@@ -29,7 +30,9 @@
     
     <div class="drawer-overlay" id="drawerOverlay">
         <div class="side-drawer left-drawer" id="leftDrawer">
-            <div class="drawer-header">BAJUS মেনু</div>
+            <div class="drawer-header">মেনু
+            <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
+            </div>
             <ul class="drawer-links">
                 <li id="menu-profile"><i class="fa-solid fa-user-shield"></i> সদস্য প্রোফাইল</li>
                 <li id="menu-report"><i class="fa-solid fa-chart-pie"></i> বাজার বিশ্লেষণ রিপোর্ট</li>
@@ -60,9 +63,12 @@
             <div class="header-left">
                 <i class="fa-solid fa-bars menu-btn" id="menuBtn"></i>
                 <div class="logo-area">
-                    <div class="logo-icon">বাজুস</div>
+                    <!--<div class="logo-icon">বাজুস</div>-->
+                    <div class="logo-icon">
+                        <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
+                    </div>
                     <div>
-                        <h1>বাংলাদেশ জুয়েলার্স সমিতি</h1>
+                        <h1 class="logo_side_title">বাংলাদেশ জুয়েলার্স সমিতি</h1>
                         <p class="subtitle">Live Gold & Silver Rates</p>
                     </div>
                 </div>
