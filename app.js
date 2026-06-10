@@ -297,13 +297,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('user_app_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const themeBtn = document.getElementById('themeBtn');
+    // start
     if (themeBtn) {
-        if (savedTheme === 'light') {
-            themeBtn.classList.replace('fa-moon', 'fa-sun');
-        } else {
-            themeBtn.classList.replace('fa-sun', 'fa-moon');
-        }
+    if (savedTheme === 'light') {
+        themeBtn.classList.add('fa-moon');
+        themeBtn.classList.remove('fa-sun');
+    } else {
+        themeBtn.classList.add('fa-sun');
+        themeBtn.classList.remove('fa-moon');
     }
+}
+// end
 
     switchTab('gold');
     updateDynamicBanglaDate();
@@ -374,13 +378,17 @@ if (themeBtn) {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         let newTheme = 'dark';
         
+        // start     
         if (currentTheme === 'dark') {
-            newTheme = 'light';
-            themeBtn.classList.replace('fa-moon', 'fa-sun');
-        } else {
-            themeBtn.classList.replace('fa-sun', 'fa-moon');
-        }
-        
+    newTheme = 'light';
+    themeBtn.classList.add('fa-moon');
+    themeBtn.classList.remove('fa-sun');
+} else {
+    newTheme = 'dark';
+    themeBtn.classList.add('fa-sun');
+    themeBtn.classList.remove('fa-moon');
+}
+// end
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('user_app_theme', newTheme);
     });
