@@ -294,7 +294,7 @@ function updateDynamicBanglaDate() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('user_app_theme') || 'dark';
+    const savedTheme = localStorage.getItem('user_app_theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const themeBtn = document.getElementById('themeBtn');
     // start
