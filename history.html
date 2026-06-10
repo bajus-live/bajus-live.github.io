@@ -1,36 +1,29 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ইতিহাস - BAJUS Live</title>
-  <!-- If any Change need to css -->
-  <link rel="stylesheet" href="style.css?v=2.0.4">
-  <link rel="stylesheet" href="history.css?v=2.0.5">
+  <title>ইতিহাস</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="history.css?v=2.0.10">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <!-- Whatsapp -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- লোটি অ্যানিমেশন স্ক্রিপ্ট -->
   <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
 </head>
 
 <body>
   <!-- স্প্ল্যাশ স্ক্রিন (লোটি) -->
   <div id="splashScreen">
-    <!--<div class="splash-logo-box">বাজুস</div>-->
     <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 130px; height: auto; margin-bottom: 15px;">
     <div class="splash-title">বাংলাদেশ জুয়েলার্স সমিতি</div>
     <div class="splash-subtitle">Live Gold & Silver Rates</div>
-    <dotlottie-wc src="https://lottie.host/d3ca82f8-d32b-4fdc-a3f2-c609bcc11227/muFTs6jxrB.lottie" style="width: 200px; height: 200px;" autoplay loop>
-    </dotlottie-wc>
+    <dotlottie-wc src="https://lottie.host/d3ca82f8-d32b-4fdc-a3f2-c609bcc11227/muFTs6jxrB.lottie" style="width: 200px; height: 200px;" autoplay loop></dotlottie-wc>
   </div>
-  
-  <!-- ড্রয়ার ওভারলে -->
+
   <div class="drawer-overlay" id="drawerOverlay">
     <div class="side-drawer left-drawer" id="leftDrawer">
-      <div class="drawer-header">মেনু
-      <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
+      <div class="drawer-header">মেনু 
+        <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
       </div>
       <ul class="drawer-links">
         <li id="menu-profile"><i class="fa-solid fa-user-shield"></i> সদস্য প্রোফাইল</li>
@@ -44,11 +37,11 @@
         <span><i class="fa-solid fa-bell"></i> লাইভ নোটিফিকেশন</span>
         <i class="fa-solid fa-xmark close-drawer-btn" id="closeNotifBtn"></i>
       </div>
-      <div id="dynamicNotifList"></div>
+      <!-- 🟢 এখানে নিচের ডিভে overflow-y: auto যোগ করা হয়েছে, যাতে নোটিফিকেশন স্ক্রল করা যায় -->
+      <div id="dynamicNotifList" style="padding: 15px; height: calc(100% - 70px); overflow-y: auto; display: flex; flex-direction: column; gap: 10px;"></div>
     </div>
   </div>
-  
-  <!-- 🆕 মডেল উইন্ডো (মেনু কন্টেন্ট দেখানোর জন্য) -->
+
   <div id="menuModal" class="menu-modal">
     <div class="menu-modal-content">
       <span class="menu-modal-close" id="closeMenuModal">&times;</span>
@@ -56,13 +49,12 @@
       <div id="menuModalBody"></div>
     </div>
   </div>
-  
+
   <div class="app-container">
     <header>
       <div class="header-left">
         <i class="fa-solid fa-bars menu-btn" id="menuBtn"></i>
         <div class="logo-area">
-          <!--<div class="logo-icon">বাজুস</div>-->
           <div class="logo-icon">
             <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
           </div>
@@ -80,12 +72,9 @@
         </div>
       </div>
     </header>
-    
+
     <main class="content-scroll" id="historyContainer">
-      <!-- Title -->
       <h3 class="list_title">সর্বশেষ মূল্য তালিকাসমূহ</h3>
-      
-      <!-- Rate list -->
       <div class="document_list_area">
         <div class="document_list_body">
           <table border="0" id="doc_h">
@@ -99,42 +88,6 @@
                 </div>
               </th>
             </tr>
-            
-
-
-<tr class="table_property">
-   <td class="document_content">
-     ১০-০৬-২০২৬
-   </td>
-   <td class="document_content">
-     <a href="https://bajus-live.github.io/storage/files/(10-06-2026)_bajus.pdf"><img src="https://bajus-live.github.io/storage/photos/pdf.png" alt="pdf" class="pdf"></a>
-   </td>
-   <td class="document_area">
-     <img src="https://bajus-live.github.io/storage/photos/down.png" alt="down" class="increase_decrease_img">&nbsp;<div class="in_de_tdata_text">৬৫৯০ টাকা</div>
-   </td>
-</tr>
-<tr class="table_property">
-   <td class="document_content">
-     ০৬-০৬-২০২৬
-   </td>
-   <td class="document_content">
-     <a href="https://bajus-live.github.io/storage/files/(06-06-2026)_bajus.pdf"><img src="https://bajus-live.github.io/storage/photos/pdf.png" alt="pdf" class="pdf"></a>
-   </td>
-   <td class="document_area">
-     <img src="https://bajus-live.github.io/storage/photos/down.png" alt="down" class="increase_decrease_img">&nbsp;<div class="in_de_tdata_text">৫৪৮২ টাকা</div>
-   </td>
-</tr>
-<tr class="table_property">
-   <td class="document_content">
-     ০২-০৬-২০২৬
-   </td>
-   <td class="document_content">
-     <a href="https://bajus-live.github.io/storage/files/(02-06-2026)_bajus.pdf"><img src="https://bajus-live.github.io/storage/photos/pdf.png" alt="pdf" class="pdf"></a>
-   </td>
-   <td class="document_area">
-     <img src="https://bajus-live.github.io/storage/photos/down.png" alt="down" class="increase_decrease_img">&nbsp;<div class="in_de_tdata_text">৩২৬৫ টাকা</div>
-   </td>
-</tr>
 <tr class="table_property">
    <td class="document_content">
      ২৫-০৫-২০২৬
@@ -1097,24 +1050,21 @@
           <img src="https://bajus-live.github.io/storage/photos/up.png" alt="up" class="increase_decrease_img">&nbsp;<div class="in_de_tdata_text">২৫০০ টাকা</div>
         </td>
       </tr>
-            
+
           </table>
         </div>
       </div>
     </main>
-    
+
     <nav class="bottom-nav">
       <a href="index.html" class="nav-item"><i class="fas fa-home"></i> <span>হোম</span></a>
-      <a href="history.html" class="nav-item active">
-        <i class="fas fa-clipboard-list"></i>
-        <span>রেকর্ড</span>
-      </a>
+      <a href="history.html" class="nav-item active"><i class="fas fa-clipboard-list"></i> <span>রেকর্ড</span></a>
       <a href="gallery.html" class="nav-item"><i class="fas fa-image"></i> <span>গ্যালারি</span></a>
       <a href="international.html" class="nav-item"><i class="fas fa-globe"></i> <span>আন্তর্জাতিক</span></a>
       <a href="javascript:void(0);" class="nav-item" onclick="showAdminLogin()"><i class="fas fa-shield-alt"></i> <span>অ্যাডমিন</span></a>
     </nav>
   </div>
-  
+
   <div id="notifPopup" class="popup-overlay" style="display:none;">
     <div class="popup-box">
       <i class="fas fa-bell"></i>
@@ -1123,7 +1073,7 @@
       <button onclick="document.getElementById('notifPopup').style.display='none'">ঠিক আছে</button>
     </div>
   </div>
-  
+
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
   <script>
@@ -1139,7 +1089,6 @@
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
   </script>
-  <script src="history.js?v=2.0.5"></script>
+  <script src="history.js?v=2.0.10"></script>
 </body>
-
 </html>
