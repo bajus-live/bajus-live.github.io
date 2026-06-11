@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>গ্যালারি</title>
-    <!-- If any Change need to css -->
-    <link rel="stylesheet" href="style.css?v=2.0.2">
-    <link rel="stylesheet" href="gallery.css?v=2.0.2">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>গ্যালারি</title>
+<link rel="stylesheet" href="style.css?v=2.0.1">
+<link rel="stylesheet" href="gallery.css?v=2.0.12">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
       <!-- Whatsapp -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- লোটি অ্যানিমেশন স্ক্রিপ্ট -->
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
 </head>
@@ -26,13 +25,13 @@
             autoplay 
             loop>
         </dotlottie-wc>
+        
     </div>
-    
     <div class="drawer-overlay" id="drawerOverlay">
         <div class="side-drawer left-drawer" id="leftDrawer">
-            <div class="drawer-header">মেনু
-            <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
-            </div>
+            <div class="drawer-header">মেনু 
+         <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
+         </div>
             <ul class="drawer-links">
                 <li id="menu-profile"><i class="fa-solid fa-user-shield"></i> সদস্য প্রোফাইল</li>
                 <li id="menu-report"><i class="fa-solid fa-chart-pie"></i> বাজার বিশ্লেষণ রিপোর্ট</li>
@@ -45,7 +44,7 @@
                 <span><i class="fa-solid fa-bell"></i> লাইভ নোটিফিকেশন</span>
                 <i class="fa-solid fa-xmark close-drawer-btn" id="closeNotifBtn"></i>
             </div>
-            <div id="dynamicNotifList"></div>
+            <div id="dynamicNotifList" style="padding: 15px; height: calc(100% - 70px); overflow-y: auto; display: flex; flex-direction: column; gap: 10px;"></div>
         </div>
     </div>
 
@@ -65,8 +64,8 @@
                 <div class="logo-area">
                     <!--<div class="logo-icon">বাজুস</div>-->
                     <div class="logo-icon">
-                        <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
-                    </div>
+    <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
+    </div>
                     <div>
                         <h1 class="logo_side_title">বাংলাদেশ জুয়েলার্স সমিতি</h1>
                         <p class="subtitle">Live Gold & Silver Rates</p>
@@ -86,8 +85,67 @@
             <!-- গ্যালারি কন্টেন্ট -->
             <h3 class="top_title"></h3>
 
-            <!-- gif / lottie -->
-            <dotlottie-wc src="https://lottie.host/232d3ebb-5947-46c9-a7b0-455a5a73c81f/udCXAPDoLY.lottie" style="width: 300px; height: 300px; margin: 0 auto;" autoplay loop></dotlottie-wc>
+
+            <!--<dotlottie-wc src="https://lottie.host/232d3ebb-5947-46c9-a7b0-455a5a73c81f/udCXAPDoLY.lottie" style="width: 300px; height: 300px; margin: 0 auto;" autoplay loop></dotlottie-wc>-->
+<!-- test -->
+<div class="gallery-container">
+  <!-- Gold Box -->
+  <div id="main-view" class="gallery-view active">
+    <h2 class="gallery-title">গহনার গ্যালারি</h2>
+    <div class="main-cards-wrapper">
+      <div class="main-card gold-card" onclick="openMetal('gold')">
+        <img src="https://bajus-live.github.io/storage/gallery/gold/cover/gold.png" alt="সোনার গহনা" 
+             onerror="this.src='https://via.placeholder.com/800x600/ffd700/333?text=সোনার+গহনা'">
+        <div class="card-overlay">
+          <h3>সোনার গহনার</h3>
+          <p style="opacity:0.9; font-size:1rem;">ডিজাইন দেখতে এখানে ক্লিক করুন</p>
+        </div>
+      </div>
+      
+  <!-- Silver Box -->
+      <div class="main-card silver-card" onclick="openMetal('silver')">
+        <img src="https://bajus-live.github.io/storage/gallery/silver/cover/silver.png" alt="রুপার গহনা" 
+             onerror="this.src='https://via.placeholder.com/800x600/c0c0c0/333?text=রুপার+গহনা'">
+        <div class="card-overlay">
+          <h3>রুপার গহনার</h3>
+          <p style="opacity:0.9; font-size:1rem;">ডিজাইন দেখতে এখানে ক্লিক করুন</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--back button-->
+  <div id="category-view" class="gallery-view">
+    <button class="back-btn" onclick="goBackToMain()">
+      <i class="fa-solid fa-angles-left" style="font-size: 18px;"></i>
+      ফিরে যান
+    </button>
+    <h2 class="gallery-title" id="cat-title">ক্যাটাগরি নির্বাচন করুন</h2>
+    <div class="category-grid" id="category-grid"></div>
+  </div>
+
+  <!-- ==================== WEIGHT VIEW ==================== -->
+  <div id="weight-view" class="gallery-view">
+    <button class="back-btn" onclick="goBackToCategory()">
+     <i class="fa-solid fa-angles-left" style="font-size: 18px;"></i>
+      ফিরে যান
+    </button>
+    <h2 class="gallery-title" id="weight-title">ওজন নির্বাচন করুন</h2>
+    <div class="category-grid" id="weights-grid"></div>
+  </div>
+
+  <!-- ==================== ITEMS VIEW ==================== -->
+  <div id="items-view" class="gallery-view">
+    <button class="back-btn" onclick="goBackToWeight()">
+     <i class="fa-solid fa-angles-left" style="font-size: 18px;"></i>
+      ফিরে যান
+    </button>
+    <h2 class="gallery-title" id="items-title">গহনার ডিজাইন</h2>
+    <div class="items-grid" id="items-grid"></div>
+  </div>
+
+</div>
+
         </main>
 
         <nav class="bottom-nav">
@@ -125,7 +183,6 @@
         if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
     </script>
-    <!-- If any Change need to js -->
-    <script src="gallery.js?v=2.0.4"></script>
+    <script src="gallery.js?v=2.0.12"></script>
 </body>
 </html>
