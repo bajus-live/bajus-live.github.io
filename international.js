@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-    // ৫. থিম টগল
+// ৫. থিম টগল
   const savedTheme = localStorage.getItem('user_app_theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
   
