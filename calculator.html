@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ক্যালকুলেটর - Gold Calculator | Bangladesh</title>
+    <title>ক্যালকুলেটর</title>
     <style>
         :root {
             --gold: #D4A017;
@@ -657,10 +657,11 @@
             const VORI_TO_ROTI = VORI_TO_ANA * ANA_TO_ROTI; // 96
             const VORI_TO_POINT = VORI_TO_ROTI * ROTI_TO_POINT; // 960
             const GRAM_TO_KG = 1000; // 1 Kg = 1000 grams
+
+
             
 // ==================== Default price value ==================== 
-
-            const DEFAULT_RATE_PER_VORI = 229372; // Default value in Taka per Vori
+            const DEFAULT_RATE_PER_VORI = 218350; // Default value in Taka per Vori
             const STORAGE_KEY_RATE = 'goldCalculator_ratePerVori';
             const STORAGE_KEY_TIMESTAMP = 'goldCalculator_lastUpdated';
 
@@ -1025,9 +1026,11 @@
                 // Recalculate if there's an active calculation
                 recalculateFromLastSource();
             });
+
+            
 // ==================== Default price value alert message ==================== 
             btnResetRate.addEventListener('click', function() {
-                if (confirm('আপনি কি নিশ্চিত ডিফল্ট দরে (২,২৯,৩৭২ টাকা/ভরি) ফিরে যেতে চান?')) {
+                if (confirm('আপনি কি নিশ্চিত ডিফল্ট দরে (২,১৮,৩৫০ টাকা/ভরি) ফিরে যেতে চান?')) {
                     saveRateToStorage(DEFAULT_RATE_PER_VORI);
                     adminRateInput.value = DEFAULT_RATE_PER_VORI;
                     adminStatus.classList.add('show');
