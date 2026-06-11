@@ -76,21 +76,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // ৫. থিম টগল
-  const savedTheme = localStorage.getItem('user_app_theme') || 'dark';
+    // ৫. থিম টগল
+  const savedTheme = localStorage.getItem('user_app_theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
   
   if (themeBtn) {
-    themeBtn.classList.toggle('fa-moon', savedTheme === 'dark');
-    themeBtn.classList.toggle('fa-sun', savedTheme === 'light');
+    themeBtn.classList.toggle('fa-moon', savedTheme === 'light');
+    themeBtn.classList.toggle('fa-sun', savedTheme === 'dark');
     
     themeBtn.addEventListener('click', () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('user_app_theme', newTheme);
-      themeBtn.classList.toggle('fa-moon', newTheme === 'dark');
-      themeBtn.classList.toggle('fa-sun', newTheme === 'light');
+      themeBtn.classList.toggle('fa-moon', newTheme === 'light');
+      themeBtn.classList.toggle('fa-sun', newTheme === 'dark');
     });
   }
   
