@@ -604,3 +604,38 @@ menuModal.addEventListener('click', (e) => {
         menuModal.classList.remove('open');
     }
 });
+
+
+
+
+// --------------- FCM পুশ নোটিফিকেশন ---------------
+function requestFCMToken() {
+    if ('Notification' in window && 'serviceWorker' in navigator) {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                navigator.serviceWorker.register('/firebase-messaging-sw.js?v=1')
+                    .then(registration => {
+                        firebase.messaging().useServiceWorker(registration);
+                        return firebase.messaging().getToken({ 
+                            vapidKey: 'BCcHXjGQ_kdS5RVodudcj-KDhObQcElGPfgcWFJ1xuWdyB0kCA5r8tqvCGA5rjpZrQ1A5XUdmmgLI-0i5G0CSLU' 
+                        });
+                    })
+                    .then(currentToken => {
+                        if (currentToken) {
+                            database.ref('fcmTokens/' + currentToken).set(true);
+                            console.log('FCM Token saved:', currentToken);
+                        } else {
+                            console.log('No token received.');
+                        }
+                    })
+                    .catch(err => {
+                        console.error('SW registration or token error:', err);
+                    });
+            }
+        });
+    }
+}
+
+window.addEventListener('load', () => {
+    requestFCMToken();
+});
