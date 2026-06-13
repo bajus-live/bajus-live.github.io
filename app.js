@@ -606,3 +606,54 @@ menuModal.addEventListener('click', (e) => {
 });
 
 
+
+
+
+// --------------- FCM পুশ নোটিফিকেশন (টোকেন ও টপিক সাবস্ক্রিপশন) ---------------
+function requestFCMToken() {
+    if ('Notification' in window && 'serviceWorker' in navigator) {
+        // যদি আগে থেকেই পারমিশন দেওয়া থাকে, সরাসরি টোকেন নিন
+        if (Notification.permission === 'granted') {
+            registerSWAndGetToken();
+        } else if (Notification.permission === 'default') {
+            // এখনও Allow/Deny কিছু করা হয়নি — ইউজারকে প্রম্পট দেখানোর জন্য একটি বাটন দেখান
+            // (আপনার index.html-এ enablePushBtn নামে একটি বাটন থাকা দরকার)
+            const enablePushBtn = document.getElementById('enablePushBtn');
+            if (enablePushBtn) enablePushBtn.style.display = 'inline-block';
+        }
+    }
+}
+
+function registerSWAndGetToken() {
+    navigator.serviceWorker.register('/firebase-messaging-sw.js?v=1')
+        .then(registration => {
+            firebase.messaging().useServiceWorker(registration);
+            return firebase.messaging().getToken({
+                vapidKey: 'BCcHXjGQ_kdS5RVodudcj-KDhObQcElGPfgcWFJ1xuWdyB0kCA5r8tqvCGA5rjpZrQ1A5XUdmmgLI-0i5G0CSLU'
+            });
+        })
+        .then(currentToken => {
+            if (currentToken) {
+                // টোকেন ডাটাবেসে জমা (অপশনাল, কিন্তু রাখতে পারেন)
+                database.ref('fcmTokens/' + currentToken).set(true);
+                console.log('FCM Token saved:', currentToken);
+
+                // 🔔 all_users টপিকে সাবস্ক্রাইব
+                return firebase.messaging().subscribeToTopic('all_users');
+            } else {
+                console.log('No token received.');
+            }
+        })
+        .then(() => {
+            console.log('Subscribed to all_users topic');
+        })
+        .catch(err => {
+            console.error('SW registration or token error:', err);
+        });
+}
+
+// পেজ লোডের পর টোকেন চাওয়া
+window.addEventListener('load', () => {
+    requestFCMToken();
+});
+
