@@ -27,6 +27,17 @@
     <link rel="stylesheet" href="style.css?v=2.0.15">
     <!-- If any Change need to manifest -->
     <link rel="manifest" href="manifest.json?v=2.0">
+
+    <!-- one signal -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "4b9de094-9b68-4e4e-a8cb-8beb66a8b7bd",
+    });
+  });
+</script>
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
     <title>বাংলাদেশ জুয়েলারি সমিতি</title>
 </head>
