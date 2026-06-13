@@ -608,32 +608,50 @@ menuModal.addEventListener('click', (e) => {
 
 
 
-// --------------- FCM পুশ নোটিফিকেশন ---------------
+// --------------- FCM পুশ নোটিফিকেশন (সংশোধিত) ---------------
+const enablePushBtn = document.getElementById('enablePushBtn');
+
 function requestFCMToken() {
     if ('Notification' in window && 'serviceWorker' in navigator) {
+        if (Notification.permission === 'granted') {
+            registerSWAndGetToken();
+        } else if (Notification.permission === 'default') {
+            if (enablePushBtn) enablePushBtn.style.display = 'inline-block';
+        }
+    }
+}
+
+if (enablePushBtn) {
+    enablePushBtn.addEventListener('click', () => {
         Notification.requestPermission().then(permission => {
             if (permission === 'granted') {
-                navigator.serviceWorker.register('/firebase-messaging-sw.js?v=1')
-                    .then(registration => {
-                        firebase.messaging().useServiceWorker(registration);
-                        return firebase.messaging().getToken({ 
-                            vapidKey: 'BCcHXjGQ_kdS5RVodudcj-KDhObQcElGPfgcWFJ1xuWdyB0kCA5r8tqvCGA5rjpZrQ1A5XUdmmgLI-0i5G0CSLU' 
-                        });
-                    })
-                    .then(currentToken => {
-                        if (currentToken) {
-                            database.ref('fcmTokens/' + currentToken).set(true);
-                            console.log('FCM Token saved:', currentToken);
-                        } else {
-                            console.log('No token received.');
-                        }
-                    })
-                    .catch(err => {
-                        console.error('SW registration or token error:', err);
-                    });
+                enablePushBtn.style.display = 'none';
+                registerSWAndGetToken();
             }
         });
-    }
+    });
+}
+
+function registerSWAndGetToken() {
+    navigator.serviceWorker.register('/firebase-messaging-sw.js?v=1')
+        .then(registration => {
+            firebase.messaging().useServiceWorker(registration);
+            return firebase.messaging().getToken({
+                vapidKey: 'BCcHXjGQ_kdS5RVodudcj-KDhObQcElGPfgcWFJ1xuWdyB0kCA5r8tqvCGA5rjpZrQ1A5XUdmmgLI-0i5G0CSLU'
+            });
+        })
+        .then(currentToken => {
+            if (currentToken) {
+                database.ref('fcmTokens/' + currentToken).set(true);
+                console.log('FCM Token saved:', currentToken);
+                alert('পুশ নোটিফিকেশন সফলভাবে চালু হয়েছে!');
+            } else {
+                console.log('No token received.');
+            }
+        })
+        .catch(err => {
+            console.error('SW registration or token error:', err);
+        });
 }
 
 window.addEventListener('load', () => {
