@@ -661,7 +661,7 @@
 
             
 // ==================== Default price value ==================== 
-            const DEFAULT_RATE_PER_VORI = 218350; // Default value in Taka per Vori
+            const DEFAULT_RATE_PER_VORI = 224940; // Default value in Taka per Vori
             const STORAGE_KEY_RATE = 'goldCalculator_ratePerVori';
             const STORAGE_KEY_TIMESTAMP = 'goldCalculator_lastUpdated';
 
@@ -1030,7 +1030,7 @@
             
 // ==================== Default price value alert message ==================== 
             btnResetRate.addEventListener('click', function() {
-                if (confirm('আপনি কি নিশ্চিত ডিফল্ট দরে (২,১৮,৩৫০ টাকা/ভরি) ফিরে যেতে চান?')) {
+                if (confirm('আপনি কি নিশ্চিত ডিফল্ট দরে (২,২৪,৯৪০ টাকা/ভরি) ফিরে যেতে চান?')) {
                     saveRateToStorage(DEFAULT_RATE_PER_VORI);
                     adminRateInput.value = DEFAULT_RATE_PER_VORI;
                     adminStatus.classList.add('show');
