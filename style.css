@@ -622,10 +622,3 @@ h3 { font-size: 16px; font-weight: 600; }
     line-height: 1.6;
     color: var(--text-main);
 }
-
-/* OneSignal বেলকে ডানদিকে সরানো */
-#onesignal-bell-container {
-  left: auto !important;
-  right: 20px !important;
-  bottom: 80px !important;  /* নিচের ন্যাভবারের উপরে রাখতে */
-}
