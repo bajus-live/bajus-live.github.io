@@ -1,3 +1,5 @@
+// gallery.js (সর্বশেষ ভার্সন — নোটিফিকেশন টাইটেল সহ)
+
 document.addEventListener('DOMContentLoaded', () => {
   // ১. এলিমেন্ট সিলেক্ট করা
   const galleryContainer = document.getElementById('galleryContainer');
@@ -127,7 +129,7 @@ function showAdminLogin() {
 // ==========================================
 // 🔔 রিয়েল-টাইম নোটিফিকেশন (পপ-আপ ও লাল ডট)
 // ==========================================
-function showMiddlePopup(message) {
+function showMiddlePopup(title, message) {  // ← title প্যারামিটার যোগ
   const oldPopup = document.getElementById('customMiddlePopup');
   if (oldPopup) oldPopup.remove();
   
@@ -143,7 +145,7 @@ function showMiddlePopup(message) {
   
   popup.innerHTML = `
         <div style="font-size: 40px; color: #ffc107; margin-bottom: 12px;"><i class="fa-solid fa-bell animate-bounce"></i></div>
-        <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: bold; color: #ffc107;">নতুন নোটিফিকেশন!</h3>
+        <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: bold; color: #ffc107;">${title || 'নতুন নোটিফিকেশন!'}</h3>  <!-- ← title ব্যবহার -->
         <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 1.4; color: #cbd5e1;">${message}</p>
         <button id="closePopupBtn" style="background: #ffc107; color: #000; border: none; padding: 8px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;">ঠিক আছে</button>
     `;
@@ -172,7 +174,7 @@ function listenToNotifications() {
       const lastNotifId = localStorage.getItem('last_read_notif_id') || '';
       if (data.id !== lastNotifId) {
         if (notifBadge) notifBadge.style.display = 'block';
-        showMiddlePopup(data.message);
+        showMiddlePopup(data.title, data.message);  // ← title ও message পাঠান
       } else {
         // আগেরটা পড়া হয়ে গেলে লাল ডট আড়াল
         if (notifBadge) notifBadge.style.display = 'none';
@@ -337,9 +339,9 @@ document.querySelectorAll('img').forEach(img => {
   
   //gold
   const goldCategories = [
-    { name: "নেকলেস", img: "https://bajus-live.github.io/storage/gallery/gold/necklace/cover/necklace.png" },
     { name: "নাক ফুল", img: "https://bajus-live.github.io/storage/gallery/gold/nakful/cover/nakful.png" },
     { name: "কানের দুল", img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/cover/kanerdul.png" },
+    { name: "নেকলেস", img: "https://bajus-live.github.io/storage/gallery/gold/necklace/cover/necklace.png" },
     { name: "ব্রেসলেট", img: "https://bajus-live.github.io/storage/gallery/gold/bracelet/cover/bracelet.png" },
     { name: "ব্যাঙ্গেল", img: "https://bajus-live.github.io/storage/gallery/gold/bangle/cover/bangle.png" },
     { name: "আংটি", img: "https://bajus-live.github.io/storage/gallery/gold/ring/cover/ring.png" }
@@ -355,355 +357,364 @@ document.querySelectorAll('img').forEach(img => {
     { name: "বালা", img: "https://bajus-live.github.io/storage/gallery/silver/bala/cover/bala.png" }
   ];
   
-  //Box Content
+  //Gold Box Content
   const jewelryData = {
     gold: {
       "নাক ফুল": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "https://bajus-live.github.io/storage/gallery/gold/nakful/nakful_1.png", label: "ওজন: ১ রতি", carat: "22K" },
+          { img: "#", label: "ওজন: ", carat: "22K" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন:", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
           ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৫ আনা": [
-          {img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          {img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২১ ক্যারেট"}
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২১ ক্যারেট"}
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
           { img: "#", label: "Serial:03", carat: "২২ ক্যারেট" }
         ],
       },
       "কানের দুল": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "Serial:1", carat: "২২ ক্যারেট" }
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/1ana/kanerdul_5.png", label: "ওজন: ১ আনা", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/1ana/kanerdul_6.png", label: "ওজন: ১ আনা", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/1ana/kanerdul_7.png", label: "ওজন: ১ আনা", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/1ana/kanerdul_1.png", label: "ওজন: ১ আনা ৮ পয়েন্ট", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/1ana/kanerdul_8.png", label: "ওজন: ১ আনা ২ রতি ৭ পয়েন্ট", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/1ana/kanerdul_9.png", label: "ওজন: ১ আনা ৩ রতি", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/1ana/kanerdul_3.png", label: "ওজন: ১ আনা ৪ রতি", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/1ana/kanerdul_2.png", label: "ওজন: ১ আনা ৫ রতি", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/1ana/kanerdul_4.png", label: "ওজন: ১ আনা ৫ রতি", carat: "22K" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/2ana/kanerdul_1.png", label: "ওজন: ২ আনা", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/2ana/kanerdul_2.png", label: "ওজন: ২ আনা ৮ রতি ৫ পয়েন্ট", carat: "22K" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/3ana/kanerdul_1.jpg", label: "ওজন: ৩ আনা", carat: "22K" },
+          { img: "https://bajus-live.github.io/storage/gallery/gold/kanerdul/3ana/kanerdul_2.jpg", label: "ওজন: ৩ আনা", carat: "22K" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-         { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+         { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
          "১৩ আনা": [
-           { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+           { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
          ],
          "১৪ আনা": [
-           { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+           { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
          ],
          "১৬ আনা": [
-           { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+           { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
          ],
          "১ ভরি": [
-           { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+           { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
          ],
          "২ ভরি": [
-           { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+           { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
          ],
          "৩ ভরি": [
-           { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+           { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
          ]
       },
       "নেকলেস": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       },
       "ব্রেসলেট": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       },
       "বেঙ্গল": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       },
       "আংটি": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট"}
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট"}
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       }
     },
@@ -711,363 +722,363 @@ document.querySelectorAll('img').forEach(img => {
     silver: {
       "ব্রেসলেট": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
        "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
        "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "১২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "১৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
       "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       },
       "নুপুর": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       },
       
       "আংটি": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       },
       "হার": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       },
       "টো রিং": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       },
       "বালা": {
         "১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" },
-          { img: "#", label: "সিরিয়ায় নং: ০২", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" },
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৭ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৮ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৯ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১০ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১১ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১২ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৩ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৪ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৫ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১৬ আনা": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "১ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "২ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ],
         "৩ ভরি": [
-          { img: "#", label: "সিরিয়ায় নং: ০১", carat: "২২ ক্যারেট" }
+          { img: "#", label: "ওজন: ", carat: "২২ ক্যারেট" }
         ]
       }
     }
