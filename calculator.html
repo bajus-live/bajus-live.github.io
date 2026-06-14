@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ক্যালকুলেটর</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
     <style>
         :root {
             --gold: #D4A017;
@@ -42,7 +45,6 @@
             overflow-x: hidden;
         }
 
-        /* Gold particles background */
         body::before {
             content: '';
             position: fixed;
@@ -83,7 +85,6 @@
             gap: 20px;
         }
 
-        /* Header Card */
         .header-card {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -136,7 +137,6 @@
             margin-top: 2px;
         }
 
-        /* Rate Display */
         .rate-display {
             display: flex;
             align-items: center;
@@ -171,7 +171,6 @@
             margin-top: 4px;
         }
 
-        /* Admin gear button */
         .admin-toggle-btn {
             position: absolute;
             top: 14px;
@@ -203,7 +202,6 @@
             transform: rotate(90deg);
         }
 
-        /* Admin Panel */
         .admin-panel {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -324,7 +322,6 @@
             }
         }
 
-        /* Calculator Card */
         .calc-card {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -358,7 +355,6 @@
             margin-bottom: 16px;
         }
 
-        /* Input Grid */
         .input-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -384,9 +380,6 @@
             display: flex;
             align-items: center;
             gap: 4px;
-        }
-        .input-group label .unit-icon {
-            font-size: 1rem;
         }
         .input-group input {
             padding: 11px 14px;
@@ -421,7 +414,6 @@
             }
         }
 
-        /* Total Price Display */
         .price-display {
             text-align: center;
             padding: 18px 20px;
@@ -450,7 +442,6 @@
             font-size: 1.6rem;
         }
 
-        /* Conversion summary */
         .conversion-summary {
             background: #FFFDF5;
             border-radius: var(--radius-sm);
@@ -481,13 +472,7 @@
             color: #3D1C00;
             text-align: right;
         }
-        .conv-divider {
-            grid-column: 1 / -1;
-            border-top: 1px dashed #E0D0B0;
-            margin: 2px 0;
-        }
 
-        /* Footer */
         .footer-note {
             text-align: center;
             font-size: 0.7rem;
@@ -495,7 +480,6 @@
             margin-top: 4px;
         }
 
-        /* Toast */
         .toast {
             position: fixed;
             top: 20px;
@@ -516,7 +500,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Responsive */
         @media (max-width: 400px) {
             .header-title {
                 font-size: 1.4rem;
@@ -545,20 +528,17 @@
 </head>
 <body>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast">✅ সংরক্ষিত হয়েছে</div>
 
-    <!-- Main Container -->
     <div class="main-container">
 
-        <!-- Header Card -->
         <div class="header-card" id="headerCard">
             <button class="admin-toggle-btn" id="adminToggleBtn" title="অ্যাডমিন প্যানেল">
                 ⚙️
             </button>
             <span class="header-icon">🪙</span>
             <h1 class="header-title">ক্যালকুলেটর</h1>
-            <p class="header-subtitle">Gold & Sipver Price Calculator</p>
+            <p class="header-subtitle">Gold & Silver Price Calculator</p>
             <div class="rate-display">
                 <span>📌 আজকের বাজার দর:</span>
                 <span class="rate-value" id="currentRateDisplay">১,০০,০০০</span>
@@ -567,7 +547,6 @@
             <div class="rate-updated" id="rateUpdatedText">আপডেট: এখনো সেট করা হয়নি</div>
         </div>
 
-        <!-- Admin Panel (Collapsible) -->
         <div class="admin-panel" id="adminPanel">
             <div class="admin-panel-inner">
                 <span class="admin-label">🔐 অ্যাডমিন প্যানেল — স্বর্ণের বাজারদর আপডেট করুন</span>
@@ -588,17 +567,15 @@
                     <span class="admin-status" id="adminStatus">✅ সফলভাবে আপডেট হয়েছে!</span>
                 </div>
                 <small style="color:#999;font-size:0.7rem;">
-                    * এখানে আপডেট করলেই ক্যালকুলেটরে স্বয়ংক্রিয়ভাবে দাম পরিবর্তন হবে। localStorage-এ ডাটা সংরক্ষিত থাকবে।
+                    * Firebase-এ ডাটা সংরক্ষিত হয়, পেজ রিলোড করলেও দাম থাকবে।
                 </small>
             </div>
         </div>
 
-        <!-- Calculator Card -->
         <div class="calc-card" id="calcCard">
             <h2 class="calc-title">মূল্য হিসাব করুন</h2>
             <p class="calc-hint">👇 নিচের যেকোনো একটি ঘরে সংখ্যা লিখুন — বাকিগুলো অটোমেটিক্যালি হিসাব হবে</p>
 
-            <!-- Input Grid -->
             <div class="input-grid">
                 <div class="input-group">
                     <label><span class="unit-icon"></span> ভরি (Vori)</label>
@@ -626,13 +603,11 @@
                 </div>
             </div>
 
-            <!-- Total Price -->
             <div class="price-display">
                 <div class="price-label">💰 মোট মূল্য</div>
                 <div class="price-value zero" id="totalPriceDisplay">০ টাকা</div>
             </div>
 
-            <!-- Conversion Summary -->
             <div class="conversion-summary" id="conversionSummary">
                 <div class="conv-item"><span class="conv-label">ভরি</span> <span class="conv-value" id="sumVori">—</span></div>
                 <div class="conv-item"><span class="conv-label">আনা</span> <span class="conv-value" id="sumAna">—</span></div>
@@ -648,6 +623,19 @@
     </div>
 
     <script>
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCGb4nMjRhK7yFJ3m4kR3rlT0oSnEEcxMo",
+            authDomain: "bangladesh-jeweller-s-asso.firebaseapp.com",
+            databaseURL: "https://bangladesh-jeweller-s-asso-default-rtdb.firebaseio.com/",
+            projectId: "bangladesh-jeweller-s-asso",
+            storageBucket: "bangladesh-jeweller-s-asso.firebasestorage.app",
+            messagingSenderId: "646542194702",
+            appId: "1:646542194702:web:f99399f05a199721c4a45f"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
         (function() {
             // ==================== CONSTANTS ====================
             const VORI_TO_GRAM = 11.664; // 1 Vori = 11.664 grams (Bangladesh standard)
@@ -658,12 +646,11 @@
             const VORI_TO_POINT = VORI_TO_ROTI * ROTI_TO_POINT; // 960
             const GRAM_TO_KG = 1000; // 1 Kg = 1000 grams
 
-
-            
-// ==================== Default price value ==================== 
+            // ==================== Default price value ==================== 
             const DEFAULT_RATE_PER_VORI = 224940; // Default value in Taka per Vori
-            const STORAGE_KEY_RATE = 'goldCalculator_ratePerVori';
-            const STORAGE_KEY_TIMESTAMP = 'goldCalculator_lastUpdated';
+
+            // Firebase reference
+            const settingsRef = database.ref('calculatorSettings');
 
             // ==================== DOM ELEMENTS ====================
             const adminToggleBtn = document.getElementById('adminToggleBtn');
@@ -700,34 +687,71 @@
             let lastUpdatedTimestamp = null;
             let lastEditedInputId = null; // Track which input was last edited
             let isUpdating = false; // Flag to prevent circular updates
+            // Messages that can be overridden from Firebase
+            let alertMessage = 'আপনি কি নিশ্চিত ডিফল্ট দরে (২,২৪,৯৪০ টাকা/ভরি) ফিরে যেতে চান?';
+            let confirmResetMessage = '🔄 ডিফল্ট দর পুনরুদ্ধার করা হয়েছে';
 
             // ==================== INITIALIZATION ====================
-            function loadRateFromStorage() {
-                const storedRate = localStorage.getItem(STORAGE_KEY_RATE);
-                const storedTimestamp = localStorage.getItem(STORAGE_KEY_TIMESTAMP);
-
-                if (storedRate !== null) {
-                    const parsed = parseFloat(storedRate);
-                    if (!isNaN(parsed) && parsed > 0) {
-                        ratePerVori = parsed;
+            function loadSettingsFromFirebase() {
+                settingsRef.once('value').then(snapshot => {
+                    const data = snapshot.val();
+                    if (data) {
+                        if (data.defaultRatePerVori) {
+                            ratePerVori = data.defaultRatePerVori;
+                        }
+                        if (data.alertMessage) {
+                            alertMessage = data.alertMessage;
+                        }
+                        if (data.confirmResetMessage) {
+                            confirmResetMessage = data.confirmResetMessage;
+                        }
+                        // We don't have a dedicated timestamp field, so use local
+                        lastUpdatedTimestamp = new Date().toISOString();
                     }
-                }
-                if (storedTimestamp !== null) {
-                    lastUpdatedTimestamp = storedTimestamp;
-                }
-                updateRateDisplay();
-                updateAdminInput();
+                    updateRateDisplay();
+                    updateAdminInput();
+                }).catch(err => {
+                    console.error('Firebase load error:', err);
+                    // Fallback to default
+                    updateRateDisplay();
+                    updateAdminInput();
+                });
             }
 
-            function saveRateToStorage(rate) {
-                localStorage.setItem(STORAGE_KEY_RATE, rate.toString());
-                const now = new Date().toISOString();
-                localStorage.setItem(STORAGE_KEY_TIMESTAMP, now);
-                lastUpdatedTimestamp = now;
-                ratePerVori = rate;
-                updateRateDisplay();
-                updateAdminInput();
-                recalculateFromLastSource();
+            function saveSettingsToFirebase(rate) {
+                const updates = {
+                    defaultRatePerVori: rate
+                };
+                settingsRef.update(updates).then(() => {
+                    ratePerVori = rate;
+                    lastUpdatedTimestamp = new Date().toISOString();
+                    updateRateDisplay();
+                    updateAdminInput();
+                    recalculateFromLastSource();
+                    adminStatus.classList.add('show');
+                    showToast('✅ স্বর্ণের বাজারদর সফলভাবে আপডেট হয়েছে!');
+                    setTimeout(() => {
+                        adminStatus.classList.remove('show');
+                    }, 3000);
+                }).catch(err => {
+                    console.error('Firebase save error:', err);
+                    showToast('⚠️ সেভ করতে সমস্যা হয়েছে', '#C62828');
+                });
+            }
+
+            function resetToFirebaseDefault() {
+                if (confirm(alertMessage)) {
+                    saveSettingsToFirebase(DEFAULT_RATE_PER_VORI);
+                    adminRateInput.value = DEFAULT_RATE_PER_VORI;
+                    adminStatus.classList.add('show');
+                    adminStatus.textContent = '🔄 ডিফল্ট দরে ফিরে গেছে';
+                    showToast(confirmResetMessage);
+                    setTimeout(() => {
+                        adminStatus.classList.remove('show');
+                        adminStatus.textContent = '✅ সফলভাবে আপডেট হয়েছে!';
+                    }, 3000);
+                    recalculateFromLastSource();
+                }
             }
 
             function updateRateDisplay() {
@@ -753,7 +777,6 @@
 
             function formatIndianNumber(num) {
                 if (isNaN(num) || num === null || num === undefined) return '০';
-                // Use Bangladeshi/Indian number formatting
                 const formatted = Math.round(num).toLocaleString('en-IN');
                 return formatted;
             }
@@ -836,7 +859,6 @@
             function updateAllFields(results, sourceInputId) {
                 isUpdating = true;
 
-                // Update input fields
                 if (results) {
                     setInputValue(inputVori, results.vori, 4, sourceInputId === 'inputVori');
                     setInputValue(inputAna, results.ana, 2, sourceInputId === 'inputAna');
@@ -845,7 +867,6 @@
                     setInputValue(inputGram, results.gram, 3, sourceInputId === 'inputGram');
                     setInputValue(inputKg, results.kg, 6, sourceInputId === 'inputKg');
 
-                    // Update summary
                     sumVori.textContent = formatDecimal(results.vori, 4);
                     sumAna.textContent = formatDecimal(results.ana, 2);
                     sumRoti.textContent = formatDecimal(results.roti, 2);
@@ -853,7 +874,6 @@
                     sumGram.textContent = formatDecimal(results.gram, 3);
                     sumKg.textContent = formatDecimal(results.kg, 6);
 
-                    // Update price
                     const priceRounded = Math.round(results.price);
                     if (priceRounded > 0) {
                         totalPriceDisplay.textContent = formatTaka(results.price);
@@ -866,11 +886,9 @@
                         totalPriceDisplay.classList.add('zero');
                     }
                 } else {
-                    // Clear all
                     clearAllFields();
                 }
 
-                // Highlight source input
                 allInputs.forEach(inp => inp.classList.remove('source-active'));
                 if (sourceInputId) {
                     const sourceInput = document.getElementById(sourceInputId);
@@ -888,9 +906,7 @@
                         inputElement.value = parseFloat(value.toFixed(decimals));
                     }
                 }
-                // If this is the source input, don't overwrite what the user is typing
                 if (isSource && document.activeElement === inputElement) {
-                    // Keep the user's typed value as-is
                     return;
                 }
                 if (!isSource) {
@@ -922,7 +938,6 @@
                 if (!inputEl) return;
                 const rawValue = inputEl.value.trim();
                 if (rawValue === '') {
-                    // If source is now empty, clear everything
                     clearAllFields();
                     return;
                 }
@@ -945,7 +960,6 @@
                 const inputId = inputEl.id;
                 const rawValue = inputEl.value.trim();
 
-                // Track this as the last edited input
                 lastEditedInputId = inputId;
 
                 if (rawValue === '') {
@@ -967,19 +981,16 @@
                 updateAllFields(results, inputId);
             }
 
-            // Attach input event listeners
             allInputs.forEach(inputEl => {
                 inputEl.addEventListener('input', handleInputChange);
                 inputEl.addEventListener('focus', function() {
                     lastEditedInputId = this.id;
-                    // Re-highlight
                     allInputs.forEach(inp => inp.classList.remove('source-active'));
                     if (this.value !== '' && parseFloat(this.value) > 0) {
                         this.classList.add('source-active');
                     }
                 });
                 inputEl.addEventListener('blur', function() {
-                    // Recalculate on blur to format nicely
                     if (lastEditedInputId === this.id && this.value.trim() !== '') {
                         recalculateFromLastSource();
                     }
@@ -995,13 +1006,11 @@
                     adminPanel.classList.add('open');
                     adminToggleBtn.classList.add('active');
                     adminRateInput.value = ratePerVori;
-                    // Scroll to admin panel
                     adminPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 } else {
                     adminPanel.classList.remove('open');
                     adminToggleBtn.classList.remove('active');
                 }
-                // Hide status message when toggling
                 adminStatus.classList.remove('show');
             });
 
@@ -1016,35 +1025,14 @@
                     showToast('⚠️ দাম খুব বেশি মনে হচ্ছে, দয়া করে চেক করুন', '#E65100');
                     return;
                 }
-                saveRateToStorage(newRate);
-                adminStatus.classList.add('show');
-                showToast('✅ স্বর্ণের বাজারদর সফলভাবে আপডেট হয়েছে!');
-                // Auto-hide status after 3 seconds
-                setTimeout(() => {
-                    adminStatus.classList.remove('show');
-                }, 3000);
-                // Recalculate if there's an active calculation
+                saveSettingsToFirebase(newRate);
                 recalculateFromLastSource();
             });
 
-            
-// ==================== Default price value alert message ==================== 
             btnResetRate.addEventListener('click', function() {
-                if (confirm('আপনি কি নিশ্চিত ডিফল্ট দরে (২,২৪,৯৪০ টাকা/ভরি) ফিরে যেতে চান?')) {
-                    saveRateToStorage(DEFAULT_RATE_PER_VORI);
-                    adminRateInput.value = DEFAULT_RATE_PER_VORI;
-                    adminStatus.classList.add('show');
-                    adminStatus.textContent = '🔄 ডিফল্ট দরে ফিরে গেছে';
-                    showToast('🔄 ডিফল্ট দর পুনরুদ্ধার করা হয়েছে');
-                    setTimeout(() => {
-                        adminStatus.classList.remove('show');
-                        adminStatus.textContent = '✅ সফলভাবে আপডেট হয়েছে!';
-                    }, 3000);
-                    recalculateFromLastSource();
-                }
+                resetToFirebaseDefault();
             });
 
-            // Allow Enter key to save in admin panel
             adminRateInput.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -1068,14 +1056,13 @@
             // ==================== UTILS ====================
             function shakeElement(el) {
                 el.style.animation = 'none';
-                el.offsetHeight; // trigger reflow
+                el.offsetHeight;
                 el.style.animation = 'shake 0.5s ease';
                 setTimeout(() => {
                     el.style.animation = '';
                 }, 500);
             }
 
-            // Add shake keyframes dynamically
             const shakeStyle = document.createElement('style');
             shakeStyle.textContent = `
                         @keyframes shake {
@@ -1091,19 +1078,13 @@
             document.head.appendChild(shakeStyle);
 
             // ==================== INITIAL SETUP ====================
-            loadRateFromStorage();
+            loadSettingsFromFirebase();
             adminRateInput.value = ratePerVori;
 
-            // Pre-fill with a default example so the calculator looks alive
-            // (optional: show 1 Vori as example)
-            // inputVori.value = '1';
-            // lastEditedInputId = 'inputVori';
-            // recalculateFromLastSource();
-
-            console.log('✅ ক্যালকুলেটর প্রস্তুত!');
+            console.log('✅ ক্যালকুলেটর প্রস্তুত (Firebase সংস্করণ)!');
             console.log('💰 বর্তমান দর:', ratePerVori, 'টাকা/ভরি');
             console.log('🔐 অ্যাডমিন প্যানেল খুলতে ⚙️ বাটনে ক্লিক করুন');
-            console.log('📌 localStorage-এ ডাটা সংরক্ষিত হয়, পেজ রিলোড করলেও দাম থাকবে');
+            console.log('📌 Firebase-এ ডাটা সংরক্ষিত হয়, পেজ রিলোড করলেও দাম থাকবে');
             console.log('🔄 ১ ভরি = ১১.৬৬৪ গ্রাম | ১ ভরি = ১৬ আনা = ৯৬ রতি = ৯৬০ পয়েন্ট');
         })();
     </script>
