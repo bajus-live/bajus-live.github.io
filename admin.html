@@ -276,6 +276,7 @@
             white-space: nowrap;
             transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 9999;
+            overflow: hidden;
         }
 
         .toast-notification.show {
@@ -284,6 +285,64 @@
 
         .toast-icon {
             font-size: 18px;
+        }
+
+        /* Toast Progress Bar */
+        .toast-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: rgba(255,255,255,0.5);
+            width: 100%;
+            animation: progressShrink 3s linear forwards;
+            transform-origin: right;
+        }
+
+        @keyframes progressShrink {
+            from { transform: scaleX(1); }
+            to { transform: scaleX(0); }
+        }
+
+        /* Animated Checkmark */
+        .animated-checkmark {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .animated-checkmark svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .animated-checkmark .circle {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2.5;
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: circleDraw 1s ease-out forwards;
+        }
+
+        .animated-checkmark .tick {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: tickDraw 0.6s 0.5s ease-out forwards;
+        }
+
+        @keyframes circleDraw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes tickDraw {
+            to { stroke-dashoffset: 0; }
         }
 
         /* History list */
@@ -377,9 +436,8 @@
         }
         
         #eyeIcon {
-    margin-top: -15px;
-    
-}
+            margin-top: -15px;
+        }
     </style>
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -389,16 +447,16 @@
 <body>
 
 <div class="admin-container" id="loginSection">
-    <h2><i class="fa-solid fa-lock"></i> Admin Login</h2>
+    <h2><i class="fa-solid fa-lock"></i>Admin Login</h2>
     <form id="loginForm">
         <div class="form-group">
-            <label>Gmail Address</label>
-            <input type="email" id="loginEmail" placeholder="Email Address" required>
+            <label>Gmail</label>
+            <input type="email" id="loginEmail" placeholder=" Enter Email Address" required>
         </div>
         <div class="form-group">
             <label>Password</label>
             <div class="password-wrapper">
-                <input type="password" id="loginPassword" placeholder="Password" required>
+                <input type="password" id="loginPassword" placeholder="Enter Password" required>
                 <button type="button" class="toggle-password-btn" id="togglePasswordBtn" onclick="togglePasswordVisibility()">
                     <i class="fa-solid fa-eye-slash" id="eyeIcon"></i>
                 </button>
@@ -409,19 +467,47 @@
 </div>
 
 <div class="admin-container" id="dashboardSection">
-    <h2><i class="fa-solid fa-user-shield"></i> BAJUS Live Admin Panel</h2>
+    <h2><i class="fa-solid fa-user-shield"></i>Admin Panel</h2>
 
+    <!-- Calculator Settings Section -->
+    <div class="dashboard-section-block">
+        <h3 class="section-header-title">
+            <i class="fa-solid fa-calculator"></i> Calculator Settings
+        </h3>
+        <div class="section-body-content">
+            <div class="form-group">
+                <label>Default Value (Vori/BDT)</label>
+                <input type="number" id="calcDefaultRate" placeholder="যেমন: 224940" required>
+            </div>
+            <div class="form-group">
+                <label>Alert Message</label>
+                <input type="text" id="calcAlertMessage" placeholder="যেমন: আপনি কি নিশ্চিত ডিফল্ট দরে ফিরে যেতে চান?">
+            </div>
+            <div class="form-group">
+                <label>Reset Confirmation Message</label>
+                <input type="text" id="calcConfirmResetMessage" placeholder="যেমন: ডিফল্ট দর পুনরুদ্ধার করা হয়েছে">
+            </div>
+            <button type="button" onclick="saveCalculatorSettings()" style="background: #3b82f6; margin-top: 0;">
+                <i class="fa-solid fa-save"></i> Save Calculator Settings
+            </button>
+            <small style="color:#666; font-size:0.75rem; display:block; margin-top:6px;">
+                * এখানে আপডেট করলে ক্যালকুলেটর পেজের ডিফল্ট মান পরিবর্তন হবে।
+            </small>
+        </div>
+    </div>
+
+    <!-- Existing Notification Section -->
     <div class="dashboard-section-block">
         <h3 class="section-header-title">
             <i class="fa-solid fa-paper-plane"></i> Send Live Notification / Message
         </h3>
         <div class="section-body-content">
             <div class="form-group">
-                <label>নোটিফিকেশন টাইটেল / শিরোনাম</label>
+                <label>Notification Title</label>
                 <input type="text" id="noticeTitle" placeholder="যেমন: আজকের বিশেষ অফার, জরুরী নোটিশ">
             </div>
             <div class="form-group">
-                <label>মেসেজ বা নোটিশ লিখুন</label>
+                <label>Write a Message</label>
                 <textarea id="noticeMessage" rows="3" placeholder="এখানে আপনার নোটিশ বা অফার মেসেজটি লিখুন..."></textarea>
             </div>
             <button type="button" onclick="sendLiveNotice()" style="background: #3b82f6; margin-top: 0;"><i class="fa-solid fa-bell"></i> Send Live Notice</button>
@@ -440,7 +526,7 @@
             </h3>
             <div class="section-body-content">
                 <div class="form-group">
-                    <label id="badgeLabel">টপ নোটিশ / স্বর্ণের ব্যাজ টেক্সট</label>
+                    <label id="badgeLabel">Top Notice / Gold Section</label>
                     <input type="text" id="appBadge" required>
                 </div>
                 
@@ -511,21 +597,21 @@
                 <i class="fa-solid fa-chart-line"></i> Gold 7-Days Graph Section
             </h3>
             <div class="section-body-content">
-                <p style="margin-top:0; font-size:13px; color:#666;">গ্রাফের জন্য গত ৭ দিনের তারিখ এবং পরিবর্তনের পরিমাণ (+/-) এখানে আপডেট করুন। Day 1 স্বয়ংক্রিয়ভাবে আজকের ডেটা নিয়ে নেবে।</p>
+                <p style="margin-top:0; font-size:13px; color:#666;">গ্রাফের জন্য গত ৭ দিনের তারিখ এবং ২২ ক্যারেটের ভরি-প্রতি মূল্য এখানে আপডেট করুন। Day 1 স্বয়ংক্রিয়ভাবে আজকের 22K দাম নিয়ে নেবে।</p>
                 
                 <div id="graphDaysContainer">
                     <script>
                         for(let i=1; i<=7; i++) {
                             const isReadOnly = (i === 1) ? 'readonly style="background: #e2e8f0; cursor: not-allowed;"' : '';
                             const placeholderDate = (i === 1) ? 'আজকের তারিখ (অটো)' : 'তারিখ (e.g. 26 May)';
-                            const placeholderChange = (i === 1) ? 'আজকের চেঞ্জ (অটো)' : 'পরিবর্তন (e.g. +500)';
+                            const placeholderPrice = (i === 1) ? 'আজকের দাম (অটো)' : '২২K দাম (e.g. 224000)';
                             
                             document.write(`
                                 <div class="graph-day-row">
                                     <div class="day-label">Day ${i}</div>
                                     <div class="graph-inputs">
                                         <input type="text" id="g_date_${i}" placeholder="${placeholderDate}" ${isReadOnly} required>
-                                        <input type="text" id="g_change_${i}" placeholder="${placeholderChange}" ${isReadOnly} required>
+                                        <input type="text" id="g_price_${i}" placeholder="${placeholderPrice}" ${isReadOnly} required>
                                     </div>
                                 </div>
                             `);
@@ -553,8 +639,14 @@
 </div>
 
 <div id="successToast" class="toast-notification">
-    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span class="animated-checkmark">
+        <svg viewBox="0 0 24 24">
+            <circle class="circle" cx="12" cy="12" r="10"/>
+            <path class="tick" d="M7 13l3 3 7-7"/>
+        </svg>
+    </span>
     <span id="toastMessage">Database Updated Successfully</span>
+    <div class="toast-progress"></div>
 </div>
 
 <script>
@@ -591,15 +683,30 @@
         }
     }
 
-    // 🌟 টপ-রাইট টোস্ট নোটিফিকেশন
+    // 🌟 টপ-রাইট টোস্ট নোটিফিকেশন (অ্যানিমেটেড প্রগ্রেস বার + টিক চিহ্ন সহ)
     function showSuccessToast(message) {
         const toast = document.getElementById('successToast');
         const toastMsg = document.getElementById('toastMessage');
-        if (toast) {
-            if (message) toastMsg.innerText = message; 
-            toast.classList.add('show'); 
-            setTimeout(() => { toast.classList.remove('show'); }, 3000);
-        }
+        if (!toast) return;
+
+        // আগের প্রগ্রেস বার সরান
+        const oldProgress = toast.querySelector('.toast-progress');
+        if (oldProgress) oldProgress.remove();
+
+        if (message) toastMsg.innerText = message;
+
+        // নতুন প্রগ্রেস বার যোগ করুন
+        const progressBar = document.createElement('div');
+        progressBar.className = 'toast-progress';
+        toast.appendChild(progressBar);
+
+        toast.classList.add('show');
+        
+        // 3 সেকেন্ড পর টোস্ট লুকান
+        setTimeout(() => {
+            toast.classList.remove('show');
+            if (progressBar) progressBar.remove();
+        }, 3000);
     }
 
     // 🔒 লগইন সেশন ট্র্যাকার
@@ -610,6 +717,7 @@
             fetchCurrentPrices();
             fetchCurrentNotice(); 
             loadNotificationHistory();
+            loadCalculatorSettings();
         } else {
             document.getElementById('loginSection').style.display = 'block';
             document.getElementById('dashboardSection').style.display = 'none';
@@ -647,7 +755,7 @@
             document.getElementById('graphSectionTitle').innerHTML = '<i class="fa-solid fa-chart-line"></i> Silver 7-Days Graph Section';
         }
         const badgeLabel = document.getElementById('badgeLabel');
-        badgeLabel.innerText = type === 'gold' ? "টপ নোটিশ / স্বর্ণের ব্যাজ টেক্সট" : "টপ নোটিশ / রূপার ব্যাজ টেক্সট";
+        badgeLabel.innerText = type === 'gold' ? "Top Notice / Gold section" : "Top Notice / Silver section";
         fetchCurrentPrices();
     }
 
@@ -734,7 +842,7 @@
                     for (let i = 1; i <= 7; i++) {
                         if (data.graphData[i - 1]) {
                             document.getElementById(`g_date_${i}`).value = data.graphData[i - 1].date || '';
-                            document.getElementById(`g_change_${i}`).value = data.graphData[i - 1].change || '';
+                            document.getElementById(`g_price_${i}`).value = data.graphData[i - 1].price || '';
                         }
                     }
                 } else {
@@ -759,7 +867,7 @@
     function clearGraphFields() {
         for (let i = 1; i <= 7; i++) {
             document.getElementById(`g_date_${i}`).value = '';
-            document.getElementById(`g_change_${i}`).value = '';
+            document.getElementById(`g_price_${i}`).value = '';
         }
     }
 
@@ -809,34 +917,80 @@
         });
 
         // ২. অটোমেটিক গ্রাফের ডেটা তৈরি
-        const mainChange = document.getElementById('k22_change').value;
+        const today22KPrice = document.getElementById('k22').value;
         const options = { day: 'numeric', month: 'short' };
         const todayDate = new Date().toLocaleDateString('en-US', options);
         
         document.getElementById('g_date_1').value = todayDate;
-        document.getElementById('g_change_1').value = mainChange;
+        document.getElementById('g_price_1').value = today22KPrice;
 
         const graphDataObject = {};
         for (let i = 1; i <= 7; i++) {
             graphDataObject[i - 1] = {
                 date: document.getElementById(`g_date_${i}`).value,
-                change: document.getElementById(`g_change_${i}`).value
+                price: document.getElementById(`g_price_${i}`).value
             };
         }
         
-        // ফায়ারবেসে সম্পূর্ণ ডেটা পাঠানো
-        database.ref('prices/' + currentType).set({
+        // 🔥 ফায়ারবেসে সম্পূর্ণ ডেটা পাঠানো + ক্যালকুলেটর সেটিংস অটো-আপডেট
+        const updates = {};
+        updates['prices/' + currentType] = {
             badge: badgeText,
             cards: cardsData,
             graphData: graphDataObject,
             updateTime: formattedTime,
             updateDate: formattedDate
-        }).then(() => {
-            showSuccessToast("Updated Successfully ✅");
-        }).catch((error) => {
-            alert("Error: " + error.message);
-        });
+        };
+        // যদি গোল্ড হয়, তাহলে ক্যালকুলেটরের defaultRatePerVori অটো-আপডেট
+        if (currentType === 'gold') {
+            updates['calculatorSettings/defaultRatePerVori'] = parseFloat(today22KPrice) || 224940;
+        }
+        
+        database.ref().update(updates)
+            .then(() => {
+                showSuccessToast("Updated Successfully!");
+                // যদি গোল্ড আপডেট করে থাকেন, তাহলে ক্যালকুলেটর সেটিংস ইনপুটও রিফ্রেশ করুন
+                if (currentType === 'gold') {
+                    document.getElementById('calcDefaultRate').value = today22KPrice;
+                }
+            })
+            .catch((error) => {
+                alert("Error: " + error.message);
+            });
     });
+
+    // 🆕 ক্যালকুলেটর সেটিংস লোড
+    function loadCalculatorSettings() {
+        database.ref('calculatorSettings').once('value').then(snapshot => {
+            const data = snapshot.val();
+            if (data) {
+                document.getElementById('calcDefaultRate').value = data.defaultRatePerVori || 224940;
+                document.getElementById('calcAlertMessage').value = data.alertMessage || '';
+                document.getElementById('calcConfirmResetMessage').value = data.confirmResetMessage || '';
+            }
+        });
+    }
+
+    // 🆕 ক্যালকুলেটর সেটিংস সেভ
+    function saveCalculatorSettings() {
+        const defaultRate = parseFloat(document.getElementById('calcDefaultRate').value) || 224940;
+        const alertMsg = document.getElementById('calcAlertMessage').value.trim();
+        const confirmMsg = document.getElementById('calcConfirmResetMessage').value.trim();
+        
+        const updates = {
+            defaultRatePerVori: defaultRate,
+            alertMessage: alertMsg,
+            confirmResetMessage: confirmMsg
+        };
+        
+        database.ref('calculatorSettings/').update(updates)
+            .then(() => {
+                showSuccessToast("Calculator Settings Saved!");
+            })
+            .catch(err => {
+                alert("Error: " + err.message);
+            });
+    }
     
     // 📥 ডাটাবেস থেকে নোটিফিকেশন লিস্ট আনা ও দেখানো
     function loadNotificationHistory() {
