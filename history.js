@@ -1,3 +1,5 @@
+// history.js (সম্পূর্ণ ফাইল — নোটিফিকেশন টাইটেল সহ)
+
 document.addEventListener('DOMContentLoaded', () => {
   // ১. এলিমেন্ট সিলেক্ট করা
   const historyContainer = document.getElementById('historyContainer');
@@ -127,7 +129,7 @@ function showAdminLogin() {
 // ==========================================
 // 🔔 রিয়েল-টাইম নোটিফিকেশন (পপ-আপ ও লাল ডট)
 // ==========================================
-function showMiddlePopup(message) {
+function showMiddlePopup(title, message) {
   const oldPopup = document.getElementById('customMiddlePopup');
   if (oldPopup) oldPopup.remove();
   
@@ -143,7 +145,7 @@ function showMiddlePopup(message) {
   
   popup.innerHTML = `
         <div style="font-size: 40px; color: #ffc107; margin-bottom: 12px;"><i class="fa-solid fa-bell animate-bounce"></i></div>
-        <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: bold; color: #ffc107;">নতুন নোটিফিকেশন!</h3>
+        <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: bold; color: #ffc107;">${title || 'নতুন নোটিফিকেশন!'}</h3>
         <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 1.4; color: #cbd5e1;">${message}</p>
         <button id="closePopupBtn" style="background: #ffc107; color: #000; border: none; padding: 8px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;">ঠিক আছে</button>
     `;
@@ -172,7 +174,7 @@ function listenToNotifications() {
       const lastNotifId = localStorage.getItem('last_read_notif_id') || '';
       if (data.id !== lastNotifId) {
         if (notifBadge) notifBadge.style.display = 'block';
-        showMiddlePopup(data.message);
+        showMiddlePopup(data.title, data.message);
       } else {
         // আগেরটা পড়া হয়ে গেলে লাল ডট আড়াল
         if (notifBadge) notifBadge.style.display = 'none';
