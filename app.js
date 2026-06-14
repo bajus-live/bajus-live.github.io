@@ -77,7 +77,7 @@ function drawLiveSVGChart(dates, prices, color) {
     const svgWidth = 400;
     const svgHeight = 120;
     const padding = 20;
-    
+
     const minPrice = Math.min(...prices) || 0;
     const maxPrice = Math.max(...prices) || 100;
     const priceRange = (maxPrice - minPrice) === 0 ? 1 : (maxPrice - minPrice);
@@ -85,7 +85,7 @@ function drawLiveSVGChart(dates, prices, color) {
     const points = prices.map((price, index) => {
         const x = (index / (prices.length - 1)) * svgWidth;
         const y = svgHeight - padding - ((price - minPrice) / priceRange) * (svgHeight - padding * 2);
-        return { x, y };
+        return { x, y, price, date: dates[index] };
     });
 
     let pathData = '';
@@ -106,6 +106,42 @@ function drawLiveSVGChart(dates, prices, color) {
         chartAreaFill.setAttribute('fill', color);
     }
 
+    const svg = document.querySelector('.trend-svg');
+    if (svg) {
+        const oldLabels = svg.querySelectorAll('.y-axis-label');
+        oldLabels.forEach(l => l.remove());
+
+        const yPositions = [20, 60, 100];
+        const priceValues = [maxPrice, (maxPrice + minPrice) / 2, minPrice];
+
+        yPositions.forEach((y, i) => {
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', 5);
+            text.setAttribute('y', y + 4);
+            text.setAttribute('class', 'y-axis-label');
+            text.setAttribute('fill', '#94a3b8');
+            text.setAttribute('font-size', '10');
+            text.setAttribute('font-family', 'Hind Siliguri, sans-serif');
+            text.textContent = formatMyPrice(Math.round(priceValues[i]));
+            svg.appendChild(text);
+        });
+    }
+
+    let tooltip = document.getElementById('chartTooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'chartTooltip';
+        tooltip.style.cssText = `
+            position: absolute; background: rgba(0,0,0,0.85); color: #fff;
+            padding: 6px 10px; border-radius: 6px; font-size: 12px;
+            font-weight: 500; pointer-events: none; z-index: 100;
+            white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            font-family: 'Hind Siliguri', sans-serif; display: none;
+        `;
+        const chartContainer = document.querySelector('.chart-container');
+        if (chartContainer) chartContainer.appendChild(tooltip);
+    }
+
     nodesGroup.innerHTML = '';
     points.forEach(point => {
         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -116,6 +152,23 @@ function drawLiveSVGChart(dates, prices, color) {
         circle.setAttribute('fill', '#fff');
         circle.setAttribute('stroke', color);
         circle.setAttribute('stroke-width', '2');
+        circle.style.cursor = 'pointer';
+
+        circle.addEventListener('mouseenter', () => {
+            tooltip.style.display = 'block';
+            tooltip.innerHTML = `${point.date}: <strong>${formatMyPrice(point.price)}</strong>`;
+        });
+
+        circle.addEventListener('mousemove', (e) => {
+            const containerRect = document.querySelector('.chart-container').getBoundingClientRect();
+            tooltip.style.left = (e.clientX - containerRect.left + 15) + 'px';
+            tooltip.style.top = (e.clientY - containerRect.top - 30) + 'px';
+        });
+
+        circle.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+
         nodesGroup.appendChild(circle);
     });
 }
@@ -212,10 +265,10 @@ function renderUI(type, liveData) {
         const datesArray = [];
         const pricesArray = [];
 
-        for (let i = 0; i < 7; i++) {
+        for (let i = 6; i >= 0; i--) {
             if (liveData.graphData[i]) {
-                datesArray.push(liveData.graphData[i].date || `Day ${i+1}`);
-                let cleanPrice = liveData.graphData[i].change || liveData.graphData[i].price || "0";
+                datesArray.push(liveData.graphData[i].date || `Day ${7 - i}`);
+                let cleanPrice = liveData.graphData[i].price || "0";
                 
                 if (typeof cleanPrice === 'string') {
                     const banglaDigits = {'০':'0','১':'1','২':'2','৩':'3','৪':'4','⑤':'5','⑥':'6','৭':'7','৮':'8','৯':'9'};
@@ -297,17 +350,15 @@ window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('user_app_theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const themeBtn = document.getElementById('themeBtn');
-    // start
     if (themeBtn) {
-    if (savedTheme === 'light') {
-        themeBtn.classList.add('fa-moon');
-        themeBtn.classList.remove('fa-sun');
-    } else {
-        themeBtn.classList.add('fa-sun');
-        themeBtn.classList.remove('fa-moon');
+        if (savedTheme === 'light') {
+            themeBtn.classList.add('fa-moon');
+            themeBtn.classList.remove('fa-sun');
+        } else {
+            themeBtn.classList.add('fa-sun');
+            themeBtn.classList.remove('fa-moon');
+        }
     }
-}
-// end
 
     switchTab('gold');
     updateDynamicBanglaDate();
@@ -322,7 +373,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --------------- সাইড ড্রয়ার ---------------
 const overlay = document.getElementById('drawerOverlay');
 const leftDrawer = document.getElementById('leftDrawer');
 const rightDrawer = document.getElementById('rightDrawer');
@@ -371,30 +421,25 @@ if (overlay) {
     });
 }
 
-// --------------- থিম সুইচ ---------------
 const themeBtn = document.getElementById('themeBtn');
 if (themeBtn) {
     themeBtn.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         let newTheme = 'dark';
-        
-        // start     
         if (currentTheme === 'dark') {
-    newTheme = 'light';
-    themeBtn.classList.add('fa-moon');
-    themeBtn.classList.remove('fa-sun');
-} else {
-    newTheme = 'dark';
-    themeBtn.classList.add('fa-sun');
-    themeBtn.classList.remove('fa-moon');
-}
-// end
+            newTheme = 'light';
+            themeBtn.classList.add('fa-moon');
+            themeBtn.classList.remove('fa-sun');
+        } else {
+            newTheme = 'dark';
+            themeBtn.classList.add('fa-sun');
+            themeBtn.classList.remove('fa-moon');
+        }
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('user_app_theme', newTheme);
     });
 }
 
-// --------------- শেয়ার বাটন ---------------
 document.addEventListener("DOMContentLoaded", () => {
     const shareBtn = document.querySelector(".share-btn");
     if (shareBtn) {
@@ -417,7 +462,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// --------------- বটম নেভ ---------------
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', function() {
         document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
@@ -425,8 +469,8 @@ document.querySelectorAll('.nav-item').forEach(item => {
     });
 });
 
-// --------------- নোটিফিকেশন পপআপ ও রিয়েল-টাইম ---------------
-function showMiddlePopup(message) {
+// ------------- নোটিফিকেশন পপআপ (title+message) -------------
+function showMiddlePopup(title, message) {
     const oldPopup = document.getElementById('customMiddlePopup');
     if (oldPopup) oldPopup.remove();
 
@@ -442,7 +486,7 @@ function showMiddlePopup(message) {
 
     popup.innerHTML = `
         <div style="font-size: 40px; color: #ffc107; margin-bottom: 12px;"><i class="fa-solid fa-bell animate-bounce"></i></div>
-        <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: bold; color: #ffc107;">নতুন নোটিফিকেশন!</h3>
+        <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: bold; color: #ffc107;">${title || 'নতুন নোটিফিকেশন!'}</h3>
         <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 1.4; color: #cbd5e1;">${message}</p>
         <button id="closePopupBtn" style="background: #ffc107; color: #000; border: none; padding: 8px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;">ঠিক আছে</button>
     `;
@@ -471,7 +515,7 @@ function listenToNotifications() {
             if (data.id !== lastNotifId) {
                 const notifBadge = document.getElementById('notifBadge');
                 if (notifBadge) notifBadge.style.display = 'block';
-                showMiddlePopup(data.message);
+                showMiddlePopup(data.title, data.message);
             } else {
                 const notifBadge = document.getElementById('notifBadge');
                 if (notifBadge) notifBadge.style.display = 'none';
@@ -507,7 +551,6 @@ window.addEventListener('DOMContentLoaded', () => {
     listenToNotifications();
 });
 
-// --------------- অ্যাডমিন লগইন ---------------
 function showAdminLogin() {
     const password = prompt("Enter Admin Password:");
     if (password === null || password === "") return;
@@ -518,13 +561,11 @@ function showAdminLogin() {
     }
 }
 
-// --------------- 🆕 মেনু মডেল কন্টেন্ট ও লজিক ---------------
 const menuModal = document.getElementById('menuModal');
 const closeMenuModalBtn = document.getElementById('closeMenuModal');
 const menuModalTitle = document.getElementById('menuModalTitle');
 const menuModalBody = document.getElementById('menuModalBody');
 
-// কন্টেন্ট ডাটা
 const menuContents = {
     profile: {
         title: 'সদস্য প্রোফাইল',
@@ -534,10 +575,9 @@ const menuContents = {
             <p style="margin-top:10px;"><strong>হেল্পলাইন:</strong> +880241031722</p>
         `
     },
-    // Bazar bishlasan report 
     report: {
-  title: 'বাজার বিশ্লেষণ রিপোর্ট',
-  body: `
+        title: 'বাজার বিশ্লেষণ রিপোর্ট',
+        body: `
             <p style="text-align:center; font-size:16px; font-weight:bold; margin-bottom:15px;">সর্বশেষ বাজার বিশ্লেষণ রিপোর্ট</p>
             <p style="text-align:center;">নিচের লিংক থেকে PDF ডাউনলোড করুন:</p>
             <div style="text-align:center; margin: 20px 0;">
@@ -551,7 +591,7 @@ const menuContents = {
                 সর্বশেষ আপডেট: ০৩ জুন ২০২৬
             </p>
         `
-},
+    },
     policy: {
         title: 'সমিতি নীতিমালা',
         body: `
@@ -578,7 +618,6 @@ const menuContents = {
     }
 };
 
-// মেনু আইটেম ক্লিক ইভেন্ট
 document.getElementById('menu-profile').addEventListener('click', () => openMenuModal('profile'));
 document.getElementById('menu-report').addEventListener('click', () => openMenuModal('report'));
 document.getElementById('menu-policy').addEventListener('click', () => openMenuModal('policy'));
@@ -589,16 +628,14 @@ function openMenuModal(key) {
         menuModalTitle.innerText = menuContents[key].title;
         menuModalBody.innerHTML = menuContents[key].body;
         menuModal.classList.add('open');
-        closeDrawers(); // বাম ড্রয়ার বন্ধ করবে
+        closeDrawers();
     }
 }
 
-// মডেল বন্ধ করা
 closeMenuModalBtn.addEventListener('click', () => {
     menuModal.classList.remove('open');
 });
 
-// মডেলের বাইরে ক্লিক করলে বন্ধ
 menuModal.addEventListener('click', (e) => {
     if (e.target === menuModal) {
         menuModal.classList.remove('open');
