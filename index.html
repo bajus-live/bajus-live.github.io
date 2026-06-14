@@ -21,29 +21,25 @@
     <meta name="keywords" content="bajus, bajus gold price, bajus live, gold price bangladesh, gold rate, বাজুস, বাজুস লাইভ, স্বর্ণের দাম ২০২৬, বাংলাদেশে সোনার দাম, গোল্ড রেট">
     <meta name="author" content="BAJUS Live">
     <link rel="canonical" href="https://bajus-live.github.io/">
-
-   <!-- If any Change need to css -->
-    <link rel="stylesheet" href="style.css?v=2.0.15">
-    <!-- If any Change need to manifest -->
+    <link rel="stylesheet" href="style.css?v=2.1">
     <link rel="manifest" href="manifest.json?v=2.0">
-
-    <!-- One Signal -->
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "4b9de094-9b68-4e4e-a8cb-8beb66a8b7bd",
-    });
-  });
-</script>
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14/dist/dotlottie-wc.js" type="module"></script>
-    <title>বাংলাদেশ জুয়েলারি সমিতি</title>
+  
+  <!-- One Signal -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+          await OneSignal.init({
+              appId: "4b9de094-9b68-4e4e-a8cb-8beb66a8b7bd",
+          });
+      });
+  </script>
+<title>বাংলাদেশ জুয়েলারি সমিতি</title>
 </head>
 <body>
     <div id="splashScreen">
-        <!--<div class="splash-logo-box">বাজুস</div>-->
-        <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 130px; height: auto; margin-bottom: 15px;">
+<img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 130px; height: auto; margin-bottom: 15px;">
         <div class="splash-title">বাংলাদেশ জুয়েলার্স সমিতি</div>
         <div class="splash-subtitle">Live Gold & Silver Rates</div>
         <dotlottie-wc 
@@ -57,7 +53,8 @@
     <div class="drawer-overlay" id="drawerOverlay">
         <div class="side-drawer left-drawer" id="leftDrawer">
             <div class="drawer-header"><!--BAJUS -->মেনু
-<img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon"></div>
+<img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
+</div>
             <ul class="drawer-links">
                 <li id="menu-profile"><i class="fa-solid fa-user-shield"></i> সদস্য প্রোফাইল</li>
                 <li id="menu-report"><i class="fa-solid fa-chart-pie"></i>বাজার বিশ্লেষণ রিপোর্ট</li>
@@ -91,9 +88,9 @@
                 <i class="fa-solid fa-bars menu-btn" id="menuBtn"></i>
                 <div class="logo-area">
                     <!--<div class="logo-icon">বাজুস</div>-->
-                   <div class="logo-icon">
-                       <img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
-                    </div>
+<div class="logo-icon">
+<img src="https://bajus-live.github.io/icon_(512×512).png" alt="BAJUS Logo" style="width: 40px; height: auto;" class="logo-icon">
+</div>
                     <div>
                         <h1 class="logo_side_title">বাংলাদেশ জুয়েলার্স সমিতি</h1>
                         <p class="subtitle">Live Gold & Silver Rates</p>
@@ -142,7 +139,7 @@
                     <span id="currentBanglaDate"></span>
                 </div>
             </section>
-            
+
             <section class="chart-section">
                 <h3 id="chartTitle">স্বর্ণের বাজার দর</h3>
                 <span class="chart-subtitle" id="chartSubtitle">Last 7 Days Gold Price Trend</span>
@@ -163,13 +160,15 @@
             <section class="quick-features">
                 <h3>ফিচার সমুহ</h3>
                 <div class="features-grid">
-                    <!--<a href="history.html" class="index_history">
+                    <!--
+                    <a href="history.html" class="index_history">
                         <div class="feature-item">
                             <i class="fa-solid fa-clipboard-list"></i>
                             <span>দামের রেকর্ড</span>
                             <p class="f-sub">লিস্ট</p>
                         </div>
-                    </a>-->
+                    </a>
+                    -->
                     <a href="calculator.html" class="index_calculator">
                         <div class="feature-item">
                             <i class="fa-solid fa-calculator"></i>
@@ -204,7 +203,6 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-    <!-- If any Change need to js -->
-    <script src="app.js?v=2.0.15"></script>
+    <script src="app.js"></script>
 </body>
 </html>
