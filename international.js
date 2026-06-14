@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-// ৫. থিম টগল
+  // ৫. থিম টগল
   const savedTheme = localStorage.getItem('user_app_theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
   
@@ -132,7 +132,7 @@ function showAdminLogin() {
 // ==========================================
 // 🔔 রিয়েল-টাইম নোটিফিকেশন (পপ-আপ ও লাল ডট)
 // ==========================================
-function showMiddlePopup(message) {
+function showMiddlePopup(title, message) { // ← title প্যারামিটার যোগ
   const oldPopup = document.getElementById('customMiddlePopup');
   if (oldPopup) oldPopup.remove();
   
@@ -148,7 +148,7 @@ function showMiddlePopup(message) {
   
   popup.innerHTML = `
         <div style="font-size: 40px; color: #ffc107; margin-bottom: 12px;"><i class="fa-solid fa-bell animate-bounce"></i></div>
-        <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: bold; color: #ffc107;">নতুন নোটিফিকেশন!</h3>
+        <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: bold; color: #ffc107;">${title || 'নতুন নোটিফিকেশন!'}</h3>  <!-- ← title ব্যবহার -->
         <p style="margin: 0 0 16px 0; font-size: 14px; line-height: 1.4; color: #cbd5e1;">${message}</p>
         <button id="closePopupBtn" style="background: #ffc107; color: #000; border: none; padding: 8px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;">ঠিক আছে</button>
     `;
@@ -177,7 +177,7 @@ function listenToNotifications() {
       const lastNotifId = localStorage.getItem('last_read_notif_id') || '';
       if (data.id !== lastNotifId) {
         if (notifBadge) notifBadge.style.display = 'block';
-        showMiddlePopup(data.message);
+        showMiddlePopup(data.title, data.message); // ← title ও message পাঠান
       } else {
         // আগেরটা পড়া হয়ে গেলে লাল ডট আড়াল
         if (notifBadge) notifBadge.style.display = 'none';
@@ -228,8 +228,8 @@ const menuContents = {
         `
   },
   report: {
-  title: 'বাজার বিশ্লেষণ রিপোর্ট',
-  body: `
+    title: 'বাজার বিশ্লেষণ রিপোর্ট',
+    body: `
             <p style="text-align:center; font-size:16px; font-weight:bold; margin-bottom:15px;">সর্বশেষ বাজার বিশ্লেষণ রিপোর্ট</p>
             <p style="text-align:center;">নিচের লিংক থেকে PDF ডাউনলোড করুন:</p>
             <div style="text-align:center; margin: 20px 0;">
@@ -243,7 +243,7 @@ const menuContents = {
                 সর্বশেষ আপডেট: ০৩ জুন ২০২৬
             </p>
         `
-},
+  },
   policy: {
     title: 'সমিতি নীতিমালা',
     body: `
