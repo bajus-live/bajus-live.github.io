@@ -88,10 +88,19 @@
 }
 
 .bottom-nav { 
-    position: fixed; bottom: 0; left: 0; width: 100%; max-width: 480px;
-    display: flex; justify-content: space-around; 
-    background: var(--bg-color); padding: 10px 0; 
-    border-top: 1px solid var(--border-color); z-index: 100;
+    position: fixed; 
+    bottom: 0; 
+    /* left: 0; */
+    margin-left: auto;
+    margin-right: auto; 
+    width: 100%;
+    max-width: 480px;
+    display: flex; 
+    justify-content: space-around; 
+    background: var(--bg-color); 
+    padding: 10px 0; 
+    border-top: 1px solid var(--border-color);
+    z-index: 100;
 }
 
 .drawer-overlay {
