@@ -218,7 +218,7 @@ function renderUI(type, liveData) {
                     <span class="karat-tag">${item.karat}</span>
                     <div class="price-amount">${formattedPrice} <span class="unit">/ভরি</span></div>
                     <div class="changeup" style="color: ${statusColor}"><i class="fa-solid ${statusIcon}"></i> ${formattedChange}</div>
-                    <p class="yesterday">(পূর্ববর্তী বাজার: ${formattedYesterday})</p>
+                    <p class="yesterday">(পূর্ববর্তী মূল্য: ${formattedYesterday})</p>
                 </div>
             `;
         });
@@ -252,7 +252,7 @@ function renderUI(type, liveData) {
             <div class="price-amount">${formattedTopPrice} <span class="unit">/ভরি</span></div>
             <div class="changeup" style="color: ${topStatusColor}">
                 <i class="fa-solid ${topStatusIcon}"></i> ${formattedTopChange} 
-                <span style="color:var(--text-muted); font-weight:normal; font-size:10px;">(পূর্ববর্তী বাজার: ${formattedTopYesterday})</span>
+                <span style="color:var(--text-muted); font-weight:normal; font-size:10px;">(পূর্ববর্তী মূল্য: ${formattedTopYesterday})</span>
             </div>
         `;
     }
