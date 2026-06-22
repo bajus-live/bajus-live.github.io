@@ -265,8 +265,7 @@ img {
 }
 
 .table_property:hover{
-  background: #FF7C7C;
-  color: white;
+  background: #E0E0E0;
   border: 10px solid red;
 }
 .in_de_tdata_text{
