@@ -22,19 +22,14 @@
             --radius-sm: 8px;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg);
             background-image: radial-gradient(circle at 50% 0%, #f8fafc 0%, #eef2f6 100%);
             color: var(--text);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-            min-height: 100vh;
+            margin: 0; padding: 20px; line-height: 1.6; min-height: 100vh;
         }
 
         .admin-container {
@@ -48,396 +43,192 @@
         }
 
         h2 {
-            text-align: center;
-            color: var(--primary);
-            margin-top: 0;
-            margin-bottom: 25px;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            text-align: center; color: var(--primary); margin-top: 0; margin-bottom: 25px;
+            font-size: 26px; font-weight: 700; letter-spacing: -0.3px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        /* Dashboard Section Block */
         .dashboard-section-block {
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 25px;
-            overflow: hidden;
-            background: #ffffff;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s;
+            border: 1px solid var(--border); border-radius: var(--radius);
+            margin-bottom: 25px; overflow: hidden; background: #ffffff;
+            box-shadow: var(--shadow-sm); transition: box-shadow 0.2s;
         }
-
-        .dashboard-section-block:hover {
-            box-shadow: var(--shadow-md);
-        }
+        .dashboard-section-block:hover { box-shadow: var(--shadow-md); }
 
         .section-header-title {
             background: linear-gradient(to right, #fafbfc, #ffffff);
-            padding: 14px 20px;
-            margin: 0;
-            font-size: 15px;
-            font-weight: 700;
-            color: #334155;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding: 14px 20px; margin: 0; font-size: 15px; font-weight: 700;
+            color: #334155; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 10px;
         }
 
-        .section-body-content {
-            padding: 20px;
-            background: #ffffff;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .section-body-content { padding: 20px; background: #ffffff; }
+        .form-group { margin-bottom: 20px; }
 
         label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #475569;
+            display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #475569;
         }
 
-        /* Password wrapper */
-        .password-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
+        /* ইনপুটের ভেতরে আইকনের জন্য র‍্যাপার */
+        .password-wrapper, .email-wrapper {
+            position: relative; display: flex; align-items: center;
         }
+        .password-wrapper input, .email-wrapper input {
+            padding-left: 45px;   /* বাঁ দিকের আইকনের জন্য জায়গা */
+            padding-right: 45px;  /* ডান দিকের চোখ আইকনের জন্য (শুধু পাসওয়ার্ডে) */
+        }
+        /* ইমেইল ফিল্ডে ডানে চোখ নেই, তাই প্যাডিং একটু কম */
+        .email-wrapper input { padding-right: 14px; }
 
-        .password-wrapper input {
-            padding-right: 45px;
+        .input-icon-left {
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            color: #94a3b8; font-size: 16px; pointer-events: none;
         }
 
         .toggle-password-btn {
-            position: absolute;
-            right: 15px;
-            background: none;
+            position: absolute; 
+            right: 15px; 
+            margin-top: -15px;
+            background: none; 
             border: none;
-            color: #94a3b8;
-            cursor: pointer;
-            font-size: 16px;
-            padding: 0;
+            color: #94a3b8; 
+            cursor: pointer; 
+            font-size: 16px; 
+            padding: 0; 
             margin: 0;
-            width: auto;
+            width: auto; 
             display: inline-flex;
             transition: color 0.2s;
-        }
-
-        .toggle-password-btn:hover {
             color: var(--primary);
-            background: none;
+        }
+        .toggle-password-btn:hover { color: var(--primary); background: none;
         }
 
-        /* Graph row */
         .graph-day-row {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            padding: 10px 0;
+            display: flex; gap: 15px; align-items: center; padding: 10px 0;
             border-bottom: 1px dashed #e2e8f0;
         }
-
-        .graph-day-row:last-child {
-            border-bottom: none;
-        }
+        .graph-day-row:last-child { border-bottom: none; }
 
         .day-label {
-            font-weight: 700;
-            font-size: 14px;
-            color: var(--primary);
-            min-width: 60px;
-            background: rgba(255,152,0,0.08);
-            padding: 4px 8px;
-            border-radius: 6px;
-            text-align: center;
+            font-weight: 700; font-size: 14px; color: var(--primary); min-width: 60px;
+            background: rgba(255,152,0,0.08); padding: 4px 8px; border-radius: 6px; text-align: center;
         }
-
-        .graph-inputs {
-            display: flex;
-            gap: 10px;
-            flex: 1;
-        }
+        .graph-inputs { display: flex; gap: 10px; flex: 1; }
 
         input, textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            box-sizing: border-box;
-            font-size: 15px;
-            transition: 0.25s;
-            background: #f9fafb;
-            color: var(--text);
-            font-family: inherit;
+            width: 100%; padding: 12px 14px; border: 1px solid var(--border);
+            border-radius: var(--radius-sm); box-sizing: border-box; font-size: 15px;
+            transition: 0.25s; background: #f9fafb; color: var(--text); font-family: inherit;
         }
-
         input:focus, textarea:focus {
-            border-color: var(--primary);
-            outline: none;
-            background: #fff;
+            border-color: var(--primary); outline: none; background: #fff;
             box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.12);
         }
-
-        input::placeholder, textarea::placeholder {
-            color: #94a3b8;
-        }
+        input::placeholder, textarea::placeholder { color: #94a3b8; }
 
         button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #ff9800, #f57c00);
-            border: none;
-            color: white;
-            font-size: 15px;
-            font-weight: 700;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            margin-top: 15px;
-            transition: all 0.25s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 10px rgba(255,152,0,0.3);
-            letter-spacing: 0.3px;
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #ff9800, #f57c00);
+            border: none; color: white; font-size: 15px; font-weight: 700;
+            border-radius: var(--radius-sm); cursor: pointer; margin-top: 15px;
+            transition: all 0.25s; display: flex; justify-content: center; align-items: center;
+            gap: 10px; box-shadow: 0 4px 10px rgba(255,152,0,0.3); letter-spacing: 0.3px;
         }
-
         button:hover {
             background: linear-gradient(135deg, #fb8c00, #ef6c00);
-            box-shadow: 0 6px 15px rgba(255,152,0,0.4);
-            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(255,152,0,0.4); transform: translateY(-1px);
         }
 
-        .tab-btn-group {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
+        .tab-btn-group { display: flex; gap: 12px; margin-bottom: 20px; }
         .tab-btn {
-            flex: 1;
-            padding: 12px;
-            background: #f1f5f9;
-            color: #475569;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 14px;
-            transition: all 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            flex: 1; padding: 12px; background: #f1f5f9; color: #475569; border: none;
+            cursor: pointer; border-radius: 10px; font-weight: 700; font-size: 14px;
+            transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
-
         .tab-btn.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255,152,0,0.3);
+            background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(255,152,0,0.3);
         }
 
-        #loginSection {
-            max-width: 400px;
-            margin: 80px auto;
-            display: block;
-        }
+        #loginSection { max-width: 400px; margin: 80px auto; display: block; }
+        #dashboardSection { display: none; }
 
-        #dashboardSection {
-            display: none;
-        }
-
-        /* Toast */
         .toast-notification {
-            position: fixed;
-            top: 25px;
-            right: -400px;
+            position: fixed; top: 25px; right: -400px;
             background: linear-gradient(135deg, #10b981, #059669);
-            color: #ffffff;
-            padding: 14px 24px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            font-family: 'Segoe UI', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: #ffffff; padding: 14px 24px; border-radius: 12px; font-size: 14px;
+            font-weight: 600; font-family: 'Segoe UI', sans-serif;
+            display: flex; align-items: center; gap: 10px;
             box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-            white-space: nowrap;
-            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 9999;
-            overflow: hidden;
+            white-space: nowrap; transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 9999; overflow: hidden;
         }
+        .toast-notification.show { right: 20px; }
+        .toast-icon { font-size: 18px; }
 
-        .toast-notification.show {
-            right: 20px;
-        }
-
-        .toast-icon {
-            font-size: 18px;
-        }
-
-        /* Toast Progress Bar */
         .toast-progress {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            background: rgba(255,255,255,0.5);
-            width: 100%;
-            animation: progressShrink 3s linear forwards;
-            transform-origin: right;
+            position: absolute; bottom: 0; left: 0; height: 3px;
+            background: rgba(255,255,255,0.5); width: 100%;
+            animation: progressShrink 3s linear forwards; transform-origin: right;
         }
-
         @keyframes progressShrink {
             from { transform: scaleX(1); }
             to { transform: scaleX(0); }
         }
 
-        /* Animated Checkmark */
-        .animated-checkmark {
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            position: relative;
-        }
-
-        .animated-checkmark svg {
-            width: 100%;
-            height: 100%;
-        }
-
+        .animated-checkmark { width: 20px; height: 20px; display: inline-block; position: relative; }
+        .animated-checkmark svg { width: 100%; height: 100%; }
         .animated-checkmark .circle {
-            fill: none;
-            stroke: #fff;
-            stroke-width: 2.5;
-            stroke-dasharray: 166;
-            stroke-dashoffset: 166;
-            animation: circleDraw 1s ease-out forwards;
+            fill: none; stroke: #fff; stroke-width: 2.5; stroke-dasharray: 166;
+            stroke-dashoffset: 166; animation: circleDraw 1s ease-out forwards;
         }
-
         .animated-checkmark .tick {
-            fill: none;
-            stroke: #fff;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke-dasharray: 48;
-            stroke-dashoffset: 48;
+            fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round;
+            stroke-linejoin: round; stroke-dasharray: 48; stroke-dashoffset: 48;
             animation: tickDraw 0.6s 0.5s ease-out forwards;
         }
+        @keyframes circleDraw { to { stroke-dashoffset: 0; } }
+        @keyframes tickDraw { to { stroke-dashoffset: 0; } }
 
-        @keyframes circleDraw {
-            to { stroke-dashoffset: 0; }
-        }
-
-        @keyframes tickDraw {
-            to { stroke-dashoffset: 0; }
-        }
-
-        /* History list */
         .history-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f9fafb;
-            padding: 12px 14px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            border: 1px solid #e9eef2;
-            transition: background 0.2s;
+            display: flex; justify-content: space-between; align-items: center;
+            background: #f9fafb; padding: 12px 14px; border-radius: 10px;
+            margin-bottom: 8px; border: 1px solid #e9eef2; transition: background 0.2s;
         }
-
-        .history-item:hover {
-            background: #f1f5f9;
-        }
-
-        .history-details {
-            font-size: 13px;
-            color: #334155;
-            flex: 1;
-            padding-right: 10px;
-        }
-
-        .history-time {
-            font-size: 11px;
-            color: #64748b;
-            display: block;
-            margin-top: 4px;
-        }
-
+        .history-item:hover { background: #f1f5f9; }
+        .history-details { font-size: 13px; color: #334155; flex: 1; padding-right: 10px; }
+        .history-time { font-size: 11px; color: #64748b; display: block; margin-top: 4px; }
         .delete-notif-btn {
-            background: #ef4444;
-            width: auto;
-            padding: 6px 12px;
-            font-size: 12px;
-            margin-top: 0;
-            border-radius: 6px;
-            background: #fee2e2;
-            color: #b91c1c;
-            border: none;
-            font-weight: 600;
+            background: #fee2e2; width: auto; padding: 6px 12px; font-size: 12px;
+            margin-top: 0; border-radius: 6px; color: #b91c1c; border: none; font-weight: 600;
             transition: all 0.2s;
         }
+        .delete-notif-btn:hover { background: #fecaca; color: #991b1b; }
 
-        .delete-notif-btn:hover {
-            background: #fecaca;
-            color: #991b1b;
-        }
-
-        /* Logout button */
         #logoutBtn {
             background: linear-gradient(135deg, #ef4444, #dc2626) !important;
-            box-shadow: 0 4px 10px rgba(239,68,68,0.3);
-            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(239,68,68,0.3); margin-top: 10px;
         }
+        #logoutBtn:hover { background: linear-gradient(135deg, #dc2626, #b91c1c) !important; box-shadow: 0 6px 15px rgba(239,68,68,0.4); }
 
-        #logoutBtn:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
-            box-shadow: 0 6px 15px rgba(239,68,68,0.4);
-        }
+        #loginForm button { margin-top: 20px; }
 
-        /* Login specific button */
-        #loginForm button {
-            margin-top: 20px;
-        }
-
-        /* Send notification button */
         button[onclick="sendLiveNotice()"] {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
-            margin-top: 0;
-            box-shadow: 0 4px 10px rgba(59,130,246,0.3);
+            margin-top: 0; box-shadow: 0 4px 10px rgba(59,130,246,0.3);
         }
-
         button[onclick="sendLiveNotice()"]:hover {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             box-shadow: 0 6px 15px rgba(59,130,246,0.4);
         }
 
-        /* Responsive adjustment */
         @media (max-width: 500px) {
-            .admin-container {
-                padding: 20px 16px;
-            }
-            .form-group[style*="display: flex"] {
-                flex-direction: column;
-                gap: 12px !important;
-            }
+            .admin-container { padding: 20px 16px; }
+            .form-group[style*="display: flex"] { flex-direction: column; gap: 12px !important; }
         }
-        
-        #eyeIcon {
-            margin-top: -15px;
-        }
+#eyeIcon{
+ margin-top: -15px;
+}
     </style>
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -449,25 +240,30 @@
 <div class="admin-container" id="loginSection">
     <h2><i class="fa-solid fa-lock"></i>Admin Login</h2>
     <form id="loginForm">
+        <!-- 📧 ইমেইল ফিল্ড (লেবেল সরিয়ে ভেতরে ইউজার আইকন) -->
         <div class="form-group">
-            <label>Gmail</label>
-            <input type="email" id="loginEmail" placeholder=" Enter Email Address" required>
+            <div class="email-wrapper">
+                <i class="fa-solid fa-user input-icon-left"></i>
+                <input type="email" id="loginEmail" placeholder="Enter Email" required>
+            </div>
         </div>
+
+        <!-- 🔐 পাসওয়ার্ড ফিল্ড (লেবেল সরিয়ে ভেতরে লক আইকন + চোখ আইকন) -->
         <div class="form-group">
-            <label>Password</label>
             <div class="password-wrapper">
+                <i class="fa-solid fa-lock input-icon-left"></i>
                 <input type="password" id="loginPassword" placeholder="Enter Password" required>
                 <button type="button" class="toggle-password-btn" id="togglePasswordBtn" onclick="togglePasswordVisibility()">
                     <i class="fa-solid fa-eye-slash" id="eyeIcon"></i>
                 </button>
             </div>
         </div>
-        <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+        <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login to Dashboard</button>
     </form>
 </div>
 
 <div class="admin-container" id="dashboardSection">
-    <h2><i class="fa-solid fa-user-shield"></i>Admin Panel</h2>
+    <h2><i class="fa-solid fa-user-shield"></i>Dashboard</h2>
 
     <!-- Calculator Settings Section -->
     <div class="dashboard-section-block">
@@ -760,13 +556,19 @@
     }
 
     // 📥 ডাটাবেস থেকে পূর্বের নোটিশ আনা
-    function fetchCurrentNotice() {
-        database.ref('notifications/liveNotice').once('value').then((snapshot) => {
-            if(snapshot.exists()) {
-                document.getElementById('noticeMessage').value = snapshot.val();
-            }
-        });
-    }
+function fetchCurrentNotice() {
+    database.ref('notifications/liveNotice').once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+            document.getElementById('noticeMessage').value = snapshot.val();
+        }
+    });
+    // শিরোনাম লোড
+    database.ref('notifications/liveNoticeTitle').once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+            document.getElementById('noticeTitle').value = snapshot.val();
+        }
+    });
+}
 
     // 🚀 নোটিফিকেশন/মেসেজ পাঠানোর ফাংশন
     function sendLiveNotice() {
@@ -796,6 +598,7 @@
         };
         
         database.ref('notifications/liveNotice').set(noticeText);
+        database.ref('notifications/liveNoticeTitle').set(noticeTitle);
         database.ref('notifications/timestamp').set(Date.now());
         database.ref('notifications/latest').set(notifData);
         
