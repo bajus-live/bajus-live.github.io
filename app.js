@@ -619,8 +619,7 @@ const menuContents = {
             </table>
         </div>
         <p style="text-align:center; font-size:13px; margin-top:12px; color: var(--text-muted);">
-            সর্বশেষ আপডেট: ৪ জুন ২০২৬
-        </p>
+            সর্বশেষ আপডেট: ৪ জুন ২০২৬ </p>
     `
 },
     policy: {
