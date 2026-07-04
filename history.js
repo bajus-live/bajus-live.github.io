@@ -239,21 +239,51 @@ const menuContents = {
         `
   },
   report: {
-  title: 'বাজার বিশ্লেষণ রিপোর্ট',
-  body: `
-            <p style="text-align:center; font-size:16px; font-weight:bold; margin-bottom:15px;">সর্বশেষ বাজার বিশ্লেষণ রিপোর্ট</p>
-            <p style="text-align:center;">নিচের লিংক থেকে PDF ডাউনলোড করুন:</p>
-            <div style="text-align:center; margin: 20px 0;">
-                <a href="https://bajus-live.github.io/storage/bazar_analysis_report/may-2026.pdf" 
-                   target="_blank" 
-                   style="background: var(--accent-gold); color: #000; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">
-                    <i class="fa-solid fa-download"></i> PDF ডাউনলোড করুন
-                </a>
-            </div>
-            <p style="text-align:center; font-size:13px; margin-top:10px; color: var(--text-muted);">
-                সর্বশেষ আপডেট: ০৩ জুন ২০২৬
-            </p>
-        `
+    title: ``,
+    body: `
+        <p style="text-align:center; font-size:20px; font-weight:bold; margin-bottom:15px; color: var(--accent-gold);">
+            📊 বাজার বিশ্লেষণ রিপোর্ট
+        </p>
+        <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; background: var(--card-bg); border-radius:12px; overflow:hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border:1px solid var(--border-color);">
+                <thead style="background: linear-gradient(135deg, #ff9800, #f57c00); color: #000;">
+                    <tr>
+                        <th style="padding:12px 16px; text-align:left; font-size:15px; font-weight:700; display:flex; align-items:center; gap:6px;">মাস
+                        </th>
+                        <th style="padding:12px 16px; text-align:center; font-size:15px; font-weight:700;">
+                            <i class="fa-solid fa-file-pdf"></i> রিপোর্ট
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: var(--bg-color); transition: background 0.2s;">
+                        <td style="padding:12px 16px; font-weight:600; color: var(--text-main); display:flex; align-items:center; gap:8px;">জুন ২০২৬
+                        </td>
+                        <td style="padding:12px 16px; text-align:center;">
+                            <a href="https://bajus-live.github.io/storage/bazar_analysis_report/june-2026.pdf" 
+                               target="_blank"
+                               style="background: var(--accent-gold); color: #000; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-download"></i> PDF
+                            </a>
+                        </td>
+                    </tr>
+                    <tr style="background: var(--bg-color); transition: background 0.2s;">
+                        <td style="padding:12px 16px; font-weight:600; color: var(--text-main); display:flex; align-items:center; gap:8px;">মে ২০২৬
+                        </td>
+                        <td style="padding:12px 16px; text-align:center;">
+                            <a href="https://bajus-live.github.io/storage/bazar_analysis_report/may-2026.pdf" 
+                               target="_blank"
+                               style="background: var(--accent-gold); color: #000; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-download"></i> PDF
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="text-align:center; font-size:13px; margin-top:12px; color: var(--text-muted);">
+            সর্বশেষ আপডেট: ৪ জুন ২০২৬ </p>
+    `
 },
   policy: {
     title: 'সমিতি নীতিমালা',
