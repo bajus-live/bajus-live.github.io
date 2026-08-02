@@ -256,6 +256,18 @@ report: {
                     </tr>
                 </thead>
                 <tbody>
+
+                <tr style="background: var(--bg-color); transition: background 0.2s;">
+                        <td style="padding:12px 16px; font-weight:600; color: var(--text-main); display:flex; align-items:center; gap:8px;">জুলাই ২০২৬
+                        </td>
+                        <td style="padding:12px 16px; text-align:center;">
+                            <a href="https://bajus-live.github.io/storage/bazar_analysis_report/july-2026.pdf" 
+                               target="_blank"
+                               style="background: var(--accent-gold); color: #000; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-download"></i> PDF
+                            </a>
+                        </td>
+                    </tr>
                     <tr style="background: var(--bg-color); transition: background 0.2s;">
                         <td style="padding:12px 16px; font-weight:600; color: var(--text-main); display:flex; align-items:center; gap:8px;">জুন ২০২৬
                         </td>
